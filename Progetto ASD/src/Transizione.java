@@ -10,7 +10,6 @@ public class Transizione {
     private Stato statoI, statoF;
     private Evento eventoI;
     private ArrayList<Evento> eventiO;
-    private String CHERUFIGO;
 
     public Transizione() {
     }
@@ -51,8 +50,8 @@ public class Transizione {
         return eventiO;
     }
 
-    public void setEventiO(ArrayList<Evento> eventiO) {
-        this.eventiO = eventiO;
+    public void pushEventiO(Evento e) {
+        this.eventiO.add(e);
     }
     
 }
