@@ -10,6 +10,7 @@ public class Transizione {
     private Stato statoI, statoF;
     private Evento eventoI;
     private ArrayList<Evento> eventiO;
+    private String CHERUFIGO;
 
     public Transizione() {
     }
