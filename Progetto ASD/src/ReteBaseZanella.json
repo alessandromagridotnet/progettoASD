@@ -1,0 +1,85 @@
+{"ReteAutomi":{
+    "Automi": [{
+      "nome": "C2",
+      "stati":[{
+        "20":true
+      },{
+        "21":null
+      }],
+      "transizioni":[{
+        "nome": "t2a",
+        "statoIniziale": "20",
+        "statoFinale": "21",
+        "eventoInput": {
+          "nome": "e2",
+          "link": "L2"
+        },
+        "eventiOutput":[{
+          "nome": "e3",
+          "link": "L3"
+        }]
+      },
+      {
+        "nome": "t2b",
+        "statoIniziale": "21",
+        "statoFinale": "20",
+        "eventoInput": null,
+        "eventiOutput":[{
+          "nome": "e3",
+          "link": "L3"
+        }]
+      }]
+    },{
+      "nome": "C3",
+      "stati":[{
+        "30":true
+      },{
+        "31":null
+      }],
+      "transizioni":[{
+        "nome": "t3a",
+        "statoIniziale": "30",
+        "statoFinale": "31",
+        "eventoInput": null,
+        "eventiOutput":[{
+          "nome": "e2",
+          "link": "L2"
+        }]
+      },
+      {
+        "nome": "t3b",
+        "statoIniziale": "31",
+        "statoFinale": "30",
+        "eventoInput": {
+          "nome": "e3",
+          "link": "L3"
+        },
+        "eventiOutput":null
+      },
+      {
+        "nome": "t3c",
+        "statoIniziale": "31",
+        "statoFinale": "31",
+        "eventoInput": {
+          "nome": "e3",
+          "link": "L3"
+        },
+        "eventiOutput":null
+      }]
+    }],
+    "Links": [
+      {
+        "nome": "L2",
+        "automaI": "C3",
+        "automaF": "C2",
+        "eventoOn": null
+      },
+      {
+        "nome": "L3",
+        "automaI": "C2",
+        "automaF": "C3",
+        "eventoOn": null
+      }
+    ]
+  }
+}
