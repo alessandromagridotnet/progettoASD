@@ -6,7 +6,9 @@ public class Evento {
     private String nome;
     private Link linkRif;
 
-    public Evento() {
+    public Evento()
+    {
+
     }
 
     public String getNome() {
