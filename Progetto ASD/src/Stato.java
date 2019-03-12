@@ -2,10 +2,10 @@
  * Classe per rappresentare uno stato all'interno di un automa
  * @author Alessandro Magri
  */
-public class stato {
+public class Stato {
     private String nome;
 
-    public stato(String nome) {
+    public Stato(String nome) {
         this.nome = nome;
     }
 
