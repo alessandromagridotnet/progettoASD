@@ -24,60 +24,43 @@ public class main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        System.out.println("Antonio");
-        main.reader();
-    }
+        public static void main (String args[]) throws IOException,FileNotFoundException{
+
+            Scanner in=new Scanner(System.in);
+            boolean quit = false;
 
 
-public static void reader ()
-    {
-        JSONParser parser = new JSONParser();
+            while(!quit){
+                System.out.println("\n1) Prenotazione");
+                System.out.println("2) Gestione (riservato ai docenti");
+                System.out.println("3) Esci");
 
-        try
-        {
-            Object obj = parser.parse(new FileReader("C:\\Users\\Antonio\\IdeaProjects\\Progetto ASD\\Progetto ASD\\src\\ReteBaseZanella.json"));
-            JSONObject jsonObject = (JSONObject) obj;
+                int scelta=in.nextInt();
+                in.nextLine();
 
-            ReteAutomi rete =new ReteAutomi();
-            ArrayList<Automa> listaAutomi= new ArrayList<Automa>();
-            ArrayList<Link> listaLink= new ArrayList<Link>();
+                switch(scelta){
 
-            JSONObject ra = (JSONObject) jsonObject.get("ReteAutomi");
+                    case 1:
+                    System.out.println("scelta1");
+                        break;
+                    case 2:
+                    System.out.println("scelta2");
+                        break;
 
-            JSONArray lk = (JSONArray) ra.get("Links");
-            for (int i=0; i<lk.size(); i++){
-                JSONObject l = (JSONObject) lk.get(i);
-                Link nuovo = new Link();
 
-                nuovo.setNome(l.get("nome"));
-                nuovo.setAutomaI=l.get("automaI");
-                nuovo.setAutomaF=l.get("automaF");
-                nuovo.setEventoOn=l.get("eventoOn");
+                    case 3: break;
 
-                listaLink.add(nuovo);
+                    default:
+                        System.out.println("Scelta non supportata;");
+                }
+                if(scelta==3) quit=true;
             }
-
-
-
-            System.out.println(lk);
-
-
-
-
-
-
-        }
-
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (org.json.simple.parser.ParseException e) {
-            e.printStackTrace();
+            System.out.println("Uscita dal sistema eseguita");
         }
 
 
-    }
+
+
+
 
 }
