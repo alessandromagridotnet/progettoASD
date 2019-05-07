@@ -1,6 +1,7 @@
 package ReteAutomi;
 
 
+import java.io.File;
 import java.util.ArrayList;
 
 /*
@@ -44,5 +45,30 @@ public class ReteAutomi {
     
     public void pushAutoma(Automa a){
         this.automi.add(a);
+    }
+    
+    public void choseFileToLoad(){
+        int i =0;
+        File dir = new File("input/");
+        File[] directoryListing = dir.listFiles();
+        // controlla se sono presenti dei file nella cartella "input"
+        if (directoryListing != null) {
+            System.out.println("Segliere la rete automi che si vuole caricare: ");
+            // stampa il menu
+            for (File child : directoryListing) {
+                i++;
+                System.out.println(i + ") per caricare " + child.getName());
+            }
+        } else {
+            System.out.println("Non sono presenti file nella cartella input!!");
+        }
+        System.out.println("*******************************************************************************");
+    }
+    
+    public boolean loadFromFile(){
+        
+        
+        
+        return true;
     }
 }
