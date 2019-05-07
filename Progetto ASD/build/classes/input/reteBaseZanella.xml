@@ -2,18 +2,62 @@
     <Automi xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
         <Automa>
             <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-                
+                <Stato>
+                    <ID>
+                        
+                    </ID>
+                    <StatoIniziale>
+                        
+                    </StatoIniziale>
+                </Stato>
+                <Stato>
+                    <ID>
+                        
+                    </ID>
+                    <StatoIniziale>
+                        
+                    </StatoIniziale>
+                </Stato>
+                <Stato>
+                    <ID>
+                        
+                    </ID>
+                    <StatoIniziale>
+                        
+                    </StatoIniziale>
+                </Stato>
             </Stati>
             <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-                
-            </Transizioni>
-        </Automa>
-        <Automa>
-            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-                
-            </Stati>
-            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-                
+                <Transizione>
+                    <Nome></Nome>
+                    <IdStatoIniziale></IdStatoIniziale>
+                    <IdStatoFinale></IdStatoFinale>
+                    <CoppiaIngresso>
+                        <IdEvento></IdEvento>
+                        <IdLink></IdLink>
+                    </CoppiaIngresso>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <CoppiaUscita>
+                            <IdEvento></IdEvento>
+                            <IdLink></IdLink>
+                        </CoppiaUscita>
+                    </CoppieUscita>
+                </Transizione>
+                <Transizione>
+                    <Nome></Nome>
+                    <IdStatoIniziale></IdStatoIniziale>
+                    <IdStatoFinale></IdStatoFinale>
+                    <CoppiaIngresso>
+                        <IdEvento></IdEvento>
+                        <IdLink></IdLink>
+                    </CoppiaIngresso>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <CoppiaUscita>
+                            <IdEvento></IdEvento>
+                            <IdLink></IdLink>
+                        </CoppiaUscita>
+                    </CoppieUscita>
+                </Transizione>
             </Transizioni>
         </Automa>
         <Automa>
@@ -25,4 +69,7 @@
             </Transizioni>
         </Automa>
     </Automi>
+    <Links xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        
+    </Links>
 </ReteAutomi>

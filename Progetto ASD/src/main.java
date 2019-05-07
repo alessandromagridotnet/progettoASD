@@ -29,10 +29,19 @@ public class main {
             
             Scanner in=new Scanner(System.in);
             boolean quit = false;
-            File dir = new File("Progetto ASD\\src\\input\\");
-
-            System.out.println(dir.getAbsolutePath());
-
+            
+            }else{
+            
+            File dir = null;
+            
+            // bugfix temporaneo per i path di linux e windows
+            if(System.getProperty("os.name").compareTo("Linux") == 0){
+                dir = new File("src/input/");
+                System.out.println("L");
+                dir = new File("Progetto ASD\\src\\input\\");
+            
+            }
+                System.out.println("W");
             File[] directoryListing = dir.listFiles();
             // controlla se sono presenti dei file nella cartella "input"
             if (directoryListing != null) {
