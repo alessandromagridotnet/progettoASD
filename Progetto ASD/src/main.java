@@ -38,8 +38,8 @@ public class main {
             }else{
                 dir = new File("Progetto ASD\\src\\input\\");
             }
-            
             File[] directoryListing = dir.listFiles();
+            
             // controlla se sono presenti dei file nella cartella "input"
             if (directoryListing != null) {
                 System.out.println("Segliere la rete automi che si vuole caricare: ");

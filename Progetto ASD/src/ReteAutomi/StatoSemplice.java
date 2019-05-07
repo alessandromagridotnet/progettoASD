@@ -1,5 +1,7 @@
 package ReteAutomi;
 
+import org.jdom.Element;
+
 /**
  *
  * @author alessandro
@@ -31,4 +33,22 @@ public class StatoSemplice implements Stato{
         this.iniziale = iniziale;
     }
     
+    public String toXML(){
+        String xml = "";
+        xml += "<Stato>";
+            xml += "<ID>" + this.getId() + "</ID>";
+            xml += "<Iniziale>" + this.getIniziale().toString() + "</Iniziale>";
+        xml += "</Stato>";
+        
+        return xml;
+    }
+    
+    public void fromXML(Element xml){
+        this.setId(xml.getChildText("ID"));
+        if(xml.getChildText("StatoIniziale").compareTo("true")==0){
+           this.setIniziale(true);
+        }else{
+            this.setIniziale(false);
+        }
+    }
 }

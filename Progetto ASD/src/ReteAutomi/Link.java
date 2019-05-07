@@ -1,5 +1,7 @@
 package ReteAutomi;
 
+import org.jdom.Element;
+
 /**
  *
  * @author alessandro
@@ -45,5 +47,11 @@ public class Link {
         xml += "</Link>";
         
         return xml;
+    }
+    
+    public void fromXML(Element xml){
+        this.setNome(xml.getChildText("Nome"));
+        this.setPartenza(xml.getChildText("IdAutomaPartenza"));
+        this.setArrivo(xml.getChildText("IdAutomaArrivo"));
     }
 }

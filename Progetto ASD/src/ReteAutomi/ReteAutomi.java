@@ -73,26 +73,8 @@ public class ReteAutomi {
                 for (int j = 0; j < listStati.size(); j++) {
                     StatoSemplice stato = new StatoSemplice();
                     Element nodoStato = (Element) listStati.get(i);
-                    stato.setId(nodoStato.getChildText("ID"));
-                    if (nodoStato.getChildText("StatoIniziale").compareTo("true")==0) {
-                       stato.setIniziale(true);
-                    }
-                    else{
-                        stato.setIniziale(false);
-                    }
-
-
-
-
-
+                    stato.fromXML(nodoStato);
                 }
-
-
-
-
-
-
-
             }
 
 
