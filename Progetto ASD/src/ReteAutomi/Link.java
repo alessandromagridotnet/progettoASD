@@ -36,5 +36,14 @@ public class Link {
         this.arrivo = arrivo;
     }
     
-    
+    public String toXML(){
+        String xml = "";
+        xml += "<Link>";
+            xml += "<Nome>" + this.getNome() + "</Nome>";
+            xml += "<IdAutomaPartenza>" + this.getPartenza().getNome() + "</IdAutomaPartenza>";
+            xml += "<IdAutomaArrivo>" + this.getArrivo().getNome() + "</IdAutomaArrivo>";
+        xml += "</Link>";
+        
+        return xml;
+    }
 }

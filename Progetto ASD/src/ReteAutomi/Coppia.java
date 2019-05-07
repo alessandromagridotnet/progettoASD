@@ -27,4 +27,13 @@ public class Coppia {
         this.link = link;
     }
     
+    public String toXML(){
+        String xml = "";
+        xml += "<Coppia>";
+            xml += "<IdEvento>" + this.getEvento().getNome() + "</IdEvento>";
+            xml += "<IdLink>" + this.getLink().getNome() + "</IdLink>";
+        xml += "</Coppia>";
+        
+        return xml;
+    }
 }

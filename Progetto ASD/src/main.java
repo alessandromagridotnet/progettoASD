@@ -35,12 +35,10 @@ public class main {
             // bugfix temporaneo per i path di linux e windows
             if(System.getProperty("os.name").compareTo("Linux") == 0){
                 dir = new File("src/input/");
-            
             }else{
                 dir = new File("Progetto ASD\\src\\input\\");
-            
             }
-                System.out.println("W");
+            
             File[] directoryListing = dir.listFiles();
             // controlla se sono presenti dei file nella cartella "input"
             if (directoryListing != null) {

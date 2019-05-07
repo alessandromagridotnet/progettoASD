@@ -23,10 +23,10 @@
                         <IdLink>L2</IdLink>
                     </CoppiaIngresso>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-                        <CoppiaUscita>
+                        <Coppia>
                             <IdEvento>e3</IdEvento>
                             <IdLink>L3</IdLink>
-                        </CoppiaUscita>
+                        </Coppia>
                     </CoppieUscita>
                 </Transizione>
                 <Transizione>
@@ -38,10 +38,10 @@
                         <IdLink>NULL</IdLink>
                     </CoppiaIngresso>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-                        <CoppiaUscita>
+                        <Coppia>
                             <IdEvento>e3</IdEvento>
                             <IdLink>L3</IdLink>
-                        </CoppiaUscita>
+                        </Coppia>
                     </CoppieUscita>
                 </Transizione>
             </Transizioni>
@@ -68,10 +68,10 @@
                         <IdLink>NULL</IdLink>
                     </CoppiaIngresso>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-                        <CoppiaUscita>
+                        <Coppia>
                             <IdEvento>e2</IdEvento>
                             <IdLink>L2</IdLink>
-                        </CoppiaUscita>
+                        </Coppia>
                     </CoppieUscita>
                 </Transizione>
                 <Transizione>
@@ -83,10 +83,10 @@
                         <IdLink>L3</IdLink>
                     </CoppiaIngresso>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-                        <CoppiaUscita>
+                        <Coppia>
                             <IdEvento>NULL</IdEvento>
                             <IdLink>NULL</IdLink>
-                        </CoppiaUscita>
+                        </Coppia>
                     </CoppieUscita>
                 </Transizione>
                 <Transizione>
@@ -98,10 +98,10 @@
                         <IdLink>L3</IdLink>
                     </CoppiaIngresso>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-                        <CoppiaUscita>
+                        <Coppia>
                             <IdEvento>NULL</IdEvento>
                             <IdLink>NULL</IdLink>
-                         </CoppiaUscita>
+                         </Coppia>
                     </CoppieUscita>
                 </Transizione>
             </Transizioni>
