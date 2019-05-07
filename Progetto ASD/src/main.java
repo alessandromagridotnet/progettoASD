@@ -29,7 +29,10 @@ public class main {
             
             Scanner in=new Scanner(System.in);
             boolean quit = false;
-            File dir = new File("src/input/");
+            File dir = new File("Progetto ASD\\src\\input\\");
+
+            System.out.println(dir.getAbsolutePath());
+
             File[] directoryListing = dir.listFiles();
             // controlla se sono presenti dei file nella cartella "input"
             if (directoryListing != null) {

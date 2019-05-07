@@ -1,6 +1,7 @@
 package ReteAutomi;
-
-
+import org.jdom.*;
+import org.jdom.input.*;
+import java.util.List;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -47,13 +48,24 @@ public class ReteAutomi {
         this.automi.add(a);
     }
     
-    public boolean loadFromFile(String path){
-        
-        System.out.println("il path è: " + path);
-        
-        
-        return true;
+    public void loadFromFile(String file) {
+        try {
+
+            System.out.println("il path è: " + file);
+            SAXBuilder builder = new SAXBuilder();
+            Document document = builder.build(new File(file));
+            Element root = document.getRootElement();
+            ReteAutomi rete =new ReteAutomi();
+            rete.setNome(root.getChild("name").getText());
+            List children = root.getChildren("Automa");
+
+        } catch (Exception e) {
+            System.err.println("Errore durante la lettura dal file");
+            e.printStackTrace();
+        }
     }
+
+
     
     public boolean storeIntoFile(String fileName){
         
