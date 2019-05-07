@@ -25,10 +25,26 @@ public class main {
      * @param args the command line arguments
      */
         public static void main (String args[]) throws IOException,FileNotFoundException{
-
+            int i =0;
             Scanner in=new Scanner(System.in);
             boolean quit = false;
+            File dir = new File("input/");
+            File[] directoryListing = dir.listFiles();
+            // controlla se sono presenti dei file nella cartella "input"
+            if (directoryListing != null) {
+                System.out.println("Segliere la rete automi che si vuole caricare: ");
+                // stampa il menu
+                for (File child : directoryListing) {
+                    i++;
+                    System.out.println(i + ") per caricare " + child.getName());
+                }
+            } else {
+                System.out.println("Non sono presenti file nella cartella input!!");
+            }
+            System.out.println("*******************************************************************************");
 
+            
+            
 
             while(!quit){
                 System.out.println("\n1) Prenotazione");
