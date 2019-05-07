@@ -47,14 +47,15 @@ public class ReteAutomi {
         this.automi.add(a);
     }
     
-    public boolean loadFromFile(){
+    public boolean loadFromFile(String path){
         
+        System.out.println("il path è: " + path);
         
         
         return true;
     }
     
-    public boolean storeIntoFile(){
+    public boolean storeIntoFile(String fileName){
         
         
         

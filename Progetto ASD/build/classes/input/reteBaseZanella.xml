@@ -1,0 +1,28 @@
+<ReteAutomi>
+    <Automi xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        <Automa>
+            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                
+            </Stati>
+            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                
+            </Transizioni>
+        </Automa>
+        <Automa>
+            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                
+            </Stati>
+            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                
+            </Transizioni>
+        </Automa>
+        <Automa>
+            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                
+            </Stati>
+            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                
+            </Transizioni>
+        </Automa>
+    </Automi>
+</ReteAutomi>

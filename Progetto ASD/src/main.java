@@ -8,11 +8,9 @@
 import ReteAutomi.Automa;
 import ReteAutomi.Link;
 import ReteAutomi.ReteAutomi;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.*;
 /**
@@ -26,52 +24,44 @@ public class main {
      */
         public static void main (String args[]) throws IOException,FileNotFoundException{
             int i =0;
+            
+            ArrayList tmpArray = new ArrayList<String>();
+            
             Scanner in=new Scanner(System.in);
             boolean quit = false;
-            File dir = new File("input/");
+            File dir = new File("src/input/");
             File[] directoryListing = dir.listFiles();
             // controlla se sono presenti dei file nella cartella "input"
             if (directoryListing != null) {
                 System.out.println("Segliere la rete automi che si vuole caricare: ");
                 // stampa il menu
                 for (File child : directoryListing) {
+                    tmpArray.add(i, child.getPath());
                     i++;
                     System.out.println(i + ") per caricare " + child.getName());
+                }
+                System.out.println((i+1) + ") terminare il programma ");
+                
+                // attesa dell'input per la scelta del file da caricare
+                while(!quit){
+                    int scelta=in.nextInt();
+                    in.nextLine();
+                    
+                    if(scelta >0 && scelta <= (directoryListing.length)){
+                        ReteAutomi RA = new ReteAutomi();
+                        RA.loadFromFile(tmpArray.get(scelta-1).toString());
+                    }else if(scelta == (directoryListing.length +1)){
+                        // uscita dal programma
+                        System.out.println("Programma terminato. Buona giornata.");
+                        quit=true;
+                    }else{
+                        System.out.println("Opzione non disponibile.");
+                    }
                 }
             } else {
                 System.out.println("Non sono presenti file nella cartella input!!");
             }
             System.out.println("*******************************************************************************");
-
-            
-            
-
-            while(!quit){
-                System.out.println("\n1) Prenotazione");
-                System.out.println("2) Gestione (riservato ai docenti");
-                System.out.println("3) Esci");
-
-                int scelta=in.nextInt();
-                in.nextLine();
-
-                switch(scelta){
-
-                    case 1:
-                    System.out.println("scelta1");
-                        break;
-                    case 2:
-                    System.out.println("scelta2");
-                        break;
-
-
-                    case 3: break;
-
-                    default:
-                        System.out.println("Scelta non supportata;");
-                }
-                if(scelta==3) quit=true;
-            }
-            System.out.println("Uscita dal sistema eseguita");
         }
 
 
