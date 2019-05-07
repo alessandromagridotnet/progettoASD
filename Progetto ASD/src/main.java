@@ -30,14 +30,13 @@ public class main {
             Scanner in=new Scanner(System.in);
             boolean quit = false;
             
-            }else{
-            
             File dir = null;
             
             // bugfix temporaneo per i path di linux e windows
             if(System.getProperty("os.name").compareTo("Linux") == 0){
                 dir = new File("src/input/");
-                System.out.println("L");
+            
+            }else{
                 dir = new File("Progetto ASD\\src\\input\\");
             
             }

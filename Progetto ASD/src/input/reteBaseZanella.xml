@@ -101,7 +101,7 @@
                         <CoppiaUscita>
                             <IdEvento>NULL</IdEvento>
                             <IdLink>NULL</IdLink>
-                        </CoppiaUscita>
+                         </CoppiaUscita>
                     </CoppieUscita>
                 </Transizione>
             </Transizioni>
