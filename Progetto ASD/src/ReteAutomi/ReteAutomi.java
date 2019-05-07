@@ -50,6 +50,7 @@ public class ReteAutomi {
         this.automi.add(a);
     }
     
+    
     public void loadFromFile(String file) {
         try {
 
@@ -63,21 +64,41 @@ public class ReteAutomi {
             Element automi =root.getChild("Automi");
             List listAutomi = automi.getChildren("Automa");
 
-            for (int i = 0; i < listAutomi.size(); i++)
-            {
+            for (int i = 0; i < listAutomi.size(); i++){
                 Automa automa = new Automa();
                 Element nodoAutoma = (Element) listAutomi.get(i);
                 automa.setNome(nodoAutoma.getChildText("Nome"));
-                Element stati =nodoAutoma.getChild("Stati");
+                // array degli stati
+                Element stati = nodoAutoma.getChild("Stati");
                 List listStati = stati.getChildren("Stato");
                 for (int j = 0; j < listStati.size(); j++) {
                     StatoSemplice stato = new StatoSemplice();
                     Element nodoStato = (Element) listStati.get(i);
                     stato.fromXML(nodoStato);
+                    automa.pushStato(stato);
                 }
+                // array delle transizioni
+                Element transizioni = nodoAutoma.getChild("Transizioni");
+                List listTransizioni = transizioni.getChildren("Transizione");
+                for (int j = 0; j < listTransizioni.size(); j++) {
+                    Transizione transizione = new Transizione();
+                    Element nodoTransizione = (Element) listTransizioni.get(i);
+                    transizione.fromXML(nodoTransizione, automa.getStati());
+                    automa.pushTransizioni(transizione);
+                }
+                this.pushAutoma(automa);
             }
 
+            // Links
+            Element links =root.getChild("Links");
+            List listLink = links.getChildren("Link");
+            for (int i = 0; i < listLink.size(); i++){
+                Link lnk = new Link();
+                lnk.fromXML((Element)listLink.get(i), this.getAutomi());
+                this.pushLink(lnk);
+            }
 
+            System.out.println("Caricamento completato");
 
         } catch (Exception e) {
             System.err.println("Errore durante la lettura dal file");

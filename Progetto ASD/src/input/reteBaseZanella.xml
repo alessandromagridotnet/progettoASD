@@ -18,10 +18,10 @@
                     <Nome>t2a</Nome>
                     <IdStatoIniziale>20</IdStatoIniziale>
                     <IdStatoFinale>21</IdStatoFinale>
-                    <CoppiaIngresso>
+                    <Coppia>
                         <IdEvento>e2</IdEvento>
                         <IdLink>L2</IdLink>
-                    </CoppiaIngresso>
+                    </Coppia>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>e3</IdEvento>
@@ -33,10 +33,10 @@
                     <Nome>t2b</Nome>
                     <IdStatoIniziale>21</IdStatoIniziale>
                     <IdStatoFinale>20</IdStatoFinale>
-                    <CoppiaIngresso>
+                    <Coppia>
                         <IdEvento>NULL</IdEvento>
                         <IdLink>NULL</IdLink>
-                    </CoppiaIngresso>
+                    </Coppia>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>e3</IdEvento>
@@ -63,10 +63,10 @@
                     <Nome>t3a</Nome>
                     <IdStatoIniziale>30</IdStatoIniziale>
                     <IdStatoFinale>31</IdStatoFinale>
-                    <CoppiaIngresso>
+                    <Coppia>
                         <IdEvento>NULL</IdEvento>
                         <IdLink>NULL</IdLink>
-                    </CoppiaIngresso>
+                    </Coppia>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>e2</IdEvento>
@@ -78,10 +78,10 @@
                     <Nome>t3b</Nome>
                     <IdStatoIniziale>31</IdStatoIniziale>
                     <IdStatoFinale>30</IdStatoFinale>
-                    <CoppiaIngresso>
+                    <Coppia>
                         <IdEvento>e3</IdEvento>
                         <IdLink>L3</IdLink>
-                    </CoppiaIngresso>
+                    </Coppia>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>NULL</IdEvento>
@@ -93,10 +93,10 @@
                     <Nome>t3c</Nome>
                     <IdStatoIniziale>31</IdStatoIniziale>
                     <IdStatoFinale>31</IdStatoFinale>
-                    <CoppiaIngresso>
+                    <Coppia>
                         <IdEvento>e3</IdEvento>
                         <IdLink>L3</IdLink>
-                    </CoppiaIngresso>
+                    </Coppia>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>NULL</IdEvento>

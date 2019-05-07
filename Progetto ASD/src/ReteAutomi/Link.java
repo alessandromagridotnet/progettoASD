@@ -1,5 +1,6 @@
 package ReteAutomi;
 
+import java.util.ArrayList;
 import org.jdom.Element;
 
 /**
@@ -40,18 +41,35 @@ public class Link {
     
     public String toXML(){
         String xml = "";
-        xml += "<Link>";
-            xml += "<Nome>" + this.getNome() + "</Nome>";
-            xml += "<IdAutomaPartenza>" + this.getPartenza().getNome() + "</IdAutomaPartenza>";
-            xml += "<IdAutomaArrivo>" + this.getArrivo().getNome() + "</IdAutomaArrivo>";
+        xml += "<Link>" + System.lineSeparator();
+            xml += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
+            xml += "<IdAutomaPartenza>" + this.getPartenza().getNome() + "</IdAutomaPartenza>" + System.lineSeparator();
+            xml += "<IdAutomaArrivo>" + this.getArrivo().getNome() + "</IdAutomaArrivo>" + System.lineSeparator();
         xml += "</Link>";
         
         return xml;
     }
     
-    public void fromXML(Element xml){
+    /**
+     * Funzione per caricare un link partendo da un elemento XML e da una lista di automi disponibili
+     * @param xml un elemento xml che contiene un LINK
+     * @param automi la lista degli automi caricati tra cui cercare partenza e arrivo dei vari link
+     */
+    public void fromXML(Element xml, ArrayList<Automa> automi){
         this.setNome(xml.getChildText("Nome"));
-        this.setPartenza(xml.getChildText("IdAutomaPartenza"));
-        this.setArrivo(xml.getChildText("IdAutomaArrivo"));
+        // trova l'automa di partenza dalla lista degli automi disponibili
+        for(int i=0; i < automi.size(); i++){
+            if(automi.get(i).getNome().equals(xml.getChildText("IdAutomaPartenza"))){
+                this.setPartenza(automi.get(i));
+                break;
+            }
+        }
+        // trova l'automa di arrivo dalla lista degli automi disponibili
+        for(int i=0; i < automi.size(); i++){
+            if(automi.get(i).getNome().equals(xml.getChildText("IdAutomaArrivo"))){
+                this.setArrivo(automi.get(i));
+                break;
+            }
+        }
     }
 }

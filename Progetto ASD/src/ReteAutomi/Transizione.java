@@ -2,6 +2,8 @@ package ReteAutomi;
 
 
 import java.util.ArrayList;
+import java.util.List;
+import org.jdom.Element;
 
 /**
  *
@@ -49,6 +51,10 @@ public class Transizione {
     public void setFinale(Stato finale) {
         this.finale = finale;
     }
+    
+    public void pushUscita(Coppia u){
+        this.uscita.add(u);
+    }
 
     public EtichettaOsservabilita getEti_oss() {
         return eti_oss;
@@ -75,5 +81,40 @@ public class Transizione {
             str += "<IdStatoFinale>" + this.getFinale().getId() + "</IdStatoFinale>";
         str += "</Transizione>";
         return str;
+    }
+    
+    /**
+     * Funzione per caricare un link partendo da un elemento XML e da una lista di automi disponibili
+     * @param xml un elemento xml che contiene un LINK
+     * @param automi la lista degli automi caricati tra cui cercare partenza e arrivo dei vari link
+     */
+    public void fromXML(Element xml, ArrayList<Stato> stati){
+        this.setNome(xml.getChildText("Nome"));
+        // trova lo stato iniziale dalla lista degli stati disponibili
+        for(int i=0; i < stati.size(); i++){
+            if(stati.get(i).getId().equals(xml.getChildText("IdStatoIniziale"))){
+                this.setIniziale(stati.get(i));
+                break;
+            }
+        }
+        // trova lo stato finale dalla lista degli stati disponibili
+        for(int i=0; i < stati.size(); i++){
+            if(stati.get(i).getId().equals(xml.getChildText("IdStatoFinale"))){
+                this.setFinale(stati.get(i));
+                break;
+            }
+        }
+        // ingresso
+        Coppia ingresso = new Coppia();
+        ingresso.fromXML((Element)xml.getChildren("Coppia"));
+        this.setIngresso(ingresso);
+        // uscite
+        Element uscite = (Element)xml.getChild("CoppieUscita");
+        List listUscite = uscite.getChildren("Coppia");
+        for(int i=0; i < listUscite.size(); i++){
+            Coppia coppia = new Coppia();
+            coppia.fromXML((Element)listUscite.get(i));
+            this.pushUscita(coppia);
+        }
     }
 }
