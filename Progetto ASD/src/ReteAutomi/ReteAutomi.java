@@ -5,6 +5,8 @@ import org.jdom.input.*;
 import java.util.Iterator;
 import java.util.List;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /*
@@ -68,25 +70,29 @@ public class ReteAutomi {
             for (int i = 0; i < listAutomi.size(); i++){
                 Automa automa = new Automa();
                 Element nodoAutoma = (Element) listAutomi.get(i);
+                
+                
                 automa.setNome(nodoAutoma.getChildText("Nome"));
                 // array degli stati
                 Element stati = nodoAutoma.getChild("Stati");
                 List listStati = stati.getChildren("Stato");
                 for (int j = 0; j < listStati.size(); j++) {
                     StatoSemplice stato = new StatoSemplice();
-                    Element nodoStato = (Element) listStati.get(i);
+                    Element nodoStato = (Element) listStati.get(j);
                     stato.fromXML(nodoStato);
                     automa.pushStato(stato);
                 }
+                
                 // array delle transizioni
                 Element transizioni = nodoAutoma.getChild("Transizioni");
                 List listTransizioni = transizioni.getChildren("Transizione");
                 for (int j = 0; j < listTransizioni.size(); j++) {
                     Transizione transizione = new Transizione();
-                    Element nodoTransizione = (Element) listTransizioni.get(i);
+                    Element nodoTransizione = (Element) listTransizioni.get(j);
                     transizione.fromXML(nodoTransizione, automa.getStati());
                     automa.pushTransizioni(transizione);
                 }
+                
                 this.pushAutoma(automa);
             }
 
@@ -113,9 +119,31 @@ public class ReteAutomi {
 
     
     public boolean storeIntoFile(String fileName){
+        try (PrintWriter out = new PrintWriter(fileName)) {
+            out.print(this.toXML());
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
+    public String toXML(){
+        String xml = "";
+        xml += "<ReteAutomi>" + System.lineSeparator();
+            xml += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
+            xml += "<Automi>" + System.lineSeparator();
+                for(Automa a : this.automi){
+                    xml += a.toXML();
+                }
+            xml += "</Automi>" + System.lineSeparator();
+            
+            xml += "<Links>" + System.lineSeparator();
+                for(Link l : this.links){
+                    xml += l.toXML();
+                }
+            xml += "</Links>" + System.lineSeparator();
+        xml += "</ReteAutomi>" + System.lineSeparator();
         
-        
-        
-        return true;
+        return xml;
     }
 }

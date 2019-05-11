@@ -70,7 +70,7 @@ public class main {
                         ReteAutomi RA = new ReteAutomi();
                         if(RA.loadFromFile(tmpArray.get(scelta-1).toString())){
                             // caricamento riuscito
-                            menu_azioni();
+                            menu_azioni(RA);
                         }else{
                             // caricamento non riuscito
                             System.out.println("Errore durante il caricamento.");
@@ -91,7 +91,7 @@ public class main {
             System.out.println("*******************************************************************************");
         }
 
-        private static void menu_azioni(){
+        private static void menu_azioni(ReteAutomi RA){
             Scanner in=new Scanner(System.in);
             boolean quit = false;
             
@@ -99,10 +99,23 @@ public class main {
             System.out.println("***************************** MENU SECONDO LIVELLO ****************************");
             System.out.println("*******************************************************************************");
             System.out.println("");
-            System.out.println("1) per ");
+            System.out.println("1) per esportare la rete caricata ");
+            System.out.println("0) per tornare al menu principale ");
             
             while(!quit){
+                int scelta=in.nextInt();
+                in.nextLine();
                 
+                switch(scelta){
+                    case 1:
+                        RA.storeIntoFile("src/output/output.xml");
+                        break;
+                    case 2:
+                        for(Automa a : RA.getAutomi()){
+                            System.out.println(a.toXML());
+                        }
+                        break;
+                }  
             }
         }
 

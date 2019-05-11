@@ -19,6 +19,8 @@ public class Transizione {
 
     public Transizione() {
         this.uscita = new ArrayList<Coppia>();
+        this.iniziale = null;
+        this.finale = null;
     }
 
     public String getNome() {
@@ -76,11 +78,19 @@ public class Transizione {
     public String toXML(){
         String str = "";
         
-        str += "<Transizione>";
-            str += "<Nome>" + this.getNome() + "</Nome>";
-            str += "<IdStatoIniziale>" + this.getIniziale().getId() + "</IdStatoIniziale>";
-            str += "<IdStatoFinale>" + this.getFinale().getId() + "</IdStatoFinale>";
-        str += "</Transizione>";
+        str += "<Transizione>" + System.lineSeparator();
+            str += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
+            if(this.getIniziale() == null){
+                str += "<IdStatoIniziale>" + this.getIniziale().getId() + "</IdStatoIniziale>" + System.lineSeparator();
+            }else{
+                str += "<IdStatoIniziale>NULL</IdStatoIniziale>" + System.lineSeparator();
+            }
+            if(this.getFinale() == null){
+                str += "<IdStatoFinale>" + this.getFinale().getId() + "</IdStatoFinale>" + System.lineSeparator();
+            }else{
+                str += "<IdStatoFinale>NULL</IdStatoFinale>" + System.lineSeparator();
+            }
+        str += "</Transizione>" + System.lineSeparator();
         return str;
     }
     

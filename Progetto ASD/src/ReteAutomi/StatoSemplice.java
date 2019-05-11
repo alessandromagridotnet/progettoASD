@@ -35,10 +35,10 @@ public class StatoSemplice implements Stato{
     
     public String toXML(){
         String xml = "";
-        xml += "<Stato>";
-            xml += "<ID>" + this.getId() + "</ID>";
-            xml += "<Iniziale>" + this.getIniziale().toString() + "</Iniziale>";
-        xml += "</Stato>";
+        xml += "<Stato>" + System.lineSeparator();
+            xml += "<ID>" + this.getId() + "</ID>" + System.lineSeparator();
+            xml += "<Iniziale>" + this.getIniziale().toString() + "</Iniziale>" + System.lineSeparator();
+        xml += "</Stato>" + System.lineSeparator();
         
         return xml;
     }

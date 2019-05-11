@@ -32,10 +32,10 @@ public class Coppia {
     
     public String toXML(){
         String xml = "";
-        xml += "<Coppia>";
-            xml += "<IdEvento>" + this.getEvento().getNome() + "</IdEvento>";
-            xml += "<IdLink>" + this.getLink() + "</IdLink>";
-        xml += "</Coppia>";
+        xml += "<Coppia>" + System.lineSeparator();
+            xml += "<IdEvento>" + this.getEvento().getNome() + "</IdEvento>" + System.lineSeparator();
+            xml += "<IdLink>" + this.getLink() + "</IdLink>" + System.lineSeparator();
+        xml += "</Coppia>" + System.lineSeparator();
         
         return xml;
     }

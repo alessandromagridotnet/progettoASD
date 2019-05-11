@@ -9,4 +9,5 @@ public interface Stato {
     public void setId(String id);
     public Boolean getIniziale();
     public void setIniziale(Boolean iniziale);
+    public String toXML();
 }

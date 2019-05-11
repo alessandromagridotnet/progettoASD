@@ -13,8 +13,8 @@ public class Automa {
     private ArrayList<Transizione> transizioni;
 
     public Automa() {
-        this.stati = new ArrayList<Stato>();
-        this.transizioni = new ArrayList<Transizione>();
+        this.stati = new ArrayList<>();
+        this.transizioni = new ArrayList<>();
     }
 
     public String getNome() {
@@ -39,6 +39,26 @@ public class Automa {
     
     public void pushTransizioni(Transizione t){
         this.transizioni.add(t);
+    }
+    
+    public String toXML(){
+        String xml = "";
+        
+        xml += "<Automa>" + System.lineSeparator();
+            xml += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
+            xml += "<Stati>" + System.lineSeparator();
+                for(Stato s : this.stati){
+                    xml += s.toXML();
+                }
+            xml += "</Stati>" + System.lineSeparator();
+            xml += "<Transizioni>" + System.lineSeparator();
+                for(Transizione t : this.transizioni){
+                    xml += t.toXML();
+                }
+            xml += "</Transizioni>" + System.lineSeparator();
+        xml += "</Automa>" + System.lineSeparator();
+        
+        return xml;
     }
     
 }

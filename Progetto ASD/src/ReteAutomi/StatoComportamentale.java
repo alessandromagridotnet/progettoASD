@@ -58,4 +58,12 @@ public class StatoComportamentale implements Stato{
     public void pushStato(Stato s){
         this.stati.add(s);
     }
+    
+    public String toXML(){
+        String xml = "";
+        
+        
+        
+        return xml;
+    }
 }
