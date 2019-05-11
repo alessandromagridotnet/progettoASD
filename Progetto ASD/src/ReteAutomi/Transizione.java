@@ -18,6 +18,7 @@ public class Transizione {
     private EtichettaRilevanza eti_rile;
 
     public Transizione() {
+        this.uscita = new ArrayList<Coppia>();
     }
 
     public String getNome() {
@@ -106,7 +107,7 @@ public class Transizione {
         }
         // ingresso
         Coppia ingresso = new Coppia();
-        ingresso.fromXML((Element)xml.getChildren("Coppia"));
+        ingresso.fromXML((Element)xml.getChild("Coppia"));
         this.setIngresso(ingresso);
         // uscite
         Element uscite = (Element)xml.getChild("CoppieUscita");

@@ -23,9 +23,15 @@ public class main {
      * @param args the command line arguments
      */
         public static void main (String args[]) throws IOException,FileNotFoundException{
-            int i =0;
             
-            ArrayList tmpArray = new ArrayList<String>();
+            menu_caricamento();
+            
+            
+        }
+        
+        private static void menu_caricamento(){
+            int i =0;
+            ArrayList tmpArray = new ArrayList<>();
             
             Scanner in=new Scanner(System.in);
             boolean quit = false;
@@ -40,6 +46,10 @@ public class main {
             }
             File[] directoryListing = dir.listFiles();
             
+            System.out.println("*******************************************************************************");
+            System.out.println("******************************* MENU PRINCIPALE *******************************");
+            System.out.println("*******************************************************************************");
+            
             // controlla se sono presenti dei file nella cartella "input"
             if (directoryListing != null) {
                 System.out.println("Segliere la rete automi che si vuole caricare: ");
@@ -49,7 +59,7 @@ public class main {
                     i++;
                     System.out.println(i + ") per caricare " + child.getName());
                 }
-                System.out.println((i+1) + ") terminare il programma ");
+                System.out.println("0) terminare il programma ");
                 
                 // attesa dell'input per la scelta del file da caricare
                 while(!quit){
@@ -58,8 +68,16 @@ public class main {
                     
                     if(scelta >0 && scelta <= (directoryListing.length)){
                         ReteAutomi RA = new ReteAutomi();
-                        RA.loadFromFile(tmpArray.get(scelta-1).toString());
-                    }else if(scelta == (directoryListing.length +1)){
+                        if(RA.loadFromFile(tmpArray.get(scelta-1).toString())){
+                            // caricamento riuscito
+                            menu_azioni();
+                        }else{
+                            // caricamento non riuscito
+                            System.out.println("Errore durante il caricamento.");
+                            System.out.println("Programma terminato. Buona giornata.");
+                            break;
+                        }
+                    }else if(scelta == 0){
                         // uscita dal programma
                         System.out.println("Programma terminato. Buona giornata.");
                         quit=true;
@@ -73,9 +91,19 @@ public class main {
             System.out.println("*******************************************************************************");
         }
 
-
-
-
-
+        private static void menu_azioni(){
+            Scanner in=new Scanner(System.in);
+            boolean quit = false;
+            
+            System.out.println("*******************************************************************************");
+            System.out.println("***************************** MENU SECONDO LIVELLO ****************************");
+            System.out.println("*******************************************************************************");
+            System.out.println("");
+            System.out.println("1) per ");
+            
+            while(!quit){
+                
+            }
+        }
 
 }

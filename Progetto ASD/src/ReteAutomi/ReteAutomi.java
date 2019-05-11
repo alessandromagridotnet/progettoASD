@@ -23,7 +23,8 @@ public class ReteAutomi {
     private ArrayList<Automa> automi;
 
     public ReteAutomi() {
-        
+        this.links = new ArrayList<Link>();
+        this.automi = new ArrayList<Automa>();
     }
 
     public String getNome() {
@@ -51,7 +52,7 @@ public class ReteAutomi {
     }
     
     
-    public void loadFromFile(String file) {
+    public boolean loadFromFile(String file) {
         try {
 
             System.out.println("il path è: " + file);
@@ -99,10 +100,13 @@ public class ReteAutomi {
             }
 
             System.out.println("Caricamento completato");
+            
+            return true;
 
         } catch (Exception e) {
             System.err.println("Errore durante la lettura dal file");
             e.printStackTrace();
+            return false;
         }
     }
 

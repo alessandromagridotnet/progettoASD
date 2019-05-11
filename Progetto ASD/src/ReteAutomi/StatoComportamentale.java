@@ -19,6 +19,8 @@ public class StatoComportamentale implements Stato{
     private ArrayList<Coppia> coppie;
 
     public StatoComportamentale() {
+        this.stati = new ArrayList<Stato>();
+        this.coppie = new ArrayList<Coppia>();
     }
     
     @Override
