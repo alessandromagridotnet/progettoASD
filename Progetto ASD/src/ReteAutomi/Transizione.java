@@ -43,6 +43,8 @@ public class Transizione {
         return ingresso;
     }
 
+    public ArrayList<Coppia> getUscita() {return uscita;}
+
     public void setIngresso(Coppia ingresso) {
         this.ingresso = ingresso;
     }

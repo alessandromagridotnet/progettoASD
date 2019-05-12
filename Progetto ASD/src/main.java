@@ -5,6 +5,12 @@
  */
 
 import ReteAutomi.ReteAutomi;
+import ReteAutomi.Automa;
+import ReteAutomi.StatoSemplice;
+import ReteAutomi.Link;
+import ReteAutomi.Transizione;
+import ReteAutomi.Stato;
+import ReteAutomi.Coppia;
 
 import java.io.*;
 import java.util.*;
@@ -104,6 +110,7 @@ public class main {
             System.out.println("*******************************************************************************");
             System.out.println("");
             System.out.println("1) per esportare la rete caricata ");
+            System.out.println("3) per visualizzare la rete caricata ");
             System.out.println("0) per tornare al menu principale ");
             
             while(!quit){
@@ -119,6 +126,8 @@ public class main {
                                 System.out.println(a.toXML());
                             });
                             return true;
+                        case 3:
+                            mostraRete(RA);
                         case 0:
                             return false;
 
@@ -131,6 +140,50 @@ public class main {
                 }
             }
             return false;
+        }
+        private static void mostraRete (ReteAutomi RA){
+            System.out.println("La rete"+RA.getNome()+" presenta questi elementi:");
+            System.out.println("AUTOMI:");
+            for (Automa automa : RA.getAutomi()) {
+               System.out.println("Automa "+automa.getNome());
+               System.out.println("Questo automa ha i seguenti stati:");
+               for (Stato stato : automa.getStati()){
+                    System.out.print("Stato "+stato.getId());
+                    System.out.println("");
+                    if (stato.getIniziale())
+                        System.out.print("(Questo è lo stato iniziale)");
+                        System.out.println("");
+               }
+                System.out.println("Questo automa ha le seguenti transizioni:");
+               for(Transizione transizione: automa.getTransizioni()){
+                   System.out.println("Transizione "+transizione.getNome());
+                   System.out.println("La transizione parte dall'automa "+transizione.getIniziale().getId()+" e arriva all'automa "+transizione.getFinale().getId());
+                   System.out.println("");
+                   if (transizione.getIngresso() != null ) {
+                       System.out.println("Questa transizione richiede in ingresso l'evento " + transizione.getIngresso().getEvento().getNome() + " trasportato nel link " + transizione.getIngresso().getLink());
+                   }
+                   if (transizione.getUscita().size()!=0){
+                       for (Coppia coppia : transizione.getUscita()){
+                           System.out.println("La transizione produce l'evento "+coppia.getEvento().getNome()+" da depositare sul link "+coppia.getLink());
+                       }
+                   }
+                   System.out.println("");
+                   System.out.println("");
+
+               }
+
+
+           }
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("I link presenti nella rete sono:");
+            for (Link link : RA.getLinks()){
+                System.out.println("Link "+link.getNome()+" che parte dall'automa "+link.getArrivo().getNome()+" e arriva all'automa "+link.getArrivo().getNome());
+            }
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
         }
 
 }
