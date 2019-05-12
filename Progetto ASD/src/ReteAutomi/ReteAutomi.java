@@ -71,27 +71,7 @@ public class ReteAutomi {
                 Automa automa = new Automa();
                 Element nodoAutoma = (Element) listAutomi.get(i);
                 
-                
-                automa.setNome(nodoAutoma.getChildText("Nome"));
-                // array degli stati
-                Element stati = nodoAutoma.getChild("Stati");
-                List listStati = stati.getChildren("Stato");
-                for (int j = 0; j < listStati.size(); j++) {
-                    StatoSemplice stato = new StatoSemplice();
-                    Element nodoStato = (Element) listStati.get(j);
-                    stato.fromXML(nodoStato);
-                    automa.pushStato(stato);
-                }
-                
-                // array delle transizioni
-                Element transizioni = nodoAutoma.getChild("Transizioni");
-                List listTransizioni = transizioni.getChildren("Transizione");
-                for (int j = 0; j < listTransizioni.size(); j++) {
-                    Transizione transizione = new Transizione();
-                    Element nodoTransizione = (Element) listTransizioni.get(j);
-                    transizione.fromXML(nodoTransizione, automa.getStati());
-                    automa.pushTransizioni(transizione);
-                }
+                automa.fromXML(nodoAutoma);
                 
                 this.pushAutoma(automa);
             }

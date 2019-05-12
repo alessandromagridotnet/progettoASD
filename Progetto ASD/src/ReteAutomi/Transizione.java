@@ -81,14 +81,14 @@ public class Transizione {
         str += "<Transizione>" + System.lineSeparator();
             str += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
             if(this.getIniziale() == null){
-                str += "<IdStatoIniziale>" + this.getIniziale().getId() + "</IdStatoIniziale>" + System.lineSeparator();
-            }else{
                 str += "<IdStatoIniziale>NULL</IdStatoIniziale>" + System.lineSeparator();
+            }else{
+                str += "<IdStatoIniziale>" + this.getIniziale().getId() + "</IdStatoIniziale>" + System.lineSeparator();
             }
             if(this.getFinale() == null){
-                str += "<IdStatoFinale>" + this.getFinale().getId() + "</IdStatoFinale>" + System.lineSeparator();
-            }else{
                 str += "<IdStatoFinale>NULL</IdStatoFinale>" + System.lineSeparator();
+            }else{
+                str += "<IdStatoFinale>" + this.getFinale().getId() + "</IdStatoFinale>" + System.lineSeparator();
             }
         str += "</Transizione>" + System.lineSeparator();
         return str;
@@ -102,16 +102,16 @@ public class Transizione {
     public void fromXML(Element xml, ArrayList<Stato> stati){
         this.setNome(xml.getChildText("Nome"));
         // trova lo stato iniziale dalla lista degli stati disponibili
-        for(int i=0; i < stati.size(); i++){
-            if(stati.get(i).getId().equals(xml.getChildText("IdStatoIniziale"))){
-                this.setIniziale(stati.get(i));
+        for(Stato s : stati){
+            if(s.getId().equals(xml.getChildText("IdStatoIniziale"))){
+                this.setIniziale(s);
                 break;
             }
         }
         // trova lo stato finale dalla lista degli stati disponibili
-        for(int i=0; i < stati.size(); i++){
-            if(stati.get(i).getId().equals(xml.getChildText("IdStatoFinale"))){
-                this.setFinale(stati.get(i));
+        for(Stato s : stati){
+            if(s.getId().equals(xml.getChildText("IdStatoFinale"))){
+                this.setFinale(s);
                 break;
             }
         }
@@ -120,8 +120,7 @@ public class Transizione {
         ingresso.fromXML((Element)xml.getChild("Coppia"));
         this.setIngresso(ingresso);
         // uscite
-        Element uscite = (Element)xml.getChild("CoppieUscita");
-        List listUscite = uscite.getChildren("Coppia");
+        List listUscite = xml.getChild("CoppieUscita").getChildren("Coppia");
         for(int i=0; i < listUscite.size(); i++){
             Coppia coppia = new Coppia();
             coppia.fromXML((Element)listUscite.get(i));
