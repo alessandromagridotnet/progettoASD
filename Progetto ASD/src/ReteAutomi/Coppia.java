@@ -30,6 +30,10 @@ public class Coppia {
         this.link = link;
     }
     
+    /**
+     * Funzione che ritorna una stringa contenente la rappresentazione XML
+     * @return String
+     */
     public String toXML(){
         String xml = "";
         xml += "<Coppia>" + System.lineSeparator();

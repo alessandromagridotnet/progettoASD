@@ -110,6 +110,7 @@ public class main {
             System.out.println("*******************************************************************************");
             System.out.println("");
             System.out.println("1) per esportare la rete caricata ");
+            System.out.println("2) per calcolare lo stato comportamentale ");
             System.out.println("3) per visualizzare la rete caricata ");
             System.out.println("0) per tornare al menu principale ");
             
@@ -122,10 +123,8 @@ public class main {
                         case 1:
                             return RA.storeIntoFile("src/output/output.xml");
                         case 2:
-                            RA.getAutomi().forEach((a) -> {
-                                System.out.println(a.toXML());
-                            });
-                            return true;
+                            ReteAutomi RA_out = new ReteAutomi();
+                            return RA.calcolaStatoComportamentale(RA_out);
                         case 3:
                             mostraRete(RA);
                         case 0:

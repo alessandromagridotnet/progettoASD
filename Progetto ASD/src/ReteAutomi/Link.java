@@ -39,6 +39,10 @@ public class Link {
         this.arrivo = arrivo;
     }
     
+    /**
+     * Funzione che ritorna una stringa contenente la rappresentazione XML
+     * @return String
+     */
     public String toXML(){
         String xml = "";
         xml += "<Link>" + System.lineSeparator();

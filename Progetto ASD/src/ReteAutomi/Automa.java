@@ -43,6 +43,10 @@ public class Automa {
         this.transizioni.add(t);
     }
     
+    /**
+     * Funzione che ritorna una stringa contenente la rappresentazione XML
+     * @return String
+     */
     public String toXML(){
         String xml = "";
         

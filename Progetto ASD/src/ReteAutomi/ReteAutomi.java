@@ -91,7 +91,11 @@ public class ReteAutomi {
     }
 
 
-    
+    /**
+     * Funzione che salva l'XML della rete di automi caricata in un file 
+     * @param fileNamepath path e nome del file in cui si vuole salvare l'xml generato
+     * @return boolean
+     */
     public boolean storeIntoFile(String fileName){
         try (PrintWriter out = new PrintWriter(fileName)) {
             out.print(this.toXML());
@@ -103,6 +107,10 @@ public class ReteAutomi {
         }
     }
     
+    /**
+     * Funzione che ritorna una stringa contenente la rappresentazione XML
+     * @return String
+     */
     public String toXML(){
         String xml = "";
         xml += "<ReteAutomi>" + System.lineSeparator();
@@ -121,5 +129,26 @@ public class ReteAutomi {
         xml += "</ReteAutomi>" + System.lineSeparator();
         
         return xml;
+    }
+    
+    public boolean calcolaStatoComportamentale(ReteAutomi RA_out){
+        StatoComportamentale sc = new StatoComportamentale();
+        this.getAutomi().forEach((a) -> {
+            a.getStati().forEach((s) -> {
+                if(s.getIniziale()){
+                    sc.pushStato(s);
+                }
+            });
+        });
+        this.getLinks().forEach((l) -> {
+            Coppia cp = new Coppia();
+            cp.setLink(l.getNome());
+            sc.pushCoppia(cp);
+        });
+        sc.setFinale(true);
+        
+        System.out.println(sc.toXML());
+        
+        return true;
     }
 }

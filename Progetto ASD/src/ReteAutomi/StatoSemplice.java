@@ -33,6 +33,11 @@ public class StatoSemplice implements Stato{
         this.iniziale = iniziale;
     }
     
+    /**
+     * Funzione che ritorna una stringa contenente la rappresentazione XML
+     * @return String
+     */
+    @Override
     public String toXML(){
         String xml = "";
         xml += "<Stato>" + System.lineSeparator();

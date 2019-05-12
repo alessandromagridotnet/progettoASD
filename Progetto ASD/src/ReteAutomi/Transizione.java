@@ -77,6 +77,10 @@ public class Transizione {
         this.eti_rile = eti_rile;
     }
     
+    /**
+     * Funzione che ritorna una stringa contenente la rappresentazione XML
+     * @return String
+     */
     public String toXML(){
         String str = "";
         

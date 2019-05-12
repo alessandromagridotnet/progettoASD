@@ -19,8 +19,10 @@ public class StatoComportamentale implements Stato{
     private ArrayList<Coppia> coppie;
 
     public StatoComportamentale() {
-        this.stati = new ArrayList<Stato>();
-        this.coppie = new ArrayList<Coppia>();
+        this.iniziale = false;
+        this.finale = false;
+        this.stati = new ArrayList<>();
+        this.coppie = new ArrayList<>();
     }
     
     @Override
@@ -59,10 +61,36 @@ public class StatoComportamentale implements Stato{
         this.stati.add(s);
     }
     
+    public ArrayList<Coppia> getCoppie() {
+        return this.coppie;
+    }
+    
+    public void pushCoppia(Coppia c){
+        this.coppie.add(c);
+    }
+    
+    /**
+     * Funzione che ritorna una stringa contenente la rappresentazione XML
+     * @return String
+     */
+    @Override
     public String toXML(){
         String xml = "";
-        
-        
+        xml += "<Stato>" + System.lineSeparator();
+            xml += "<ID>" + this.getId() + "</ID>" + System.lineSeparator();
+            xml += "<Iniziale>" + this.getIniziale().toString() + "</Iniziale>" + System.lineSeparator();
+            xml += "<Finale>" + this.getFinale().toString() + "</Finale>" + System.lineSeparator();
+            xml += "<Stati>" + System.lineSeparator();
+            for(Stato s : this.getStati()){
+                xml += s.toXML();
+            }
+            xml += "</Stati>" + System.lineSeparator();
+            xml += "<Coppie>" + System.lineSeparator();
+            for(Coppia c : this.getCoppie()){
+                xml += c.toXML();
+            }
+            xml += "</Coppie>" + System.lineSeparator();
+        xml += "</Stato>" + System.lineSeparator();
         
         return xml;
     }
