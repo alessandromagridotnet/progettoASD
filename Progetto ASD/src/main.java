@@ -4,14 +4,9 @@
  * and open the template in the editor.
  */
 
-
-import ReteAutomi.Automa;
-import ReteAutomi.Link;
 import ReteAutomi.ReteAutomi;
 
 import java.io.*;
-import java.nio.file.Paths;
-import java.text.ParseException;
 import java.util.*;
 /**
  *
@@ -21,21 +16,21 @@ public class main {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-        public static void main (String args[]) throws IOException,FileNotFoundException{
+        public static void main (String args[]) throws IOException{
             
             menu_caricamento();
+            System.out.println("-------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
             
             
         }
         
-        private static void menu_caricamento(){
+        private static void menu_caricamento() throws IOException{
             int i =0;
             ArrayList tmpArray = new ArrayList<>();
-            
-            Scanner in=new Scanner(System.in);
             boolean quit = false;
-            
             File dir = null;
             
             // bugfix temporaneo per i path di linux e windows
@@ -46,9 +41,9 @@ public class main {
             }
             File[] directoryListing = dir.listFiles();
             
-            System.out.println("*******************************************************************************");
-            System.out.println("******************************* MENU PRINCIPALE *******************************");
-            System.out.println("*******************************************************************************");
+            System.out.println("###############################################################################");
+            System.out.println("############################### MENU PRINCIPALE ###############################");
+            System.out.println("###############################################################################");
             
             // controlla se sono presenti dei file nella cartella "input"
             if (directoryListing != null) {
@@ -63,38 +58,47 @@ public class main {
                 
                 // attesa dell'input per la scelta del file da caricare
                 while(!quit){
-                    int scelta=in.nextInt();
-                    in.nextLine();
-                    
-                    if(scelta >0 && scelta <= (directoryListing.length)){
-                        ReteAutomi RA = new ReteAutomi();
-                        if(RA.loadFromFile(tmpArray.get(scelta-1).toString())){
-                            // caricamento riuscito
-                            menu_azioni(RA);
-                        }else{
-                            // caricamento non riuscito
-                            System.out.println("Errore durante il caricamento.");
+                    try{
+                        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                        int scelta = Integer.parseInt(br.readLine());
+
+                        if(scelta >0 && scelta <= (directoryListing.length)){
+                            ReteAutomi RA = new ReteAutomi();
+                            if(RA.loadFromFile(tmpArray.get(scelta-1).toString())){
+                                // caricamento riuscito
+                                Boolean azioni = true;
+                                while(azioni){
+                                    azioni = menu_azioni(RA);
+                                }
+                                quit=true;
+                                menu_caricamento();
+                            }else{
+                                // caricamento non riuscito
+                                System.err.println("Errore durante il caricamento.");
+                                System.out.println("Programma terminato. Buona giornata.");
+                                quit=true;
+                                break;
+                            }
+                        }else if(scelta == 0){
+                            // uscita dal programma
                             System.out.println("Programma terminato. Buona giornata.");
-                            break;
+                            quit=true;
+                        }else{
+                            System.err.println("Opzione non disponibile.");
                         }
-                    }else if(scelta == 0){
-                        // uscita dal programma
-                        System.out.println("Programma terminato. Buona giornata.");
-                        quit=true;
-                    }else{
-                        System.out.println("Opzione non disponibile.");
+                    }catch(NumberFormatException e){
+                        System.err.println("Scelta non consentita. Inserire solo valori numerici consentiti!");
                     }
                 }
             } else {
                 System.out.println("Non sono presenti file nella cartella input!!");
             }
-            System.out.println("*******************************************************************************");
         }
 
-        private static void menu_azioni(ReteAutomi RA){
-            Scanner in=new Scanner(System.in);
+        private static boolean menu_azioni(ReteAutomi RA) throws IOException{
             boolean quit = false;
             
+            System.out.println("");
             System.out.println("*******************************************************************************");
             System.out.println("***************************** MENU SECONDO LIVELLO ****************************");
             System.out.println("*******************************************************************************");
@@ -103,20 +107,30 @@ public class main {
             System.out.println("0) per tornare al menu principale ");
             
             while(!quit){
-                int scelta=in.nextInt();
-                in.nextLine();
-                
-                switch(scelta){
-                    case 1:
-                        RA.storeIntoFile("src/output/output.xml");
-                        break;
-                    case 2:
-                        for(Automa a : RA.getAutomi()){
-                            System.out.println(a.toXML());
-                        }
-                        break;
-                }  
+                try{
+                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                    int scelta = Integer.parseInt(br.readLine());
+
+                    switch(scelta){
+                        case 1:
+                            return RA.storeIntoFile("src/output/output.xml");
+                        case 2:
+                            RA.getAutomi().forEach((a) -> {
+                                System.out.println(a.toXML());
+                            });
+                            return true;
+                        case 0:
+                            return false;
+
+                        default:
+                            System.err.println("Scelta non consentita. Inserire solo valori numerici consentiti ");
+                            break;
+                    }
+                }catch(NumberFormatException e){
+                    System.err.println("Scelta non consentita. Inserire solo valori numerici consentiti!");
+                }
             }
+            return false;
         }
 
 }

@@ -2,10 +2,8 @@ package ReteAutomi;
 import org.jdom.*;
 import org.jdom.input.*;
 
-import java.util.Iterator;
 import java.util.List;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -56,17 +54,13 @@ public class ReteAutomi {
     
     public boolean loadFromFile(String file) {
         try {
-
-            System.out.println("il path è: " + file);
             SAXBuilder builder = new SAXBuilder();
-            Document document = builder.build(new File(file));
-            Element root = document.getRootElement();
+            Element root = builder.build(new File(file)).getRootElement();
             ReteAutomi rete =new ReteAutomi();
             rete.setNome(root.getChild("Nome").getText());
 
-            Element automi =root.getChild("Automi");
-            List listAutomi = automi.getChildren("Automa");
-
+            List listAutomi =root.getChild("Automi").getChildren("Automa");
+            // Automi
             for (int i = 0; i < listAutomi.size(); i++){
                 Automa automa = new Automa();
                 Element nodoAutoma = (Element) listAutomi.get(i);
@@ -101,8 +95,10 @@ public class ReteAutomi {
     public boolean storeIntoFile(String fileName){
         try (PrintWriter out = new PrintWriter(fileName)) {
             out.print(this.toXML());
+            System.out.println("Salvataggio eseguito correttamente");
             return true;
         }catch(Exception e){
+            System.out.println("Errore durante il salvataggio del file");
             return false;
         }
     }
