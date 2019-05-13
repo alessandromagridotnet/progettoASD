@@ -131,8 +131,15 @@ public class ReteAutomi {
         return xml;
     }
     
-    public boolean calcolaStatoComportamentale(ReteAutomi RA_out){
+    /**
+     * Funzione che calcola il primo Stato all'interno dell'automa chiamato StatoComportamentale
+     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
+     * @return boolean
+     */
+    public boolean calcolaStatoComportamentale(Automa A_out){
         StatoComportamentale sc = new StatoComportamentale();
+        Integer conteggio = 0;
+        sc.setId(conteggio.toString());
         this.getAutomi().forEach((a) -> {
             a.getStati().forEach((s) -> {
                 if(s.getIniziale()){
@@ -147,8 +154,63 @@ public class ReteAutomi {
         });
         sc.setFinale(true);
         
-        System.out.println(sc.toXML());
+        A_out.pushStato(sc);
         
+        statoComportamentaleRicorsivo(A_out, sc, conteggio++);
+        
+        return true;
+    }
+    
+    /**
+     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa StatoComportamentale
+     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
+     * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaStatoComportamentale()")
+     * @param conteggio un intero che indica il numero di stati generati dal sistema
+     * @return boolean
+     */
+    private boolean statoComportamentaleRicorsivo(Automa A_out, StatoComportamentale sc_pre, Integer conteggio){
+        for (Automa a : this.getAutomi()) {
+            for(Transizione t : a.getTransizioni()){
+                if(sc_pre.getStati().contains(t.getIniziale())){
+                    if(t.getIngresso()==null || sc_pre.getCoppie().contains(t.getIngresso())){
+                        boolean tmp = true;
+                        for(Coppia u : t.getUscita()){
+                            if(!(u==null || sc_pre.getCoppie().contains(u))){
+                                tmp = false;
+                                break;
+                            }
+                        }
+                        // entra nel seguente if solo se sono state verificate tutte le precondizioni
+                        if(tmp){
+                            // scaturisce l'evento e lancia una nuova istanza ricorsiva
+                            StatoComportamentale sc = sc_pre;
+                            // setta il nuovo nome (quello per la ridenominazione)
+                            sc.setId(conteggio.toString());
+                            // rimuovo lo stato iniziale della transizione dalla lista degli stati nel nuovo spazio comportamentale
+                            if(sc.getStati().contains(t.getIniziale())){
+                                sc.getStati().remove(t.getIniziale());
+                            }
+                            // aggiungo alla lista degli stati del nuovo spazio comportamentale lo stato finale della transizione
+                            sc.pushStato(t.getFinale());
+                            
+                            // loop sulle coppie evento link in uscita alla transizione abilitata
+                            for(Coppia cp_u : t.getUscita()){
+                                for(Link lnk : this.getLinks()){
+                                    if(cp_u.getLink()==lnk.getNome()){
+                                        // non so dove segnare l'eventoOn sul link
+                                        // qui dovrei dire che lnk.eventoOn=cp_u.getEvento()
+                                        // ma avevamo deciso di gestirla diversamente e non ricordo bene come
+                                        break;
+                                    }
+                                }
+                            }
+                            sc.setFinale(false);
+                            A_out.pushStato(sc);
+                        }
+                    }
+                }
+            }
+        }
         return true;
     }
 }

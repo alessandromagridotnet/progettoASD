@@ -96,6 +96,13 @@ public class Transizione {
             }else{
                 str += "<IdStatoFinale>" + this.getFinale().getId() + "</IdStatoFinale>" + System.lineSeparator();
             }
+            str += this.ingresso.toXML();
+            str += "<CoppieUscita>" + System.lineSeparator();
+                for(int i =0; i<this.getUscita().size(); i++){
+                    Coppia cp = this.getUscita().get(i);
+                    str += cp.toXML();
+                }
+            str += "</CoppieUscita>" + System.lineSeparator();
         str += "</Transizione>" + System.lineSeparator();
         return str;
     }

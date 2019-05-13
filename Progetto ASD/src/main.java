@@ -123,13 +123,13 @@ public class main {
                         case 1:
                             return RA.storeIntoFile("src/output/output.xml");
                         case 2:
-                            ReteAutomi RA_out = new ReteAutomi();
-                            return RA.calcolaStatoComportamentale(RA_out);
+                            Automa A_out = new Automa();
+                            return RA.calcolaStatoComportamentale(A_out);
                         case 3:
                             mostraRete(RA);
+                            break;
                         case 0:
                             return false;
-
                         default:
                             System.err.println("Scelta non consentita. Inserire solo valori numerici consentiti ");
                             break;
@@ -140,6 +140,7 @@ public class main {
             }
             return false;
         }
+        
         private static void mostraRete (ReteAutomi RA){
             System.out.println("La rete"+RA.getNome()+" presenta questi elementi:");
             System.out.println("AUTOMI:");
