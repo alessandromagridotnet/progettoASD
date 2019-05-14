@@ -194,12 +194,21 @@ public class ReteAutomi {
                             sc.pushStato(t.getFinale());
                             
                             // loop sulle coppie evento link in uscita alla transizione abilitata
-                            for(Coppia cp_u : t.getUscita()){
-                                for(Link lnk : this.getLinks()){
+                            for(Link lnk : this.getLinks()){
+                                if(t.getIngresso().getLink()==lnk.getNome()){
+                                    // qui devo svuotare il link su cui c'era l'evento in ingresso
+                                    for(Integer i = 0; i<sc.getCoppie().size(); i++){
+                                        if(sc.getCoppie().get(i) == t.getIngresso()){
+                                            sc.getCoppie().remove(i);
+                                        }
+                                    }
+                                }
+                                for(Coppia cp_u : t.getUscita()){
                                     if(cp_u.getLink()==lnk.getNome()){
                                         // non so dove segnare l'eventoOn sul link
                                         // qui dovrei dire che lnk.eventoOn=cp_u.getEvento()
                                         // ma avevamo deciso di gestirla diversamente e non ricordo bene come
+                                        sc.getCoppie().add(cp_u);
                                         break;
                                     }
                                 }
