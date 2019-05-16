@@ -1,5 +1,8 @@
 package ReteAutomi;
 
+import java.util.ArrayList;
+import org.jdom.Element;
+
 /**
  *
  * @author alessandro
@@ -9,7 +12,7 @@ public class Evento {
 
     public Evento()
     {
-
+        this.setNome("");
     }
 
     public String getNome() {
@@ -18,5 +21,26 @@ public class Evento {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    /**
+     * Funzione che ritorna una stringa contenente la rappresentazione XML
+     * @return String
+     */
+    public String toXML(){
+        String xml = "";
+        xml += "<Evento>" + System.lineSeparator();
+            xml += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
+        xml += "</Evento>";
+        
+        return xml;
+    }
+    
+    /**
+     * Funzione per caricare un link partendo da un elemento XML
+     * @param xml un elemento xml che contiene un EVENTO
+     */
+    public void fromXML(Element xml){
+        this.setNome(xml.getChildText("Nome"));
     }
 }

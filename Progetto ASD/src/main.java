@@ -124,7 +124,11 @@ public class main {
                             return RA.storeIntoFile("src/output/output.xml");
                         case 2:
                             Automa A_out = new Automa();
-                            return RA.calcolaStatoComportamentale(A_out);
+                            RA.calcolaStatoComportamentale(A_out);
+                            
+//                            System.out.println(A_out.toXML());
+                            
+                            return true;
                         case 3:
                             mostraRete(RA);
                             break;

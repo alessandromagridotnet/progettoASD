@@ -172,7 +172,12 @@ public class ReteAutomi {
         for (Automa a : this.getAutomi()) {
             for(Transizione t : a.getTransizioni()){
                 if(sc_pre.getStati().contains(t.getIniziale())){
+                    
+                    for(Coppia kk : sc_pre.getCoppie()){
+                        System.out.println(kk.getLink() + "_" + kk.getEvento() + " -- " + t.getIngresso().getLink() + "_" + t.getIngresso().getEvento());
+                    }
                     if(t.getIngresso()==null || sc_pre.getCoppie().contains(t.getIngresso())){
+                        System.out.println("  altro if");
                         boolean tmp = true;
                         for(Coppia u : t.getUscita()){
                             if(!(u==null || sc_pre.getCoppie().contains(u))){
@@ -197,6 +202,8 @@ public class ReteAutomi {
                             for(Link lnk : this.getLinks()){
                                 if(t.getIngresso().getLink()==lnk.getNome()){
                                     // qui devo svuotare il link su cui c'era l'evento in ingresso
+                                    // per farlo rimuovo da quelle che erano le coppie link/evento
+                                    // esistenti nello stato precedente
                                     for(Integer i = 0; i<sc.getCoppie().size(); i++){
                                         if(sc.getCoppie().get(i) == t.getIngresso()){
                                             sc.getCoppie().remove(i);
@@ -213,8 +220,19 @@ public class ReteAutomi {
                                     }
                                 }
                             }
-                            sc.setFinale(false);
+                            Integer cnt_void_link = 0;
+                            for(Coppia cp : sc.getCoppie()){
+                                if(cp.getEvento() == null){
+                                    cnt_void_link++;
+                                }
+                            }
+                            if(cnt_void_link == sc.getCoppie().size()){
+                                sc.setFinale(true);
+                            }else{
+                                sc.setFinale(false);
+                            }
                             A_out.pushStato(sc);
+                            statoComportamentaleRicorsivo(A_out, sc, conteggio++);
                         }
                     }
                 }
