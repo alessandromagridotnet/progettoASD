@@ -70,13 +70,24 @@ public class StatoSemplice implements Stato, Cloneable{
 //        
 //        return result;
 //    }
-public StatoSemplice clone() {
-    try {
-        return (StatoSemplice) super.clone();
-    } catch (CloneNotSupportedException e) {
-        throw new RuntimeException(e);
+    /**
+     * Funzione per colonare l'oggetto e non fare solo una copia del puntatore
+     * @return StatoSemplice
+     */
+    @Override
+    public StatoSemplice clone() {
+        try {
+            return (StatoSemplice) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
-}
+    
+    /**
+     * Verifica che l'oggetto passato sia effettivamente uguale all'istanza
+     * @param StatoSemplice
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o){
         if(o!=null){

@@ -117,14 +117,18 @@ public class Transizione {
         // trova lo stato iniziale dalla lista degli stati disponibili
         for(Stato s : stati){
             if(s.getId().equals(xml.getChildText("IdStatoIniziale"))){
-                this.setIniziale(s);
+                Stato s_tmp = s.clone();
+                s_tmp.setIniziale(true);
+                this.setIniziale(s_tmp);
                 break;
             }
         }
         // trova lo stato finale dalla lista degli stati disponibili
         for(Stato s : stati){
             if(s.getId().equals(xml.getChildText("IdStatoFinale"))){
-                this.setFinale(s);
+                Stato s_tmp = s.clone();
+                s_tmp.setIniziale(false);
+                this.setFinale(s_tmp);
                 break;
             }
         }

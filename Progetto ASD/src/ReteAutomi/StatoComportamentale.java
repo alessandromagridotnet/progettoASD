@@ -101,4 +101,25 @@ public class StatoComportamentale implements Stato, Cloneable {
             throw new RuntimeException(e);
         }
     }
+    
+    /**
+     * Verifica che l'oggetto passato sia effettivamente uguale all'istanza
+     * @param StatoSemplice
+     * @return boolean
+     */
+//    @Override
+//    public boolean equals(Object o){
+//        if(o!=null){
+//            if(this.getClass().isInstance(o)){
+//                StatoComportamentale sc = (StatoComportamentale) o;
+//                if(this.getId().equals(sc.getId()) 
+//                    && this.getIniziale().equals(sc.getIniziale())
+//                    // DA FI
+//                    ){
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 }

@@ -172,9 +172,7 @@ public class ReteAutomi {
      * @return boolean
      */
     private boolean statoComportamentaleRicorsivo(Automa A_out, StatoComportamentale sc_pre, Integer conteggio){
-//        System.out.println("ENTRATO IN FUNZIONE RICORSIVA");
-//        System.out.println(conteggio);
-//        System.out.println(sc_pre.toXML());
+        System.out.println("ENTRATO IN FUNZIONE RICORSIVA " + conteggio);
         
         Evento eventoNull = new Evento();
         eventoNull.setNome("NULL");
@@ -182,11 +180,19 @@ public class ReteAutomi {
             System.out.println(a.getNome());
             for(Transizione t : a.getTransizioni()){
                 System.out.println(t.getNome()+"Transizione------------------------------------------------");
+//                if(conteggio==3 && a.getNome().equals("C3")){
+//                    System.out.println(t.getIniziale().toXML());
+//                    System.out.println("___");
+//                    for(Stato sssss : sc_pre.getStati()){
+//                        System.out.println(sssss.toXML());
+//                        System.out.println(t.getIniziale().equals(sssss));
+//                    }
+//                    
+//                }
+                
                 if(sc_pre.getStati().contains(t.getIniziale())){
-                    
                     // Controlliamo che siano verificati i prerequisiti degli eventi in ingresso
                     if(t.getIngresso().getEvento().getNome().equals("NULL") || sc_pre.getCoppie().contains(t.getIngresso())){
-//                        System.out.println("  INGRESSI OK");
                         boolean tmp = true;
                         for(Coppia u : t.getUscita()){
                             for (Coppia u2 : sc_pre.getCoppie()) {
@@ -235,7 +241,7 @@ public class ReteAutomi {
                             // controlli per determinare se lo stato è finale
                             Integer cnt_void_link = 0;
                             for(Coppia cp : sc.getCoppie()){
-                                if(cp.getEvento().getNome() == "NULL"){
+                                if(cp.getEvento().getNome().equals("NULL")){
                                     cnt_void_link++;
                                 }
                             }
@@ -248,7 +254,11 @@ public class ReteAutomi {
                             // aggiunta dello stato all'Automa "statocomportamentale"
                             A_out.pushStato(sc);
                             // chiamata ricorsiva
+                            
+//                            System.out.println(sc.toXML());
+                            
                             statoComportamentaleRicorsivo(A_out, sc, ++conteggio);
+                            System.out.println("ritorno: " + conteggio);
                         }
                     }
                 }
