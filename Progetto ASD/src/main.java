@@ -145,7 +145,7 @@ public class main {
             return false;
         }
         
-        private static void mostraRete (ReteAutomi RA){
+        private static boolean mostraRete (ReteAutomi RA){
             System.out.println("La rete"+RA.getNome()+" presenta questi elementi:");
             System.out.println("AUTOMI:");
             for (Automa automa : RA.getAutomi()) {
@@ -188,6 +188,7 @@ public class main {
             System.out.println("");
             System.out.println("");
             System.out.println("");
+            return true;
         }
 
 }
