@@ -29,9 +29,15 @@ public class Evento {
      */
     public String toXML(){
         String xml = "";
-        xml += "<Evento>" + System.lineSeparator();
-            xml += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
-        xml += "</Evento>";
+        if(this == null){
+            xml += "<Evento>" + System.lineSeparator();
+                xml += "<Nome>NULL</Nome>" + System.lineSeparator();
+            xml += "</Evento>";
+        }else{
+            xml += "<Evento>" + System.lineSeparator();
+                xml += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
+            xml += "</Evento>";
+        }
         
         return xml;
     }
@@ -41,7 +47,11 @@ public class Evento {
      * @param xml un elemento xml che contiene un EVENTO
      */
     public void fromXML(Element xml){
-        this.setNome(xml.getChildText("Nome"));
+        if(xml.getChildText("Nome") == "NULL"){
+            this.setNome(null);
+        }else{
+            this.setNome(xml.getChildText("Nome"));
+        }
     }
     
     @Override
@@ -52,6 +62,10 @@ public class Evento {
                 if(this.getNome().equals(ee.getNome())){
                     return true;
                 }
+            }
+        }else{
+            if(this.getNome().equals("NULL")){
+                return true;
             }
         }
         return false;
