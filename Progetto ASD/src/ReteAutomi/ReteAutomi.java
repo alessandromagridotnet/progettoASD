@@ -159,7 +159,7 @@ public class ReteAutomi {
         
         A_out.pushStato(sc);
         
-        statoComportamentaleRicorsivo(A_out, sc, conteggio++);
+        statoComportamentaleRicorsivo(A_out, sc, ++conteggio);
         
         return true;
     }
@@ -172,6 +172,11 @@ public class ReteAutomi {
      * @return boolean
      */
     private boolean statoComportamentaleRicorsivo(Automa A_out, StatoComportamentale sc_pre, Integer conteggio){
+        System.out.println("ENTRATO IN FUNZIONE RICORSIVA");
+        System.out.println(conteggio);
+        System.out.println(sc_pre.toXML());
+        Evento eventoNull = new Evento();
+        eventoNull.setNome("NULL");
         for (Automa a : this.getAutomi()) {
             for(Transizione t : a.getTransizioni()){
                 System.out.println(t.getNome()+"Transizione------------------------------------------------");
@@ -181,21 +186,13 @@ public class ReteAutomi {
                     if(t.getIngresso().getEvento().getNome().equals("NULL") || sc_pre.getCoppie().contains(t.getIngresso())){
                         System.out.println("  INGRESSI OK");
                         boolean tmp = true;
-                        Evento eventoNull = new Evento();
-                        eventoNull.setNome("NULL");
                         for(Coppia u : t.getUscita()){
                             for (Coppia u2 : sc_pre.getCoppie()) {
-
-                                System.out.println(eventoNull.toXML());
-                                System.out.println(u2.getEvento().toXML());
-
                                 //Controlliamo che i link associati agli eventi in uscita siano liberi
                                 if (u.getLink().equals(u2.getLink()) && !(u2.getEvento().equals(eventoNull))){
                                     tmp = false;
-                                    System.out.println("Entrato in false");
                                     break;
                                 }
-                                System.out.println("DOPO");
                             }
                             if (!tmp)
                                 break;
@@ -203,12 +200,9 @@ public class ReteAutomi {
                         // entra nel seguente if solo se sono state verificate tutte le precondizioni
                         if(tmp){
 
-                            System.out.println("Entrato in"+t.getNome());
+                            System.out.println("Entrato in "+t.getNome());
                             // scaturisce l'evento e lancia una nuova istanza ricorsiva
                             StatoComportamentale sc = sc_pre.clone();
-                            sc.setId("ERROREVERO");
-                            System.out.println("controllo="+sc_pre.getId());
-                            System.out.println(sc.getId());
                             // setta il nuovo nome (quello per la ridenominazione)
                             sc.setId(conteggio.toString());
                             // rimuovo lo stato iniziale della transizione dalla lista degli stati nel nuovo spazio comportamentale
@@ -216,29 +210,36 @@ public class ReteAutomi {
                                 sc.getStati().remove(t.getIniziale());
                             }
                             // aggiungo alla lista degli stati del nuovo spazio comportamentale lo stato finale della transizione
-                            sc.pushStato(t.getFinale());
+                            Stato st =t.getFinale().clone();
+                            st.setIniziale(true);
+                            sc.pushStato(st);
                             
                             // loop sulle coppie evento link in uscita alla transizione abilitata
-                            for(Link lnk : this.getLinks()){
-                                if(t.getIngresso().getLink()==lnk.getNome()){
+                            if (t.getIngresso().getEvento().getNome()!="NULL"){
+                               for (Coppia cp_s : sc.getCoppie()){
+                                   if (cp_s.getLink().equals(t.getIngresso().getLink())){
+                                       cp_s.setEvento(eventoNull);
+                                   }
+                               }
+                            }
+                            for(Link lnk : this.getLinks()) {
+                                if (t.getIngresso().getLink() == lnk.getNome()) {
                                     // qui devo svuotare il link su cui c'era l'evento in ingresso
                                     // per farlo rimuovo da quelle che erano le coppie link/evento
                                     // esistenti nello stato precedente
-                                    for(Integer i = 0; i<sc.getCoppie().size(); i++){
-                                        if(sc.getCoppie().get(i) == t.getIngresso()){
+                                    for (Integer i = 0; i < sc.getCoppie().size(); i++) {
+                                        if (sc.getCoppie().get(i) == t.getIngresso()) {
                                             Evento ev = new Evento();
                                             ev.setNome("NULL");
                                             sc.getCoppie().get(i).setEvento(ev);
                                         }
                                     }
                                 }
-                                for(Coppia cp_u : t.getUscita()){
-                                    if(cp_u.getLink()==lnk.getNome()){ //ANCHE QUI POTREBBE ESSERE ERRONEO.
-                                        // non so dove segnare l'eventoOn sul link
-                                        // qui dovrei dire che lnk.eventoOn=cp_u.getEvento()
-                                        // ma avevamo deciso di gestirla diversamente e non ricordo bene come
-                                        sc.getCoppie().add(cp_u);
-                                        break;
+                            }
+                            for(Coppia cp_u : t.getUscita()){
+                                for (Coppia cp_s : sc.getCoppie()){
+                                    if (cp_u.getLink().equals(cp_s.getLink())){
+                                        cp_s.setEvento(cp_u.getEvento());
                                     }
                                 }
                             }
@@ -254,7 +255,7 @@ public class ReteAutomi {
                                 sc.setFinale(false);
                             }
                             A_out.pushStato(sc);
-                            statoComportamentaleRicorsivo(A_out, sc, conteggio++);
+                            statoComportamentaleRicorsivo(A_out, sc, ++conteggio);
                         }
                     }
                 }

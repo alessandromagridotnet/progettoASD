@@ -10,6 +10,7 @@ public interface Stato {
     public Boolean getIniziale();
     public void setIniziale(Boolean iniziale);
     public String toXML();
+    public Stato clone();
     @Override
     public boolean equals(Object o);
 }

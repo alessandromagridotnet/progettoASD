@@ -6,7 +6,7 @@ import org.jdom.Element;
  *
  * @author alessandro
  */
-public class StatoSemplice implements Stato{
+public class StatoSemplice implements Stato, Cloneable{
     private String id;
     private Boolean iniziale;
 
@@ -70,7 +70,13 @@ public class StatoSemplice implements Stato{
 //        
 //        return result;
 //    }
-    
+public StatoSemplice clone() {
+    try {
+        return (StatoSemplice) super.clone();
+    } catch (CloneNotSupportedException e) {
+        throw new RuntimeException(e);
+    }
+}
     @Override
     public boolean equals(Object o){
         if(o!=null){
@@ -83,4 +89,5 @@ public class StatoSemplice implements Stato{
         }
         return false;
     }
+
 }
