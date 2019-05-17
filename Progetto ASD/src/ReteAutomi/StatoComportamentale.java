@@ -94,6 +94,8 @@ public class StatoComportamentale implements Stato, Cloneable {
         
         return xml;
     }
+    
+    @Override
     public StatoComportamentale clone() {
         try {
             return (StatoComportamentale) super.clone();
@@ -102,24 +104,94 @@ public class StatoComportamentale implements Stato, Cloneable {
         }
     }
     
+    public void clone(StatoComportamentale sc) {
+        this.setId(sc.getId());
+        this.setFinale(sc.getFinale());
+        this.setIniziale(sc.getIniziale());
+        for(Coppia c : sc.getCoppie()){
+            Coppia cp = c.clone();
+            this.pushCoppia(cp);
+        }
+        for(Stato s : sc.getStati()){
+            Stato ss = s.clone();
+            this.pushStato(ss);
+        }
+    }
+    
     /**
      * Verifica che l'oggetto passato sia effettivamente uguale all'istanza
      * @param StatoSemplice
      * @return boolean
      */
-//    @Override
-//    public boolean equals(Object o){
-//        if(o!=null){
-//            if(this.getClass().isInstance(o)){
-//                StatoComportamentale sc = (StatoComportamentale) o;
-//                if(this.getId().equals(sc.getId()) 
-//                    && this.getIniziale().equals(sc.getIniziale())
-//                    // DA FI
-//                    ){
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
+    @Override
+    public boolean equals(Object o){
+        System.out.println(this.toXML());
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                StatoComportamentale sc = (StatoComportamentale) o;
+                System.out.println(sc.toXML());
+                if(this.getId().equals(sc.getId()) 
+                    && this.getIniziale().equals(sc.getIniziale())
+                    && this.getFinale().equals(sc.getFinale())
+                    ){
+                        for(Coppia cp : this.getCoppie()){
+                            if(!(sc.getCoppie().contains(cp))){
+                                return false;
+                            }
+                        }
+                        for(Stato s :this.getStati()){
+                            if(!(sc.getStati().contains(s))){
+                                return false;
+                            }
+                        }
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equalsNotId(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                StatoComportamentale sc = (StatoComportamentale) o;
+                
+                for(Coppia cp : this.getCoppie()){
+                    if(!(sc.getCoppie().contains(cp))){
+                        return false;
+                    }
+                }
+                for(Stato s :this.getStati()){
+                    boolean chk_count = true;
+                    for(Stato s_chk : sc.getStati()){
+                        if(s_chk.equalsOnlyId(s)){
+                            chk_count=false;
+                            break;
+
+                        }
+                    }
+                    if(chk_count){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public boolean equalsOnlyId(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                StatoComportamentale ss = (StatoComportamentale) o;
+                if(this.getId().equals(ss.getId())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

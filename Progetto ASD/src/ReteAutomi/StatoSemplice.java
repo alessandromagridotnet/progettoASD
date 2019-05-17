@@ -100,5 +100,31 @@ public class StatoSemplice implements Stato, Cloneable{
         }
         return false;
     }
-
+    
+    @Override
+    public boolean equalsNotId(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                StatoSemplice ss = (StatoSemplice) o;
+                if(this.getIniziale().equals(ss.getIniziale())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equalsOnlyId(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                StatoSemplice ss = (StatoSemplice) o;
+                if(this.getId().equals(ss.getId())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
 }

@@ -7,7 +7,7 @@ import org.jdom.Element;
  *
  * @author alessandro
  */
-public class Coppia {
+public class Coppia implements Cloneable{
     private Evento evento;
     private String link;
 
@@ -79,5 +79,14 @@ public class Coppia {
             }
         }
         return false;
+    }
+    
+    @Override
+    public Coppia clone() {
+        try {
+            return (Coppia) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

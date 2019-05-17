@@ -13,4 +13,6 @@ public interface Stato {
     public Stato clone();
     @Override
     public boolean equals(Object o);
+    public boolean equalsNotId(Object o);
+    public boolean equalsOnlyId(Object o);
 }

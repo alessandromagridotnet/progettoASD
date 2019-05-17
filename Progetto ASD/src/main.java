@@ -126,9 +126,10 @@ public class main {
                             Automa A_out = new Automa();
                             RA.calcolaStatoComportamentale(A_out);
                             
-//                            System.out.println(A_out.toXML());
+                            ReteAutomi tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_out);
                             
-                            return true;
+                            return tmp.storeIntoFile("src/output/spazio_comportamentale.xml");
                         case 3:
                             mostraRete(RA);
                             break;

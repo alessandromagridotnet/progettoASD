@@ -138,8 +138,9 @@ public class ReteAutomi {
      */
     public boolean calcolaStatoComportamentale(Automa A_out){
         StatoComportamentale sc = new StatoComportamentale();
-        Integer conteggio = 0;
-        sc.setId(conteggio.toString());
+        int[] conteggio = new int[1];
+        conteggio[0]=0;
+        sc.setId(conteggio[0]+"");
         this.getAutomi().forEach((a) -> {
             a.getStati().forEach((s) -> {
                 if(s.getIniziale()){
@@ -159,7 +160,8 @@ public class ReteAutomi {
         
         A_out.pushStato(sc);
         
-        statoComportamentaleRicorsivo(A_out, sc, ++conteggio);
+        conteggio[0]++;
+        statoComportamentaleRicorsivo(A_out, sc, conteggio);
         
         return true;
     }
@@ -171,25 +173,13 @@ public class ReteAutomi {
      * @param conteggio un intero che indica il numero di stati generati dal sistema
      * @return boolean
      */
-    private boolean statoComportamentaleRicorsivo(Automa A_out, StatoComportamentale sc_pre, Integer conteggio){
-        System.out.println("ENTRATO IN FUNZIONE RICORSIVA " + conteggio);
-        
+    private boolean statoComportamentaleRicorsivo(Automa A_out, StatoComportamentale sc_pre, int[] conteggio){
         Evento eventoNull = new Evento();
         eventoNull.setNome("NULL");
+        // cicliamo su automi e transizioni per poter scansionare tutte le possibili transizioni
         for (Automa a : this.getAutomi()) {
-            System.out.println(a.getNome());
             for(Transizione t : a.getTransizioni()){
-                System.out.println(t.getNome()+"Transizione------------------------------------------------");
-//                if(conteggio==3 && a.getNome().equals("C3")){
-//                    System.out.println(t.getIniziale().toXML());
-//                    System.out.println("___");
-//                    for(Stato sssss : sc_pre.getStati()){
-//                        System.out.println(sssss.toXML());
-//                        System.out.println(t.getIniziale().equals(sssss));
-//                    }
-//                    
-//                }
-                
+                // controllo se lo stato iniziale della transizione considerata è tra gli stati attualmente attivi
                 if(sc_pre.getStati().contains(t.getIniziale())){
                     // Controlliamo che siano verificati i prerequisiti degli eventi in ingresso
                     if(t.getIngresso().getEvento().getNome().equals("NULL") || sc_pre.getCoppie().contains(t.getIngresso())){
@@ -208,12 +198,11 @@ public class ReteAutomi {
                         }
                         // entra nel seguente if solo se sono state verificate tutte le precondizioni
                         if(tmp){
-
-                            System.out.println("Entrato in "+t.getNome());
                             // scaturisce l'evento e lancia una nuova istanza ricorsiva
-                            StatoComportamentale sc = sc_pre.clone();
-                            // setta il nuovo nome (quello per la ridenominazione)
-                            sc.setId(conteggio.toString());
+                            StatoComportamentale sc = new StatoComportamentale();
+                            sc.clone(sc_pre);
+                            sc.setFinale(false);
+                            sc.setId(conteggio[0]+"");
                             // rimuovo lo stato iniziale della transizione dalla lista degli stati nel nuovo spazio comportamentale
                             if(sc.getStati().contains(t.getIniziale())){
                                 sc.getStati().remove(t.getIniziale());
@@ -251,14 +240,23 @@ public class ReteAutomi {
                             }else{
                                 sc.setFinale(false);
                             }
-                            // aggiunta dello stato all'Automa "statocomportamentale"
-                            A_out.pushStato(sc);
-                            // chiamata ricorsiva
                             
-//                            System.out.println(sc.toXML());
+                            // controllo che il nuovo stato generato non sia già presente nell'automa dello stato comportamentale
+                            int chk_count = 0;
+                            for(Stato s_chk : A_out.getStati()){
+                                if(s_chk.equalsNotId(sc)){
+                                    chk_count++;
+                                }
+                            }
                             
-                            statoComportamentaleRicorsivo(A_out, sc, ++conteggio);
-                            System.out.println("ritorno: " + conteggio);
+                            // se il ciclo sopra ha trovato uno stato uguale nell'albero già generato allora non entro nell'if sotto
+                            if( chk_count==0){
+                                // aggiunta dello stato all'Automa "statocomportamentale"
+                                A_out.pushStato(sc);
+                                // chiamata ricorsiva
+                                conteggio[0]++;
+                                statoComportamentaleRicorsivo(A_out, sc, conteggio);
+                            }
                         }
                     }
                 }
