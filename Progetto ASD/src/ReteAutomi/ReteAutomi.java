@@ -93,7 +93,7 @@ public class ReteAutomi {
 
     /**
      * Funzione che salva l'XML della rete di automi caricata in un file 
-     * @param fileNamepath path e nome del file in cui si vuole salvare l'xml generato
+     * @param fileName path e nome del file in cui si vuole salvare l'xml generato
      * @return boolean
      */
     public boolean storeIntoFile(String fileName){
@@ -179,7 +179,7 @@ public class ReteAutomi {
                     if(t.getIngresso()==null || sc_pre.getCoppie().contains(t.getIngresso())){
                         System.out.println("  altro if");
                         boolean tmp = true;
-                        for(Coppia u : t.getUscita()){
+                        for(Coppia u : t.getUscita()){                            //POTREBBE ESSERE SBAGLIATO?
                             if(!(u==null || sc_pre.getCoppie().contains(u))){
                                 tmp = false;
                                 break;
@@ -188,7 +188,10 @@ public class ReteAutomi {
                         // entra nel seguente if solo se sono state verificate tutte le precondizioni
                         if(tmp){
                             // scaturisce l'evento e lancia una nuova istanza ricorsiva
-                            StatoComportamentale sc = sc_pre;
+                            StatoComportamentale sc = sc_pre.clone();
+                            sc.setId("ERRORE");
+                            System.out.println("controllo="+sc_pre.getId());
+                            System.out.println(sc.getId());
                             // setta il nuovo nome (quello per la ridenominazione)
                             sc.setId(conteggio.toString());
                             // rimuovo lo stato iniziale della transizione dalla lista degli stati nel nuovo spazio comportamentale
@@ -206,12 +209,14 @@ public class ReteAutomi {
                                     // esistenti nello stato precedente
                                     for(Integer i = 0; i<sc.getCoppie().size(); i++){
                                         if(sc.getCoppie().get(i) == t.getIngresso()){
-                                            sc.getCoppie().remove(i);
+                                            Evento ev = new Evento();
+                                            ev.setNome(null);
+                                            sc.getCoppie().get(i).setEvento(ev);
                                         }
                                     }
                                 }
                                 for(Coppia cp_u : t.getUscita()){
-                                    if(cp_u.getLink()==lnk.getNome()){
+                                    if(cp_u.getLink()==lnk.getNome()){ //ANCHE QUI POTREBBE ESSERE ERRONEO.
                                         // non so dove segnare l'eventoOn sul link
                                         // qui dovrei dire che lnk.eventoOn=cp_u.getEvento()
                                         // ma avevamo deciso di gestirla diversamente e non ricordo bene come

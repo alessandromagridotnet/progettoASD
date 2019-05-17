@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author alessandro
  */
-public class StatoComportamentale implements Stato{
+public class StatoComportamentale implements Stato, Cloneable {
     private String id;
     private Boolean iniziale;
     private Boolean finale;
@@ -93,5 +93,12 @@ public class StatoComportamentale implements Stato{
         xml += "</Stato>" + System.lineSeparator();
         
         return xml;
+    }
+    public StatoComportamentale clone() {
+        try {
+            return (StatoComportamentale) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
