@@ -147,9 +147,12 @@ public class ReteAutomi {
                 }
             });
         });
+        Evento eventoNull = new Evento();
+        eventoNull.setNome("NULL");
         this.getLinks().forEach((l) -> {
             Coppia cp = new Coppia();
             cp.setLink(l.getNome());
+            cp.setEvento(eventoNull);
             sc.pushCoppia(cp);
         });
         sc.setFinale(true);
@@ -171,22 +174,36 @@ public class ReteAutomi {
     private boolean statoComportamentaleRicorsivo(Automa A_out, StatoComportamentale sc_pre, Integer conteggio){
         for (Automa a : this.getAutomi()) {
             for(Transizione t : a.getTransizioni()){
+                System.out.println(t.getNome()+"Transizione------------------------------------------------");
                 if(sc_pre.getStati().contains(t.getIniziale())){
                     
-                    for(Coppia kk : sc_pre.getCoppie()){
-                        System.out.println(kk.getLink() + "_" + kk.getEvento() + " -- " + t.getIngresso().getLink() + "_" + t.getIngresso().getEvento());
-                    }
-                    if(t.getIngresso()==null || sc_pre.getCoppie().contains(t.getIngresso())){
-                        System.out.println("  altro if");
+                    // Controlliamo che siano verificati i prerequisiti degli eventi in ingresso
+                    if(t.getIngresso().getEvento().getNome().equals("NULL") || sc_pre.getCoppie().contains(t.getIngresso())){
+                        System.out.println("  INGRESSI OK");
                         boolean tmp = true;
-                        for(Coppia u : t.getUscita()){                            //POTREBBE ESSERE SBAGLIATO?
-                            if(!(u==null || sc_pre.getCoppie().contains(u))){
-                                tmp = false;
-                                break;
+                        Evento eventoNull = new Evento();
+                        eventoNull.setNome("NULL");
+                        for(Coppia u : t.getUscita()){
+                            for (Coppia u2 : sc_pre.getCoppie()) {
+
+                                System.out.println(eventoNull.toXML());
+                                System.out.println(u2.getEvento().toXML());
+
+                                //Controlliamo che i link associati agli eventi in uscita siano liberi
+                                if (u.getLink().equals(u2.getLink()) && !(u2.getEvento().equals(eventoNull))){
+                                    tmp = false;
+                                    System.out.println("Entrato in false");
+                                    break;
+                                }
+                                System.out.println("DOPO");
                             }
+                            if (!tmp)
+                                break;
                         }
                         // entra nel seguente if solo se sono state verificate tutte le precondizioni
                         if(tmp){
+
+                            System.out.println("Entrato in"+t.getNome());
                             // scaturisce l'evento e lancia una nuova istanza ricorsiva
                             StatoComportamentale sc = sc_pre.clone();
                             sc.setId("ERRORE");
@@ -210,7 +227,7 @@ public class ReteAutomi {
                                     for(Integer i = 0; i<sc.getCoppie().size(); i++){
                                         if(sc.getCoppie().get(i) == t.getIngresso()){
                                             Evento ev = new Evento();
-                                            ev.setNome(null);
+                                            ev.setNome("NULL");
                                             sc.getCoppie().get(i).setEvento(ev);
                                         }
                                     }
