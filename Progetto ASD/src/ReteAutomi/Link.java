@@ -10,7 +10,6 @@ import org.jdom.Element;
 public class Link {
     private String nome;
     private Automa partenza, arrivo;
-//    private Evento eventoOn;
 
     public Link() {
         
@@ -39,14 +38,6 @@ public class Link {
     public void setArrivo(Automa arrivo) {
         this.arrivo = arrivo;
     }
-
-//    public Evento getEventoOn() {
-//        return eventoOn;
-//    }
-//
-//    public void setEventoOn(Evento eventoOn) {
-//        this.eventoOn = eventoOn;
-//    }
     
     /**
      * Funzione che ritorna una stringa contenente la rappresentazione XML
@@ -58,7 +49,6 @@ public class Link {
             xml += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
             xml += "<IdAutomaPartenza>" + this.getPartenza().getNome() + "</IdAutomaPartenza>" + System.lineSeparator();
             xml += "<IdAutomaArrivo>" + this.getArrivo().getNome() + "</IdAutomaArrivo>" + System.lineSeparator();
-//            xml += this.getEventoOn().toXML();
         xml += "</Link>";
         
         return xml;
@@ -85,8 +75,17 @@ public class Link {
                 break;
             }
         }
-//        Evento e = new Evento();
-//        e.fromXML(xml.getChild("Evento"));
-//        this.setEventoOn(e);
+    }
+    @Override
+    public boolean equals(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                Link ll = (Link) o;
+                if(this.getNome().equals(ll.getNome()) && this.getArrivo().equals(ll.getArrivo()) && this.getPartenza().equals(ll.getPartenza())){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

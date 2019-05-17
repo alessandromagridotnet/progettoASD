@@ -43,4 +43,17 @@ public class Evento {
     public void fromXML(Element xml){
         this.setNome(xml.getChildText("Nome"));
     }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                Evento ee = (Evento) o;
+                if(this.getNome().equals(ee.getNome())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

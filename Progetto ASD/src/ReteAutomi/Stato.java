@@ -10,4 +10,6 @@ public interface Stato {
     public Boolean getIniziale();
     public void setIniziale(Boolean iniziale);
     public String toXML();
+    @Override
+    public boolean equals(Object o);
 }

@@ -57,17 +57,30 @@ public class StatoSemplice implements Stato{
         }
     }
     
-    public boolean equals(Stato s){
-        boolean result = false;
-        
-        if(s != null && s instanceof StatoSemplice){
-            if (this.getId().equals(s.getId())) {
-                if(this.getIniziale() == s.getIniziale()){
-                    result = true;
+//    public boolean equals(Stato s){
+//        boolean result = false;
+//        
+//        if(s != null && s instanceof StatoSemplice){
+//            if (this.getId().equals(s.getId())) {
+//                if(this.getIniziale() == s.getIniziale()){
+//                    result = true;
+//                }
+//            }
+//        }
+//        
+//        return result;
+//    }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                StatoSemplice ss = (StatoSemplice) o;
+                if(this.getId().equals(ss.getId()) && this.getIniziale().equals(ss.getIniziale())){
+                    return true;
                 }
             }
         }
-        
-        return result;
+        return false;
     }
 }
