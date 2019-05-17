@@ -172,19 +172,21 @@ public class ReteAutomi {
      * @return boolean
      */
     private boolean statoComportamentaleRicorsivo(Automa A_out, StatoComportamentale sc_pre, Integer conteggio){
-        System.out.println("ENTRATO IN FUNZIONE RICORSIVA");
-        System.out.println(conteggio);
-        System.out.println(sc_pre.toXML());
+//        System.out.println("ENTRATO IN FUNZIONE RICORSIVA");
+//        System.out.println(conteggio);
+//        System.out.println(sc_pre.toXML());
+        
         Evento eventoNull = new Evento();
         eventoNull.setNome("NULL");
         for (Automa a : this.getAutomi()) {
+            System.out.println(a.getNome());
             for(Transizione t : a.getTransizioni()){
                 System.out.println(t.getNome()+"Transizione------------------------------------------------");
                 if(sc_pre.getStati().contains(t.getIniziale())){
                     
                     // Controlliamo che siano verificati i prerequisiti degli eventi in ingresso
                     if(t.getIngresso().getEvento().getNome().equals("NULL") || sc_pre.getCoppie().contains(t.getIngresso())){
-                        System.out.println("  INGRESSI OK");
+//                        System.out.println("  INGRESSI OK");
                         boolean tmp = true;
                         for(Coppia u : t.getUscita()){
                             for (Coppia u2 : sc_pre.getCoppie()) {
@@ -194,8 +196,9 @@ public class ReteAutomi {
                                     break;
                                 }
                             }
-                            if (!tmp)
+                            if (!tmp){
                                 break;
+                            }
                         }
                         // entra nel seguente if solo se sono state verificate tutte le precondizioni
                         if(tmp){
@@ -222,20 +225,6 @@ public class ReteAutomi {
                                    }
                                }
                             }
-                            for(Link lnk : this.getLinks()) {
-                                if (t.getIngresso().getLink() == lnk.getNome()) {
-                                    // qui devo svuotare il link su cui c'era l'evento in ingresso
-                                    // per farlo rimuovo da quelle che erano le coppie link/evento
-                                    // esistenti nello stato precedente
-                                    for (Integer i = 0; i < sc.getCoppie().size(); i++) {
-                                        if (sc.getCoppie().get(i) == t.getIngresso()) {
-                                            Evento ev = new Evento();
-                                            ev.setNome("NULL");
-                                            sc.getCoppie().get(i).setEvento(ev);
-                                        }
-                                    }
-                                }
-                            }
                             for(Coppia cp_u : t.getUscita()){
                                 for (Coppia cp_s : sc.getCoppie()){
                                     if (cp_u.getLink().equals(cp_s.getLink())){
@@ -243,18 +232,22 @@ public class ReteAutomi {
                                     }
                                 }
                             }
+                            // controlli per determinare se lo stato è finale
                             Integer cnt_void_link = 0;
                             for(Coppia cp : sc.getCoppie()){
-                                if(cp.getEvento() == null){
+                                if(cp.getEvento().getNome() == "NULL"){
                                     cnt_void_link++;
                                 }
                             }
+                            // controllo se tutti i link sono vuoti
                             if(cnt_void_link == sc.getCoppie().size()){
                                 sc.setFinale(true);
                             }else{
                                 sc.setFinale(false);
                             }
+                            // aggiunta dello stato all'Automa "statocomportamentale"
                             A_out.pushStato(sc);
+                            // chiamata ricorsiva
                             statoComportamentaleRicorsivo(A_out, sc, ++conteggio);
                         }
                     }
