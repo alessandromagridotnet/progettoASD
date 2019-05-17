@@ -206,7 +206,7 @@ public class ReteAutomi {
                             System.out.println("Entrato in"+t.getNome());
                             // scaturisce l'evento e lancia una nuova istanza ricorsiva
                             StatoComportamentale sc = sc_pre.clone();
-                            sc.setId("ERRORE");
+                            sc.setId("ERROREVERO");
                             System.out.println("controllo="+sc_pre.getId());
                             System.out.println(sc.getId());
                             // setta il nuovo nome (quello per la ridenominazione)
