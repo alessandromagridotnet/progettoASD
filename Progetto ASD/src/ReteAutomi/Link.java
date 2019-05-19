@@ -76,6 +76,7 @@ public class Link {
             }
         }
     }
+    
     @Override
     public boolean equals(Object o){
         if(o!=null){

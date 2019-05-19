@@ -84,7 +84,7 @@ public class Automa {
         // array delle transizioni
         List listTransizioni = xml.getChild("Transizioni").getChildren("Transizione");
         for (int j = 0; j < listTransizioni.size(); j++) {
-            Transizione transizione = new Transizione();
+            TransizioneStati transizione = new TransizioneStati();
             Element nodoTransizione = (Element) listTransizioni.get(j);
             transizione.fromXML(nodoTransizione, this.getStati());
             this.pushTransizioni(transizione);

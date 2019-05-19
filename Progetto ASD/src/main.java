@@ -11,6 +11,7 @@ import ReteAutomi.Link;
 import ReteAutomi.Transizione;
 import ReteAutomi.Stato;
 import ReteAutomi.Coppia;
+import ReteAutomi.TransizioneStati;
 
 import java.io.*;
 import java.util.*;
@@ -160,7 +161,9 @@ public class main {
                         System.out.println("");
                }
                 System.out.println("Questo automa ha le seguenti transizioni:");
-               for(Transizione transizione: automa.getTransizioni()){
+               for(Transizione tt: automa.getTransizioni()){
+                    // casto a TransizioneStati perchè so che può essere solo quello
+                    TransizioneStati transizione = (TransizioneStati) tt;
                    System.out.println("Transizione "+transizione.getNome());
                    System.out.println("La transizione parte dall'automa "+transizione.getIniziale().getId()+" e arriva all'automa "+transizione.getFinale().getId());
                    System.out.println("");

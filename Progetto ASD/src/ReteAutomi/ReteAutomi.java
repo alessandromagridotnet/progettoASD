@@ -178,7 +178,9 @@ public class ReteAutomi {
         eventoNull.setNome("NULL");
         // cicliamo su automi e transizioni per poter scansionare tutte le possibili transizioni
         for (Automa a : this.getAutomi()) {
-            for(Transizione t : a.getTransizioni()){
+            for(Transizione tt : a.getTransizioni()){
+                // casto a TransizioneStati perchè so che può essere solo quello
+                TransizioneStati t = (TransizioneStati) tt;
                 // controllo se lo stato iniziale della transizione considerata è tra gli stati attualmente attivi
                 if(sc_pre.getStati().contains(t.getIniziale())){
                     // Controlliamo che siano verificati i prerequisiti degli eventi in ingresso
@@ -241,18 +243,26 @@ public class ReteAutomi {
                                 sc.setFinale(false);
                             }
                             
+                            TransizioneComportamentale t_comp = new TransizioneComportamentale();
+                            t_comp.setNome(t.getNome());
+                            t_comp.setIniziale(sc_pre);
                             // controllo che il nuovo stato generato non sia già presente nell'automa dello stato comportamentale
                             int chk_count = 0;
                             for(Stato s_chk : A_out.getStati()){
                                 if(s_chk.equalsNotId(sc)){
                                     chk_count++;
+                                    t_comp.setFinale(s_chk);
+                                    A_out.pushTransizioni(t_comp);
+                                    break;
                                 }
                             }
                             
                             // se il ciclo sopra ha trovato uno stato uguale nell'albero già generato allora non entro nell'if sotto
                             if( chk_count==0){
+                                t_comp.setFinale(sc);
                                 // aggiunta dello stato all'Automa "statocomportamentale"
                                 A_out.pushStato(sc);
+                                A_out.pushTransizioni(t_comp);
                                 // chiamata ricorsiva
                                 conteggio[0]++;
                                 statoComportamentaleRicorsivo(A_out, sc, conteggio);
