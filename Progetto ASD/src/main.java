@@ -112,9 +112,12 @@ public class main {
             System.out.println("");
             System.out.println("1) per esportare la rete caricata ");
             System.out.println("2) per calcolare lo stato comportamentale ");
-            System.out.println("3) per visualizzare la rete caricata ");
+            System.out.println("3) potatura dello stato comportamentale ");
+            System.out.println("10) per visualizzare la rete caricata ");
             System.out.println("0) per tornare al menu principale ");
             
+            Automa A_out = new Automa();
+            ReteAutomi tmp = new ReteAutomi();
             while(!quit){
                 try{
                     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -124,14 +127,21 @@ public class main {
                         case 1:
                             return RA.storeIntoFile("src/output/output.xml");
                         case 2:
-                            Automa A_out = new Automa();
+                            A_out = new Automa();
                             RA.calcolaStatoComportamentale(A_out);
-                            
-                            ReteAutomi tmp = new ReteAutomi();
+                            tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             
                             return tmp.storeIntoFile("src/output/spazio_comportamentale.xml");
                         case 3:
+                            A_out = new Automa();
+                            RA.calcolaStatoComportamentale(A_out);
+                            A_out.potatura();
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_out);
+                            
+                            return tmp.storeIntoFile("src/output/spazio_comportamentale_potato.xml");
+                        case 10:
                             mostraRete(RA);
                             break;
                         case 0:

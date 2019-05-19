@@ -5,7 +5,7 @@
 <Nome>null</Nome>
 <Stati>
 <Stato>
-<ID>0</ID>
+<ID>0</ID>2
 <Iniziale>true</Iniziale>
 <Finale>true</Finale>
 <Stati>
@@ -30,7 +30,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>1</ID>
+<ID>1</ID>2
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -55,7 +55,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>2</ID>
+<ID>2</ID>1
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -80,7 +80,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>3</ID>
+<ID>3</ID>2
 <Iniziale>false</Iniziale>
 <Finale>true</Finale>
 <Stati>
@@ -105,7 +105,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>4</ID>
+<ID>4</ID>1
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -130,7 +130,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>5</ID>
+<ID>5</ID>1
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -155,7 +155,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>6</ID>
+<ID>6</ID>1
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -180,7 +180,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>7</ID>
+<ID>7</ID>1
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -205,7 +205,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>8</ID>
+<ID>8</ID>1
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -230,7 +230,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>9</ID>
+<ID>9</ID>0
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -255,7 +255,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>10</ID>
+<ID>10</ID>0
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -280,7 +280,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>11</ID>
+<ID>11</ID>1
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -305,7 +305,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>12</ID>
+<ID>12</ID>2
 <Iniziale>false</Iniziale>
 <Finale>true</Finale>
 <Stati>
@@ -330,7 +330,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>13</ID>
+<ID>13</ID>1
 <Iniziale>false</Iniziale>
 <Finale>false</Finale>
 <Stati>
@@ -355,7 +355,7 @@
 </Coppie>
 </Stato>
 <Stato>
-<ID>14</ID>
+<ID>14</ID>2
 <Iniziale>false</Iniziale>
 <Finale>true</Finale>
 <Stati>

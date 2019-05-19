@@ -157,6 +157,7 @@ public class ReteAutomi {
             sc.pushCoppia(cp);
         });
         sc.setFinale(true);
+        sc.setIniziale(true);
         
         A_out.pushStato(sc);
         
@@ -203,6 +204,7 @@ public class ReteAutomi {
                             // scaturisce l'evento e lancia una nuova istanza ricorsiva
                             StatoComportamentale sc = new StatoComportamentale();
                             sc.clone(sc_pre);
+                            sc.setIniziale(false);
                             sc.setFinale(false);
                             sc.setId(conteggio[0]+"");
                             // rimuovo lo stato iniziale della transizione dalla lista degli stati nel nuovo spazio comportamentale

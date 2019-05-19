@@ -67,10 +67,6 @@ public class Coppia implements Cloneable{
             if(this.getClass().isInstance(o)){
                 Coppia cc = (Coppia) o;
                 
-//                System.out.println(this.toXML());
-//                System.out.println(cc.toXML());
-//                System.out.println(" ");
-                
                 if(this.getLink().equals(cc.getLink()) || (this.getLink()==null && cc.getLink()==null)){
                     if(this.getEvento().equals(cc.getEvento())){
                         return true;

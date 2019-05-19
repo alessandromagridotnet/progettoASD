@@ -90,4 +90,87 @@ public class Automa {
             this.pushTransizioni(transizione);
         }
     }
+    
+    /**
+     * Funzione per la potatura, richiamabile solo su un automa dello comportamentale
+     * @return 
+     */
+    public boolean potatura(){
+        boolean chk = false;
+        boolean chk2 = false;
+        for(Stato s : this.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) s;
+            if(sc.getIniziale()){
+                sc.setConfermato(2);
+            }
+        }
+        for(Stato s : this.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) s;
+            if(sc.getFinale()){
+                sc.setConfermato(2);
+                chk2 = potatura_ricorsiva(sc);
+                chk = chk || chk2;
+            }
+        }
+        int size = 0;
+        while(size < this.getStati().size()){
+            StatoComportamentale sc = (StatoComportamentale) this.getStati().get(size);
+            if(!(sc.isConfermato() || sc.isVisitato())){
+                this.getStati().remove(sc);
+            }else{
+                ++size;
+            }
+        }
+        return chk;
+    }
+    
+    private boolean potatura_ricorsiva(StatoComportamentale sc){
+        ArrayList<StatoComportamentale> prec = precedenti(sc);
+        boolean chk = false;
+        boolean chk2 = false;
+        // se non è uno stato già confermato lo imposto a stato visitato
+        if(!sc.isConfermato()){
+            sc.setConfermato(1);
+        }
+        // genero tutti i predecessori
+        for(StatoComportamentale sc_prec : prec){
+            // se il predecessore in esame è confermato confermo anche lo stato attuale
+            // altrimenti richiamo ricorsivamente la funzione sol predecessore non visitato
+            if(sc_prec.isConfermato()){
+                sc.setConfermato(2);
+                chk= true;
+            }else if(!sc_prec.isVisitato()){
+                // fatto su due righe per obbligare leseguzione della funzione
+                chk2 = potatura_ricorsiva(sc_prec);
+                chk = chk || chk2;
+            }
+        }
+        return chk;
+    }
+    
+    private ArrayList<StatoComportamentale> successivi(StatoComportamentale sc){
+        ArrayList<StatoComportamentale> ret = new ArrayList<>();
+        for(Transizione tt : this.getTransizioni()){
+            TransizioneComportamentale t = (TransizioneComportamentale) tt;
+            if(t.getIniziale().equals(sc)){
+                StatoComportamentale temporaneo = (StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale()));
+                ret.add(temporaneo);
+            }
+        }
+        return ret;
+    }
+    
+    private ArrayList<StatoComportamentale> precedenti(StatoComportamentale sc){
+        System.out.println(sc.getId()+" - ");
+        ArrayList<StatoComportamentale> ret = new ArrayList<>();
+        for(Transizione tt : this.getTransizioni()){
+            TransizioneComportamentale t = (TransizioneComportamentale) tt;
+            if(t.getFinale().equals(sc)){
+                StatoComportamentale temporaneo = (StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getIniziale()));
+                System.out.println(t.getNome()+" "+temporaneo.getId()+",");
+                ret.add(temporaneo);
+            }
+        }
+        return ret;
+    }
 }

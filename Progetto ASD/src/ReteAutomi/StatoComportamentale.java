@@ -17,12 +17,14 @@ public class StatoComportamentale implements Stato, Cloneable {
     private Boolean finale;
     private ArrayList<Stato> stati;
     private ArrayList<Coppia> coppie;
+    private int confermato; // 0 se è da rimuovere | 1 se è stato visitato | 2 se confermato
 
     public StatoComportamentale() {
         this.iniziale = false;
         this.finale = false;
         this.stati = new ArrayList<>();
         this.coppie = new ArrayList<>();
+        this.confermato = 0;
     }
     
     @Override
@@ -67,6 +69,14 @@ public class StatoComportamentale implements Stato, Cloneable {
     
     public void pushCoppia(Coppia c){
         this.coppie.add(c);
+    }
+
+    public int getConfermato() {
+        return confermato;
+    }
+
+    public void setConfermato(int confermato) {
+        this.confermato = confermato;
     }
     
     /**
@@ -125,11 +135,9 @@ public class StatoComportamentale implements Stato, Cloneable {
      */
     @Override
     public boolean equals(Object o){
-        System.out.println(this.toXML());
         if(o!=null){
             if(this.getClass().isInstance(o)){
                 StatoComportamentale sc = (StatoComportamentale) o;
-                System.out.println(sc.toXML());
                 if(this.getId().equals(sc.getId()) 
                     && this.getIniziale().equals(sc.getIniziale())
                     && this.getFinale().equals(sc.getFinale())
@@ -193,5 +201,13 @@ public class StatoComportamentale implements Stato, Cloneable {
             }
         }
         return false;
+    }
+    
+    public boolean isConfermato(){
+        return this.getConfermato()==2;
+    }
+    
+    public boolean isVisitato(){
+        return this.getConfermato()==1;
     }
 }
