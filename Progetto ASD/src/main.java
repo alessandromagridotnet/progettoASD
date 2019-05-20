@@ -142,8 +142,7 @@ public class main {
                             
                             return tmp.storeIntoFile("src/output/spazio_comportamentale_potato.xml");
                         case 10:
-                            mostraRete(RA);
-                            break;
+                            return mostraRete(RA);
                         case 0:
                             return false;
                         default:
@@ -158,51 +157,55 @@ public class main {
         }
         
         private static boolean mostraRete (ReteAutomi RA){
-            System.out.println("La rete"+RA.getNome()+" presenta questi elementi:");
-            System.out.println("AUTOMI:");
-            for (Automa automa : RA.getAutomi()) {
-               System.out.println("Automa "+automa.getNome());
-               System.out.println("Questo automa ha i seguenti stati:");
-               for (Stato stato : automa.getStati()){
-                    System.out.print("Stato "+stato.getId());
-                    System.out.println("");
-                    if (stato.getIniziale())
-                        System.out.print("(Questo è lo stato iniziale)");
+            try{
+                System.out.println("La rete"+RA.getNome()+" presenta questi elementi:");
+                System.out.println("AUTOMI:");
+                for (Automa automa : RA.getAutomi()) {
+                   System.out.println("Automa "+automa.getNome());
+                   System.out.println("Questo automa ha i seguenti stati:");
+                   for (Stato stato : automa.getStati()){
+                        System.out.print("Stato "+stato.getId());
                         System.out.println("");
-               }
-                System.out.println("Questo automa ha le seguenti transizioni:");
-               for(Transizione tt: automa.getTransizioni()){
-                    // casto a TransizioneStati perchè so che può essere solo quello
-                    TransizioneStati transizione = (TransizioneStati) tt;
-                   System.out.println("Transizione "+transizione.getNome());
-                   System.out.println("La transizione parte dall'automa "+transizione.getIniziale().getId()+" e arriva all'automa "+transizione.getFinale().getId());
-                   System.out.println("");
-                   if (transizione.getIngresso() != null ) {
-                       System.out.println("Questa transizione richiede in ingresso l'evento " + transizione.getIngresso().getEvento().getNome() + " trasportato nel link " + transizione.getIngresso().getLink());
+                        if (stato.getIniziale())
+                            System.out.print("(Questo è lo stato iniziale)");
+                            System.out.println("");
                    }
-                   if (transizione.getUscita().size()!=0){
-                       for (Coppia coppia : transizione.getUscita()){
-                           System.out.println("La transizione produce l'evento "+coppia.getEvento().getNome()+" da depositare sul link "+coppia.getLink());
+                    System.out.println("Questo automa ha le seguenti transizioni:");
+                   for(Transizione tt: automa.getTransizioni()){
+                        // casto a TransizioneStati perchè so che può essere solo quello
+                        TransizioneStati transizione = (TransizioneStati) tt;
+                       System.out.println("Transizione "+transizione.getNome());
+                       System.out.println("La transizione parte dall'automa "+transizione.getIniziale().getId()+" e arriva all'automa "+transizione.getFinale().getId());
+                       System.out.println("");
+                       if (transizione.getIngresso() != null ) {
+                           System.out.println("Questa transizione richiede in ingresso l'evento " + transizione.getIngresso().getEvento().getNome() + " trasportato nel link " + transizione.getIngresso().getLink());
                        }
+                       if (transizione.getUscita().size()!=0){
+                           for (Coppia coppia : transizione.getUscita()){
+                               System.out.println("La transizione produce l'evento "+coppia.getEvento().getNome()+" da depositare sul link "+coppia.getLink());
+                           }
+                       }
+                       System.out.println("");
+                       System.out.println("");
+
                    }
-                   System.out.println("");
-                   System.out.println("");
+
 
                }
-
-
-           }
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("I link presenti nella rete sono:");
-            for (Link link : RA.getLinks()){
-                System.out.println("Link "+link.getNome()+" che parte dall'automa "+link.getArrivo().getNome()+" e arriva all'automa "+link.getArrivo().getNome());
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("I link presenti nella rete sono:");
+                for (Link link : RA.getLinks()){
+                    System.out.println("Link "+link.getNome()+" che parte dall'automa "+link.getArrivo().getNome()+" e arriva all'automa "+link.getArrivo().getNome());
+                }
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                return true;
+            } catch(Exception e){
+                return false;
             }
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            return true;
         }
 
 }

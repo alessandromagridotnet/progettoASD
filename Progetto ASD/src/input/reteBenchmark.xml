@@ -1,0 +1,191 @@
+<ReteAutomi>
+    <Nome>ReteBaseZanella</Nome>
+    <Automi xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        <Automa>
+            <Nome>C1</Nome>
+            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <Stato>
+                    <ID>10</ID>
+                    <StatoIniziale>true</StatoIniziale>
+                </Stato>
+                <Stato>
+                    <ID>11</ID>
+                    <StatoIniziale>false</StatoIniziale>
+                </Stato>
+            </Stati>
+            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <Transizione>
+                    <Nome>t1a</Nome>
+                    <IdStatoIniziale>10</IdStatoIniziale>
+                    <IdStatoFinale>11</IdStatoFinale>
+                    <Coppia>
+                        <IdEvento>e1</IdEvento>
+                        <IdLink>L1</IdLink>
+                    </Coppia>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <Coppia>
+                            <IdEvento>NULL</IdEvento>
+                            <IdLink>NULL</IdLink>
+                         </Coppia>
+                    </CoppieUscita>
+                </Transizione>
+                <Transizione>
+                    <Nome>t1b</Nome>
+                    <IdStatoIniziale>11</IdStatoIniziale>
+                    <IdStatoFinale>10</IdStatoFinale>
+                    <Coppia>
+                        <IdEvento>e2</IdEvento>
+                        <IdLink>L3</IdLink>
+                    </Coppia>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <Coppia>
+                            <IdEvento>NULL</IdEvento>
+                            <IdLink>NULL</IdLink>
+                         </Coppia>
+                    </CoppieUscita>
+                </Transizione>
+                <Transizione>
+                    <Nome>t1c</Nome>
+                    <IdStatoIniziale>10</IdStatoIniziale>
+                    <IdStatoFinale>11</IdStatoFinale>
+                    <Coppia>
+                        <IdEvento>NULL</IdEvento>
+                        <IdLink>NULL</IdLink>
+                    </Coppia>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <Coppia>
+                            <IdEvento>NULL</IdEvento>
+                            <IdLink>NULL</IdLink>
+                         </Coppia>
+                    </CoppieUscita>
+                </Transizione>
+            </Transizioni>
+        </Automa>
+        <Automa>
+            <Nome>C2</Nome>
+            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <Stato>
+                    <ID>20</ID>
+                    <StatoIniziale>true</StatoIniziale>
+                </Stato>
+                <Stato>
+                    <ID>21</ID>
+                    <StatoIniziale>false</StatoIniziale>
+                </Stato>
+            </Stati>
+            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <Transizione>
+                    <Nome>t2a</Nome>
+                    <IdStatoIniziale>20</IdStatoIniziale>
+                    <IdStatoFinale>21</IdStatoFinale>
+                    <Coppia>
+                        <IdEvento>NULL</IdEvento>
+                        <IdLink>NULL</IdLink>
+                    </Coppia>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <Coppia>
+                            <IdEvento>e1</IdEvento>
+                            <IdLink>L1</IdLink>
+                        </Coppia>
+                        <Coppia>
+                            <IdEvento>e3</IdEvento>
+                            <IdLink>L2</IdLink>
+                        </Coppia>
+                    </CoppieUscita>
+                </Transizione>
+                <Transizione>
+                    <Nome>t2b</Nome>
+                    <IdStatoIniziale>21</IdStatoIniziale>
+                    <IdStatoFinale>20</IdStatoFinale>
+                    <Coppia>
+                        <IdEvento>NULL</IdEvento>
+                        <IdLink>NULL</IdLink>
+                    </Coppia>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <Coppia>
+                            <IdEvento>e1</IdEvento>
+                            <IdLink>L1</IdLink>
+                        </Coppia>
+                    </CoppieUscita>
+                </Transizione>
+            </Transizioni>
+        </Automa>
+        <Automa>
+            <Nome>C3</Nome>
+            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <Stato>
+                    <ID>30</ID>
+                    <StatoIniziale>true</StatoIniziale>
+                </Stato>
+                <Stato>
+                    <ID>31</ID>
+                    <StatoIniziale>false</StatoIniziale>
+                </Stato>
+            </Stati>
+            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <Transizione>
+                    <Nome>t3a</Nome>
+                    <IdStatoIniziale>30</IdStatoIniziale>
+                    <IdStatoFinale>31</IdStatoFinale>
+                    <Coppia>
+                        <IdEvento>NULL</IdEvento>
+                        <IdLink>NULL</IdLink>
+                    </Coppia>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <Coppia>
+                            <IdEvento>e3</IdEvento>
+                            <IdLink>L2</IdLink>
+                        </Coppia>
+                    </CoppieUscita>
+                </Transizione>
+                <Transizione>
+                    <Nome>t3b</Nome>
+                    <IdStatoIniziale>31</IdStatoIniziale>
+                    <IdStatoFinale>30</IdStatoFinale>
+                    <Coppia>
+                        <IdEvento>e3</IdEvento>
+                        <IdLink>L2</IdLink>
+                    </Coppia>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <Coppia>
+                            <IdEvento>NULL</IdEvento>
+                            <IdLink>NULL</IdLink>
+                        </Coppia>
+                    </CoppieUscita>
+                </Transizione>
+                <Transizione>
+                    <Nome>t3c</Nome>
+                    <IdStatoIniziale>31</IdStatoIniziale>
+                    <IdStatoFinale>31</IdStatoFinale>
+                    <Coppia>
+                        <IdEvento>e3</IdEvento>
+                        <IdLink>L2</IdLink>
+                    </Coppia>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                        <Coppia>
+                            <IdEvento>NULL</IdEvento>
+                            <IdLink>NULL</IdLink>
+                         </Coppia>
+                    </CoppieUscita>
+                </Transizione>
+            </Transizioni>
+        </Automa>
+    </Automi>
+    <Links xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        <Link>
+            <Nome>L1</Nome>
+            <IdAutomaPartenza>C2</IdAutomaPartenza>
+            <IdAutomaArrivo>C1</IdAutomaArrivo>
+        </Link>
+        <Link>
+            <Nome>L2</Nome>
+            <IdAutomaPartenza>C2</IdAutomaPartenza>
+            <IdAutomaArrivo>C3</IdAutomaArrivo>
+        </Link>
+        <Link>
+            <Nome>L3</Nome>
+            <IdAutomaPartenza>C3</IdAutomaPartenza>
+            <IdAutomaArrivo>C1</IdAutomaArrivo>
+        </Link>
+    </Links>
+</ReteAutomi>

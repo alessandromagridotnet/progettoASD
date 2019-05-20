@@ -161,13 +161,13 @@ public class Automa {
     }
     
     private ArrayList<StatoComportamentale> precedenti(StatoComportamentale sc){
-        System.out.println(sc.getId()+" - ");
+//        System.out.println(sc.getId()+" - ");
         ArrayList<StatoComportamentale> ret = new ArrayList<>();
         for(Transizione tt : this.getTransizioni()){
             TransizioneComportamentale t = (TransizioneComportamentale) tt;
             if(t.getFinale().equals(sc)){
                 StatoComportamentale temporaneo = (StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getIniziale()));
-                System.out.println(t.getNome()+" "+temporaneo.getId()+",");
+//                System.out.println(t.getNome()+" "+temporaneo.getId()+",");
                 ret.add(temporaneo);
             }
         }
