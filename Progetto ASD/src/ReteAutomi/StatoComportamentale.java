@@ -17,6 +17,8 @@ public class StatoComportamentale implements Stato, Cloneable {
     private Boolean finale;
     private ArrayList<Stato> stati;
     private ArrayList<Coppia> coppie;
+    private ArrayList<String> rilevanza;
+    private String osservabilita;
     private int confermato; // 0 se è da rimuovere | 1 se è stato visitato | 2 se confermato
 
     public StatoComportamentale() {
@@ -25,6 +27,8 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.stati = new ArrayList<>();
         this.coppie = new ArrayList<>();
         this.confermato = 0;
+        this.rilevanza = new ArrayList<>();
+        this.osservabilita = "NULL";
     }
     
     @Override
@@ -69,6 +73,22 @@ public class StatoComportamentale implements Stato, Cloneable {
     
     public void pushCoppia(Coppia c){
         this.coppie.add(c);
+    }
+    
+    public ArrayList<String> getRilevanza() {
+        return this.rilevanza;
+    }
+    
+    public void pushRilevanza(String rilevanza){
+        this.rilevanza.add(rilevanza);
+    }
+
+    public String getOsservabilita() {
+        return osservabilita;
+    }
+
+    public void setOsservabilita(String osservabilita) {
+        this.osservabilita = osservabilita;
     }
 
     public int getConfermato() {
@@ -141,17 +161,35 @@ public class StatoComportamentale implements Stato, Cloneable {
                 if(this.getId().equals(sc.getId()) 
                     && this.getIniziale().equals(sc.getIniziale())
                     && this.getFinale().equals(sc.getFinale())
+//                    && this.getOsservabilita().equals(sc.getOsservabilita())
                     ){
-                        for(Coppia cp : this.getCoppie()){
-                            if(!(sc.getCoppie().contains(cp))){
-                                return false;
+                        if(this.getCoppie().size()==sc.getCoppie().size()){
+                            for(Coppia cp : this.getCoppie()){
+                                if(!(sc.getCoppie().contains(cp))){
+                                    return false;
+                                }
                             }
+                        }else{
+                            return false;
                         }
-                        for(Stato s :this.getStati()){
-                            if(!(sc.getStati().contains(s))){
-                                return false;
+                        if(this.getStati().size()==sc.getStati().size()){
+                            for(Stato s :this.getStati()){
+                                if(!(sc.getStati().contains(s))){
+                                    return false;
+                                }
                             }
+                        }else{
+                            return false;
                         }
+//                        if(this.getRilevanza().size()==sc.getRilevanza().size()){
+//                            for(String e :this.getRilevanza()){
+//                                if(!(sc.getRilevanza().contains(e))){
+//                                    return false;
+//                                }
+//                            }
+//                        }else{
+//                            return false;
+//                        }
                         return true;
                 }
             }

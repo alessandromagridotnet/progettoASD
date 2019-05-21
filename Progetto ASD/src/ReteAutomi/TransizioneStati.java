@@ -14,6 +14,7 @@ public class TransizioneStati implements Transizione{
     private Stato iniziale, finale;
     private Coppia ingresso;
     private ArrayList<Coppia> uscita;
+    private String osservabilita, rilevanza;
 
     public TransizioneStati() {
         this.uscita = new ArrayList<>();
@@ -64,6 +65,22 @@ public class TransizioneStati implements Transizione{
     public void pushUscita(Coppia u){
         this.uscita.add(u);
     }
+
+    public String getOsservabilita() {
+        return osservabilita;
+    }
+
+    public void setOsservabilita(String osservabilita) {
+        this.osservabilita = osservabilita;
+    }
+
+    public String getRilevanza() {
+        return rilevanza;
+    }
+
+    public void setRilevanza(String rilevanza) {
+        this.rilevanza = rilevanza;
+    }
     
     /**
      * Funzione che ritorna una stringa contenente la rappresentazione XML
@@ -92,6 +109,8 @@ public class TransizioneStati implements Transizione{
                     str += cp.toXML();
                 }
             str += "</CoppieUscita>" + System.lineSeparator();
+                str += "<Osservabilita>" + this.getOsservabilita() + "</Osservabilita>" + System.lineSeparator();
+                str += "<Rilevanza>" + this.getRilevanza() + "</Rilevanza>" + System.lineSeparator();
         str += "</Transizione>" + System.lineSeparator();
         return str;
     }
@@ -132,5 +151,8 @@ public class TransizioneStati implements Transizione{
             coppia.fromXML((Element)listUscite.get(i));
             this.pushUscita(coppia);
         }
+        // etichette
+        this.setOsservabilita(xml.getChildText("Osservabilita"));
+        this.setRilevanza(xml.getChildText("Rilevanza"));
     }
 }

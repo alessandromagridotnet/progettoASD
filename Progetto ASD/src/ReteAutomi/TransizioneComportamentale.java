@@ -16,6 +16,7 @@ import org.jdom.Element;
 public class TransizioneComportamentale implements Transizione{
     private String nome;
     private Stato iniziale, finale;
+    private String osservabilita, rilevanza;
 
     public TransizioneComportamentale() {
         this.iniziale = null;
@@ -50,6 +51,26 @@ public class TransizioneComportamentale implements Transizione{
     @Override
     public void setFinale(Stato finale) {
         this.finale = finale;
+    }
+
+    @Override
+    public String getOsservabilita() {
+        return osservabilita;
+    }
+
+    @Override
+    public void setOsservabilita(String osservabilita) {
+        this.osservabilita = osservabilita;
+    }
+
+    @Override
+    public String getRilevanza() {
+        return rilevanza;
+    }
+
+    @Override
+    public void setRilevanza(String rilevanza) {
+        this.rilevanza = rilevanza;
     }
     
     /**

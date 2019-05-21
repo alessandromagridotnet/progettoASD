@@ -148,6 +148,59 @@ public class Automa {
         return chk;
     }
     
+    
+    
+    
+    
+    public boolean etichettaturaRilevanza(){
+        boolean chk = false;
+        StatoComportamentale si = new StatoComportamentale();
+        for(Stato s : this.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) s;
+            if(sc.getIniziale()){
+                si=sc;
+                sc.setConfermato(1);
+            }else{
+                sc.setConfermato(0);    
+            }
+        }
+        return etichettaturaRilevanzaRicorsiva(si);
+    }
+    
+    public boolean etichettaturaRilevanzaRicorsiva(StatoComportamentale sc){
+        boolean chk = false;
+        // scorro le transizioni
+        for(Transizione tt : this.getTransizioni()){
+            TransizioneComportamentale t = (TransizioneComportamentale) tt;
+            // se la transizione parte dallo stato iniziale
+            if(t.getIniziale().equals(sc)){
+                // prendo lo stato di arrivo della transizione considerata
+                StatoComportamentale successivo = (StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale()));
+                // se la transizione ha l'etichetta di rilevanza non nulla e lo stato successivo non contiene l'etichetta di rilevanza
+                if(!(t.getRilevanza().equals("NULL")) && !(successivo.getRilevanza().contains(t.getRilevanza()))){
+                    // se non sono ancora passato
+                    if(successivo.getConfermato()==0){
+                        // aggiungo l'etichetta di rilevanza
+                        successivo.pushRilevanza(t.getRilevanza());
+                        // segno il passaggio
+                        successivo.setConfermato(1);
+                    // se sono già passato
+                    }else if(successivo.getConfermato()==1){
+                        
+                    }
+                }
+                chk = etichettaturaRilevanzaRicorsiva(sc);
+            }
+        }
+        return true;
+    }
+    
+    
+    /**
+     * Funzione che trova gli stati comportamentali successivi
+     * @param sc Lo stato comportamentale rifermento
+     * @return  L'ArrayList degli stati comportamentali successivi
+     */
     private ArrayList<StatoComportamentale> successivi(StatoComportamentale sc){
         ArrayList<StatoComportamentale> ret = new ArrayList<>();
         for(Transizione tt : this.getTransizioni()){
@@ -160,14 +213,17 @@ public class Automa {
         return ret;
     }
     
+    /**
+     * Funzione che trova gli stati comportamentali precedenti
+     * @param sc Lo stato comportamentale rifermento
+     * @return  L'ArrayList degli stati comportamentali precedenti
+     */
     private ArrayList<StatoComportamentale> precedenti(StatoComportamentale sc){
-//        System.out.println(sc.getId()+" - ");
         ArrayList<StatoComportamentale> ret = new ArrayList<>();
         for(Transizione tt : this.getTransizioni()){
             TransizioneComportamentale t = (TransizioneComportamentale) tt;
             if(t.getFinale().equals(sc)){
                 StatoComportamentale temporaneo = (StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getIniziale()));
-//                System.out.println(t.getNome()+" "+temporaneo.getId()+",");
                 ret.add(temporaneo);
             }
         }
