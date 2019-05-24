@@ -114,6 +114,7 @@ public class main {
             System.out.println("2) per calcolare lo stato comportamentale ");
             System.out.println("3) potatura dello stato comportamentale ");
             System.out.println("4) per calcolare lo stato comportamentale decorato");
+            System.out.println("5) per calcolare la determinizzazione");
             System.out.println("10) per visualizzare la rete caricata ");
             System.out.println("0) per tornare al menu principale ");
             
@@ -152,6 +153,20 @@ public class main {
                             A_out = new Automa();
                             RA.calcolaStatoComportamentaleDecorato(A_out);
                             A_out.potatura();
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_out);
+                            
+                            return tmp.storeIntoFile(dir + "spazio_comportamentale_decorato.xml");
+                        case 5:
+                            Automa A_tmp = new Automa();
+                            A_out = new Automa();
+                            RA.calcolaStatoComportamentaleDecorato(A_tmp);
+                            A_tmp.potatura();
+                            
+                            A_tmp.determinizzazione(A_out);
+                            
+                            
+                            
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             

@@ -184,58 +184,50 @@ public class Automa {
         return chk;
     }
     
-//    public boolean etichettaturaRilevanza(){
-//        boolean chk = false;
-//        StatoComportamentale si = new StatoComportamentale();
-//        for(Stato s : this.getStati()){
-//            StatoComportamentale sc = (StatoComportamentale) s;
-//            if(sc.getIniziale()){
-//                si=sc;
-//                sc.setConfermato(1);
-//            }else{
-//                sc.setConfermato(0);    
-//            }
-//        }
-//        return etichettaturaRilevanzaRicorsiva(si);
-//    }
-//    
-//    public boolean etichettaturaRilevanzaRicorsiva(StatoComportamentale sc){
-//        boolean chk = false;
-//        // scorro le transizioni
-//        for(Transizione tt : this.getTransizioni()){
-//            TransizioneComportamentale t = (TransizioneComportamentale) tt;
-//            // se la transizione parte dallo stato iniziale di questa ricorsione
-//            if(((StatoComportamentale)t.getIniziale()).equalsNotEtichette(sc)){
-//                // prendo lo stato di arrivo della transizione considerata
-//                StatoComportamentale successivo = (StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale()));
-//                // se la transizione ha l'etichetta di rilevanza non nulla e lo stato successivo non contiene questa etichetta di rilevanza
-//                if(t.getRilevanza().equals("NULL")) {
-//                    
-//                }else{
-//                    
-//                }
-//                
-//                
-//                // va spezzato nel primo if + un ciclo
-//                if(!(t.getRilevanza().equals("NULL")) && !(successivo.getRilevanza().contains(t.getRilevanza()))){
-//                    // se non sono ancora passato
-//                    if(successivo.getConfermato()==0){
-//                        // aggiungo l'etichetta di rilevanza
-//                        successivo.pushRilevanza(t.getRilevanza());
-//                        // segno il passaggio
-//                        successivo.setConfermato(1);
-//                    // se sono già passato
-//                    }else if(successivo.getConfermato()==1){
-//                        
-//                    }
-//                }else{
-//                    // non devo aggiungere nulla allo stato finale
-//                }
-//                chk = etichettaturaRilevanzaRicorsiva(sc);
-//            }
-//        }
-//        return true;
-//    }
+    
+    public boolean determinizzazione(Automa A_out){
+        boolean chk = false;
+        StatoComportamentale si = new StatoComportamentale();
+        for(Stato s : this.getStati()){
+            if(s.getIniziale()){
+                si = (StatoComportamentale) s;
+                break;
+            }
+        }
+        return determinizzazioneRicorsiva(A_out, si);
+    }
+    
+    public boolean determinizzazioneRicorsiva(Automa A_out, StatoComportamentale sc){
+        StatoComportamentale nuovo = new StatoComportamentale();
+        ArrayList<StatoComportamentale> a_sc = new ArrayList<>();
+        a_sc.add(sc);
+        nuovo.getStati().addAll(successiviOsservabilitaNull(a_sc));
+        
+        
+        return true;
+        
+    }
+    
+    public ArrayList<StatoComportamentale> successiviOsservabilitaNull(ArrayList<StatoComportamentale> a_sc){
+        ArrayList<StatoComportamentale> ret = new ArrayList<>();
+        // aggiungo lo stato passato
+        ret.addAll(a_sc);
+        // ciclo sulle transizioni
+        for(Transizione tt : this.getTransizioni()){
+            TransizioneComportamentale t = (TransizioneComportamentale) tt;
+            ArrayList<StatoComportamentale> finale = new ArrayList<>();
+            for(StatoComportamentale sc : a_sc){
+                // se la transizione parte dallo stato comportamentale passato e ha etichetta di osservabilità nulla
+                if(t.getIniziale().equals(sc) && t.getOsservabilita().equals("NULL")){
+                    // calcolo lo stato comportamentale successivo
+                    finale.add((StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale())));
+                }
+            }
+            // chiamata ricorsiva per cercare i figli
+            ret.addAll(successiviOsservabilitaNull(finale));
+        }
+        return ret;
+    }
     
     
     /**
