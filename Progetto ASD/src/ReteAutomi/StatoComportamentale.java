@@ -252,7 +252,6 @@ public class StatoComportamentale implements Stato, Cloneable {
                     return false;
                 }
                 if(this.getRilevanza().size()==sc.getRilevanza().size()){
-                    System.out.println("stessa misura");
                     for(String e :this.getRilevanza()){
                         boolean controllo = false;
                         for(String e2 : sc.getRilevanza()){

@@ -98,6 +98,9 @@ public class Automa {
     public boolean potatura(){
         boolean chk = false;
         boolean chk2 = false;
+        ///////////////////////////////////////////////////////////////////////
+        ////////////////////////// POTATURA DEGLI STATI ///////////////////////
+        ///////////////////////////////////////////////////////////////////////
         for(Stato s : this.getStati()){
             StatoComportamentale sc = (StatoComportamentale) s;
             if(sc.getIniziale()){
@@ -121,6 +124,39 @@ public class Automa {
                 ++size;
             }
         }
+        ///////////////////////////////////////////////////////////////////////
+        ///////////////////// POTATURA DELLE TRANSIZIONI //////////////////////
+        ///////////////////////////////////////////////////////////////////////
+        
+        for(Transizione t : this.getTransizioni()){
+            boolean presente = false, presente2=false;
+            for(Stato s : this.getStati()){
+                if(t.getIniziale().getId().equals(s.getId())){
+                    presente = true;
+                    break;
+                }
+            }
+            for(Stato s : this.getStati()){
+                if(t.getFinale().getId().equals(s.getId())){
+                    presente2 = true;
+                    break;
+                }
+            }
+            if(!(presente && presente2)){
+                t.setNome("DACANCELLARE");
+            }
+        }
+        
+        size = 0;
+        while(size < this.getTransizioni().size()){
+            TransizioneComportamentale tc = (TransizioneComportamentale) this.getTransizioni().get(size);
+            if(tc.getNome().equals("DACANCELLARE")){
+                this.getTransizioni().remove(size);
+            }else{
+                ++size;
+            }
+        }
+        
         return chk;
     }
     

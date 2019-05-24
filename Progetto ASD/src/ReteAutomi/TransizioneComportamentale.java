@@ -21,6 +21,8 @@ public class TransizioneComportamentale implements Transizione{
     public TransizioneComportamentale() {
         this.iniziale = null;
         this.finale = null;
+        this.rilevanza="NULL";
+        this.osservabilita="NULL";
     }
 
     @Override

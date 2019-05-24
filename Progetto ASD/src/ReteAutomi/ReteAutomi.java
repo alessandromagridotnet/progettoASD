@@ -321,7 +321,6 @@ public class ReteAutomi {
      * @return boolean
      */
     private boolean statoComportamentaleDecoratoRicorsivo(Automa A_out, StatoComportamentale sc_pre, int[] conteggio){
-        System.out.println(conteggio[0]);
         Evento eventoNull = new Evento();
         eventoNull.setNome("NULL");
         // cicliamo su automi e transizioni per poter scansionare tutte le possibili transizioni
