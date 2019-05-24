@@ -138,6 +138,7 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.setId(sc.getId());
         this.setFinale(sc.getFinale());
         this.setIniziale(sc.getIniziale());
+        this.setOsservabilita(sc.getOsservabilita());
         for(Coppia c : sc.getCoppie()){
             Coppia cp = c.clone();
             this.pushCoppia(cp);
@@ -145,6 +146,9 @@ public class StatoComportamentale implements Stato, Cloneable {
         for(Stato s : sc.getStati()){
             Stato ss = s.clone();
             this.pushStato(ss);
+        }
+        for(String e : sc.getRilevanza()){
+            this.pushRilevanza(e);
         }
     }
     
@@ -161,7 +165,7 @@ public class StatoComportamentale implements Stato, Cloneable {
                 if(this.getId().equals(sc.getId()) 
                     && this.getIniziale().equals(sc.getIniziale())
                     && this.getFinale().equals(sc.getFinale())
-//                    && this.getOsservabilita().equals(sc.getOsservabilita())
+                    && this.getOsservabilita().equals(sc.getOsservabilita())
                     ){
                         if(this.getCoppie().size()==sc.getCoppie().size()){
                             for(Coppia cp : this.getCoppie()){
@@ -181,15 +185,48 @@ public class StatoComportamentale implements Stato, Cloneable {
                         }else{
                             return false;
                         }
-//                        if(this.getRilevanza().size()==sc.getRilevanza().size()){
-//                            for(String e :this.getRilevanza()){
-//                                if(!(sc.getRilevanza().contains(e))){
-//                                    return false;
-//                                }
-//                            }
-//                        }else{
-//                            return false;
-//                        }
+                        if(this.getRilevanza().size()==sc.getRilevanza().size()){
+                            for(String e :this.getRilevanza()){
+                                if(!(sc.getRilevanza().contains(e))){
+                                    return false;
+                                }
+                            }
+                        }else{
+                            return false;
+                        }
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean equalsNotEtichette(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                StatoComportamentale sc = (StatoComportamentale) o;
+                if(this.getId().equals(sc.getId()) 
+                    && this.getIniziale().equals(sc.getIniziale())
+                    && this.getFinale().equals(sc.getFinale())
+                    ){
+                        if(this.getCoppie().size()==sc.getCoppie().size()){
+                            for(Coppia cp : this.getCoppie()){
+                                if(!(sc.getCoppie().contains(cp))){
+                                    return false;
+                                }
+                            }
+                        }else{
+                            return false;
+                        }
+                        if(this.getStati().size()==sc.getStati().size()){
+                            for(Stato s :this.getStati()){
+                                if(!(sc.getStati().contains(s))){
+                                    return false;
+                                }
+                            }
+                        }else{
+                            return false;
+                        }
                         return true;
                 }
             }
@@ -202,22 +239,32 @@ public class StatoComportamentale implements Stato, Cloneable {
         if(o!=null){
             if(this.getClass().isInstance(o)){
                 StatoComportamentale sc = (StatoComportamentale) o;
-                
-                for(Coppia cp : this.getCoppie()){
-                    if(!(sc.getCoppie().contains(cp))){
+                if(this.getId().equals(sc.getId())){
+                    if(this.getCoppie().size()==sc.getCoppie().size()){
+                        for(Coppia cp : this.getCoppie()){
+                            if(!(sc.getCoppie().contains(cp))){
+                                return false;
+                            }
+                        }
+                    }else{
                         return false;
                     }
-                }
-                for(Stato s :this.getStati()){
-                    boolean chk_count = true;
-                    for(Stato s_chk : sc.getStati()){
-                        if(s_chk.equalsOnlyId(s)){
-                            chk_count=false;
-                            break;
-
+                    if(this.getStati().size()==sc.getStati().size()){
+                        for(Stato s :this.getStati()){
+                            if(!(sc.getStati().contains(s))){
+                                return false;
+                            }
                         }
+                    }else{
+                        return false;
                     }
-                    if(chk_count){
+                    if(this.getRilevanza().size()==sc.getRilevanza().size()){
+                        for(String e :this.getRilevanza()){
+                            if(!(sc.getRilevanza().contains(e))){
+                                return false;
+                            }
+                        }
+                    }else{
                         return false;
                     }
                 }

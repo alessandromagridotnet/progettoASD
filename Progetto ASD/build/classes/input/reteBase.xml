@@ -28,6 +28,8 @@
                             <IdLink>L3</IdLink>
                         </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>o2</Osservabilita>
+                    <Rilevanza>NULL</Rilevanza>
                 </Transizione>
                 <Transizione>
                     <Nome>t2b</Nome>
@@ -43,6 +45,8 @@
                             <IdLink>L3</IdLink>
                         </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>NULL</Osservabilita>
+                    <Rilevanza>r</Rilevanza>
                 </Transizione>
             </Transizioni>
         </Automa>
@@ -73,6 +77,8 @@
                             <IdLink>L2</IdLink>
                         </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>o3</Osservabilita>
+                    <Rilevanza>NULL</Rilevanza>
                 </Transizione>
                 <Transizione>
                     <Nome>t3b</Nome>
@@ -88,6 +94,8 @@
                             <IdLink>NULL</IdLink>
                         </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>NULL</Osservabilita>
+                    <Rilevanza>NULL</Rilevanza>
                 </Transizione>
                 <Transizione>
                     <Nome>t3c</Nome>
@@ -103,6 +111,8 @@
                             <IdLink>NULL</IdLink>
                          </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>NULL</Osservabilita>
+                    <Rilevanza>f</Rilevanza>
                 </Transizione>
             </Transizioni>
         </Automa>

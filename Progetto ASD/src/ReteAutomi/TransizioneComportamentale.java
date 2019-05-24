@@ -96,4 +96,30 @@ public class TransizioneComportamentale implements Transizione{
         str += "</Transizione>" + System.lineSeparator();
         return str;
     }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                TransizioneComportamentale tc = (TransizioneComportamentale) o;
+                if(this.getNome().equals(tc.getNome()) 
+                        && this.getOsservabilita().equals(tc.getOsservabilita())
+                        && this.getRilevanza().equals(tc.getRilevanza())
+                        && this.getIniziale().equals(tc.getIniziale())
+                        && this.getFinale().equals(tc.getFinale())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean equalsRilevanzaEsclusa(TransizioneComportamentale tc){
+        if(this.getNome().equals(tc.getNome()) 
+                && ((StatoComportamentale)this.getIniziale()).equalsNotEtichette((StatoComportamentale)tc.getIniziale())
+                && ((StatoComportamentale)this.getFinale()).equalsNotEtichette((StatoComportamentale)tc.getFinale())){
+            return true;
+        }
+        return false;
+    }
 }

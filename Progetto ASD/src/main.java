@@ -113,6 +113,7 @@ public class main {
             System.out.println("1) per esportare la rete caricata ");
             System.out.println("2) per calcolare lo stato comportamentale ");
             System.out.println("3) potatura dello stato comportamentale ");
+            System.out.println("4) per calcolare lo stato comportamentale decorato");
             System.out.println("10) per visualizzare la rete caricata ");
             System.out.println("0) per tornare al menu principale ");
             
@@ -140,7 +141,14 @@ public class main {
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             
-                            return tmp.storeIntoFile("src/output/spazio_comportamentale_potato.xml");
+                        case 4:
+                            A_out = new Automa();
+                            RA.calcolaStatoComportamentaleDecorato(A_out);
+                            A_out.potatura();
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_out);
+                            
+                            return tmp.storeIntoFile("src/output/spazio_comportamentale_decorato.xml");
                         case 10:
                             return mostraRete(RA);
                         case 0:
