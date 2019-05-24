@@ -119,6 +119,13 @@ public class main {
             
             Automa A_out = new Automa();
             ReteAutomi tmp = new ReteAutomi();
+            String dir;
+            // bugfix temporaneo per i path di linux e windows
+            if(System.getProperty("os.name").compareTo("Linux") == 0){
+                dir = "src/output/";
+            }else{
+                dir = "Progetto ASD\\src\\output\\";
+            }
             while(!quit){
                 try{
                     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -126,21 +133,21 @@ public class main {
 
                     switch(scelta){
                         case 1:
-                            return RA.storeIntoFile("src/output/output.xml");
+                            return RA.storeIntoFile(dir + "output.xml");
                         case 2:
                             A_out = new Automa();
                             RA.calcolaStatoComportamentale(A_out);
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             
-                            return tmp.storeIntoFile("src/output/spazio_comportamentale.xml");
+                            return tmp.storeIntoFile(dir + "spazio_comportamentale.xml");
                         case 3:
                             A_out = new Automa();
                             RA.calcolaStatoComportamentale(A_out);
                             A_out.potatura();
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
-                            
+                            return tmp.storeIntoFile(dir + "spazio_comportamentale_potato.xml");
                         case 4:
                             A_out = new Automa();
                             RA.calcolaStatoComportamentaleDecorato(A_out);
@@ -148,7 +155,7 @@ public class main {
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             
-                            return tmp.storeIntoFile("src/output/spazio_comportamentale_decorato.xml");
+                            return tmp.storeIntoFile(dir + "spazio_comportamentale_decorato.xml");
                         case 10:
                             return mostraRete(RA);
                         case 0:
