@@ -18,7 +18,6 @@ public class StatoComportamentale implements Stato, Cloneable {
     private ArrayList<Stato> stati;
     private ArrayList<Coppia> coppie;
     private ArrayList<String> rilevanza;
-    private String osservabilita;
     private int confermato; // 0 se è da rimuovere | 1 se è stato visitato | 2 se confermato
 
     public StatoComportamentale() {
@@ -28,7 +27,6 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.coppie = new ArrayList<>();
         this.confermato = 0;
         this.rilevanza = new ArrayList<>();
-        this.osservabilita = "NULL";
     }
     
     @Override
@@ -82,15 +80,7 @@ public class StatoComportamentale implements Stato, Cloneable {
     public void pushRilevanza(String rilevanza){
         this.rilevanza.add(rilevanza);
     }
-
-    public String getOsservabilita() {
-        return osservabilita;
-    }
-
-    public void setOsservabilita(String osservabilita) {
-        this.osservabilita = osservabilita;
-    }
-
+    
     public int getConfermato() {
         return confermato;
     }
@@ -120,6 +110,12 @@ public class StatoComportamentale implements Stato, Cloneable {
                 xml += c.toXML();
             }
             xml += "</Coppie>" + System.lineSeparator();
+            xml += "<Rilevanza>" + System.lineSeparator();
+            for(String r : this.getRilevanza()){
+                xml += "<Etichetta>" + r + "</Etichetta>";
+            }
+            xml += "</Rilevanza>" + System.lineSeparator();
+            
         xml += "</Stato>" + System.lineSeparator();
         
         return xml;
@@ -138,7 +134,6 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.setId(sc.getId());
         this.setFinale(sc.getFinale());
         this.setIniziale(sc.getIniziale());
-        this.setOsservabilita(sc.getOsservabilita());
         for(Coppia c : sc.getCoppie()){
             Coppia cp = c.clone();
             this.pushCoppia(cp);
@@ -165,7 +160,6 @@ public class StatoComportamentale implements Stato, Cloneable {
                 if(this.getId().equals(sc.getId()) 
                     && this.getIniziale().equals(sc.getIniziale())
                     && this.getFinale().equals(sc.getFinale())
-                    && this.getOsservabilita().equals(sc.getOsservabilita())
                     ){
                         if(this.getCoppie().size()==sc.getCoppie().size()){
                             for(Coppia cp : this.getCoppie()){
@@ -239,34 +233,40 @@ public class StatoComportamentale implements Stato, Cloneable {
         if(o!=null){
             if(this.getClass().isInstance(o)){
                 StatoComportamentale sc = (StatoComportamentale) o;
-                if(this.getId().equals(sc.getId())){
-                    if(this.getCoppie().size()==sc.getCoppie().size()){
-                        for(Coppia cp : this.getCoppie()){
-                            if(!(sc.getCoppie().contains(cp))){
-                                return false;
+                if(this.getCoppie().size()==sc.getCoppie().size()){
+                    for(Coppia cp : this.getCoppie()){
+                        if(!(sc.getCoppie().contains(cp))){
+                            return false;
+                        }
+                    }
+                }else{
+                    return false;
+                }
+                if(this.getStati().size()==sc.getStati().size()){
+                    for(Stato s :this.getStati()){
+                        if(!(sc.getStati().contains(s))){
+                            return false;
+                        }
+                    }
+                }else{
+                    return false;
+                }
+                if(this.getRilevanza().size()==sc.getRilevanza().size()){
+                    System.out.println("stessa misura");
+                    for(String e :this.getRilevanza()){
+                        boolean controllo = false;
+                        for(String e2 : sc.getRilevanza()){
+                            if(e.equals(e2)){
+                                controllo = true;
+                                break;
                             }
                         }
-                    }else{
-                        return false;
-                    }
-                    if(this.getStati().size()==sc.getStati().size()){
-                        for(Stato s :this.getStati()){
-                            if(!(sc.getStati().contains(s))){
-                                return false;
-                            }
+                        if(!controllo){
+                            return false;
                         }
-                    }else{
-                        return false;
                     }
-                    if(this.getRilevanza().size()==sc.getRilevanza().size()){
-                        for(String e :this.getRilevanza()){
-                            if(!(sc.getRilevanza().contains(e))){
-                                return false;
-                            }
-                        }
-                    }else{
-                        return false;
-                    }
+                }else{
+                    return false;
                 }
                 return true;
             }

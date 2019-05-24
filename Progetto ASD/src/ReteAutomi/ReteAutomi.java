@@ -286,7 +286,7 @@ public class ReteAutomi {
         StatoComportamentale sc = new StatoComportamentale();
         int[] conteggio = new int[1];
         conteggio[0]=0;
-        sc.setId(conteggio[0]+"");
+        sc.setId("a"+conteggio[0]+"");
         this.getAutomi().forEach((a) -> {
             a.getStati().forEach((s) -> {
                 if(s.getIniziale()){
@@ -321,6 +321,7 @@ public class ReteAutomi {
      * @return boolean
      */
     private boolean statoComportamentaleDecoratoRicorsivo(Automa A_out, StatoComportamentale sc_pre, int[] conteggio){
+        System.out.println(conteggio[0]);
         Evento eventoNull = new Evento();
         eventoNull.setNome("NULL");
         // cicliamo su automi e transizioni per poter scansionare tutte le possibili transizioni
@@ -352,7 +353,7 @@ public class ReteAutomi {
                             sc.clone(sc_pre);
                             sc.setIniziale(false);
                             sc.setFinale(false);
-                            sc.setId(conteggio[0]+"");
+                            sc.setId("a"+conteggio[0]+"");
                             
                             if(!(t.getRilevanza().equals("NULL")) && !(sc.getRilevanza().contains(t.getRilevanza()))){
                                 sc.pushRilevanza(t.getRilevanza());
@@ -399,6 +400,7 @@ public class ReteAutomi {
                             TransizioneComportamentale t_comp = new TransizioneComportamentale();
                             t_comp.setNome(t.getNome());
                             t_comp.setIniziale(sc_pre);
+                            t_comp.setOsservabilita(t.getOsservabilita());
                             // controllo che il nuovo stato generato non sia già presente nell'automa dello stato comportamentale
                             int chk_count = 0;
                             for(Stato s_chk : A_out.getStati()){
@@ -418,7 +420,7 @@ public class ReteAutomi {
                                 A_out.pushTransizioni(t_comp);
                                 // chiamata ricorsiva
                                 conteggio[0]++;
-                                statoComportamentaleRicorsivo(A_out, sc, conteggio);
+                                statoComportamentaleDecoratoRicorsivo(A_out, sc, conteggio);
                             }
                         }
                     }

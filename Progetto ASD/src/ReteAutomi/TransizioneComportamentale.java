@@ -93,6 +93,7 @@ public class TransizioneComportamentale implements Transizione{
             }else{
                 str += "<IdStatoFinale>" + this.getFinale().getId() + "</IdStatoFinale>" + System.lineSeparator();
             }
+            str += "<Osservabilita>" + this.getOsservabilita()+ "</Osservabilita>" + System.lineSeparator();
         str += "</Transizione>" + System.lineSeparator();
         return str;
     }
