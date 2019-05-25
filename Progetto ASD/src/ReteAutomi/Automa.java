@@ -1,8 +1,11 @@
 package ReteAutomi;
 
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.jdom.Element;
 
 /**
@@ -212,26 +215,60 @@ public class Automa {
     
     public boolean determinizzazioneRicorsiva(Automa A_out, ArrayList<StatoComportamentale> a_sc){
         StatoComportamentale nuovo = new StatoComportamentale();
+        // calcola tutti gli stati successivi a quelli passati che siano collegati da transizioni con osservabilità nulla
+        successiviOsservabilitaNull(a_sc).forEach((sc) -> {
+            nuovo.getStati().add(sc);
+        });
+        if(!A_out.getStati().contains(nuovo)){
+            // cerco se esiste una transizione pendente senza stato finale e la aggiorno
+            for(Transizione trans : A_out.getTransizioni()){
+                if(trans.getFinale()==null){
+                    trans.setFinale(nuovo);
+                }
+            }
+            // aggiungi stato e completa il link
+            A_out.pushStato(nuovo);
+        }else{
+            // termina
+            return true;
+        }
         
-        nuovo.getStati().addAll(successiviOsservabilitaNull(a_sc));
         // trova tutte le possibili etichette di osservabilità in uscita dall'insieme di stati considerati
         ArrayList<String> etichette_osservabilita = new ArrayList<>();
         for(Transizione tt : this.getTransizioni()){
-            if(a_sc.contains((StatoComportamentale) tt.getIniziale())){
+            // controlla che l'etichetta non sia nulla e che lo stato iniziale sia uno di quelli considerati
+            if((!tt.getOsservabilita().equals("NULL")) && nuovo.getStati().contains((StatoComportamentale) tt.getIniziale())){
                 if(!etichette_osservabilita.contains(tt.getOsservabilita())){
                     etichette_osservabilita.add(tt.getOsservabilita());
                 }
             }
         }
+        Map<String,ArrayList<StatoComportamentale>> map= new HashMap<>();
         // per ogni etichetta di osservabilità possibile
         for(String e_o : etichette_osservabilita){
+            ArrayList<StatoComportamentale> tmp_array = new ArrayList<>();
             // ciclo sulle transizioni
             for(Transizione tt : this.getTransizioni()){
                 // cerco quelle che hanno una delle etichette di osservabilità possibili e che partono da uno degli stati considerati
-                if(tt.getOsservabilita().equals(e_o) && a_sc.contains((StatoComportamentale) tt.getIniziale())){
-                    
+                if(tt.getOsservabilita().equals(e_o) && nuovo.getStati().contains((StatoComportamentale) tt.getIniziale())){
+                    // le aggiungo ad un array tempooraneo
+                    tmp_array.add((StatoComportamentale) tt.getFinale());
                 }
             }
+            // metto l'array temporaneo in una map list in modo da raggruppare tutti gli stati in uscita accomunati dalla stessa erichetta
+            map.put(e_o, tmp_array);
+        }
+        
+        for (Map.Entry<String, ArrayList<StatoComportamentale>> entry : map.entrySet()) {
+            // creo una transizione che parte dallo stato nuovo appena inserito e che ha la giusta etichetta di relevanza
+            // lasio a null lo stato finale che setterò al prossimo loop
+            TransizioneComportamentale tc = new TransizioneComportamentale();
+            tc.setIniziale(nuovo);
+            tc.setFinale(null);
+            tc.setOsservabilita(entry.getKey());
+            A_out.pushTransizioni(tc);
+            
+            determinizzazioneRicorsiva(A_out, entry.getValue());
         }
         return true;
         
@@ -244,21 +281,35 @@ public class Automa {
      */
     public ArrayList<StatoComportamentale> successiviOsservabilitaNull(ArrayList<StatoComportamentale> a_sc){
         ArrayList<StatoComportamentale> ret = new ArrayList<>();
-        // aggiungo lo stato passato
-        ret.addAll(a_sc);
-        // ciclo sulle transizioni
-        for(Transizione tt : this.getTransizioni()){
-            TransizioneComportamentale t = (TransizioneComportamentale) tt;
-            ArrayList<StatoComportamentale> finale = new ArrayList<>();
-            for(StatoComportamentale sc : a_sc){
-                // se la transizione parte dallo stato comportamentale passato e ha etichetta di osservabilità nulla
-                if(t.getIniziale().equals(sc) && t.getOsservabilita().equals("NULL")){
-                    // calcolo lo stato comportamentale successivo
-                    finale.add((StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale())));
+        // aggiunge gli stati passati
+        if(!a_sc.isEmpty()){
+            try{
+                for(StatoComportamentale sc : a_sc){
+                    ret.add(sc);
                 }
+            }catch(Exception e){
+                System.out.println(e);
             }
-            // chiamata ricorsiva per cercare i figli
-            ret.addAll(successiviOsservabilitaNull(finale));
+            // ciclo sulle transizioni
+            for(Transizione tt : this.getTransizioni()){
+                TransizioneComportamentale t = (TransizioneComportamentale) tt;
+                ArrayList<StatoComportamentale> finale = new ArrayList<>();
+                for(StatoComportamentale sc : a_sc){
+                    // se la transizione parte dallo stato comportamentale passato e ha etichetta di osservabilità nulla
+                    if(t.getIniziale().equals(sc) && t.getOsservabilita().equals("NULL")){
+                        // calcolo lo stato comportamentale successivo e se non è già contenuto in finale lo aggiungo
+                        if(!finale.contains((StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale())))){
+                            finale.add((StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale())));
+                        }
+                    }
+                }
+                // chiamata ricorsiva per cercare i figli e aggiunta dei ritorni
+                successiviOsservabilitaNull(finale).forEach((sc) -> {
+                    if(!ret.contains(sc)){
+                        ret.add(sc);
+                    }
+                });
+            }
         }
         return ret;
     }

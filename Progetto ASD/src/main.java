@@ -170,7 +170,7 @@ public class main {
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             
-                            return tmp.storeIntoFile(dir + "spazio_comportamentale_decorato.xml");
+                            return tmp.storeIntoFile(dir + "spazio_comportamentale_decorato_determinato.xml");
                         case 10:
                             return mostraRete(RA);
                         case 0:

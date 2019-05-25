@@ -21,6 +21,7 @@ public class StatoComportamentale implements Stato, Cloneable {
     private int confermato; // 0 se è da rimuovere | 1 se è stato visitato | 2 se confermato
 
     public StatoComportamentale() {
+        this.id = "NULL";
         this.iniziale = false;
         this.finale = false;
         this.stati = new ArrayList<>();
