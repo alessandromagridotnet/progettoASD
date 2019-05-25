@@ -93,7 +93,7 @@ public class Automa {
     
     /**
      * Funzione per la potatura, richiamabile solo su un automa dello comportamentale
-     * @return 
+     * @return boolean
      */
     public boolean potatura(){
         boolean chk = false;
@@ -160,6 +160,11 @@ public class Automa {
         return chk;
     }
     
+    /**
+     * Sotto-funzione per la potatura che va ad esplorare l'albero marcando gli stati esplorati come confermati (se finali) o semplicemente come esplorati
+     * @param sc lo stato da cui partire
+     * @return boolean
+     */
     private boolean potatura_ricorsiva(StatoComportamentale sc){
         ArrayList<StatoComportamentale> prec = precedenti(sc);
         boolean chk = false;
@@ -184,30 +189,59 @@ public class Automa {
         return chk;
     }
     
-    
+    /**
+     * Funzione per la determinizzazione di uno SpazioComportamentaleDecorato e la creazione del relativo automa
+     * @param A_out Automa all'interno del quale calcolare l'output
+     * @return boolean
+     */
     public boolean determinizzazione(Automa A_out){
         boolean chk = false;
         StatoComportamentale si = new StatoComportamentale();
+        // trovo lo stato iniziale
         for(Stato s : this.getStati()){
             if(s.getIniziale()){
-                si = (StatoComportamentale) s;
+                si.clone((StatoComportamentale) s);
                 break;
             }
         }
-        return determinizzazioneRicorsiva(A_out, si);
+        ArrayList<StatoComportamentale> arr_sc = new ArrayList<>();
+        arr_sc.add(si);
+        // chiamata alla funzione ricorsiva
+        return determinizzazioneRicorsiva(A_out, arr_sc);
     }
     
-    public boolean determinizzazioneRicorsiva(Automa A_out, StatoComportamentale sc){
+    public boolean determinizzazioneRicorsiva(Automa A_out, ArrayList<StatoComportamentale> a_sc){
         StatoComportamentale nuovo = new StatoComportamentale();
-        ArrayList<StatoComportamentale> a_sc = new ArrayList<>();
-        a_sc.add(sc);
+        
         nuovo.getStati().addAll(successiviOsservabilitaNull(a_sc));
-        
-        
+        // trova tutte le possibili etichette di osservabilità in uscita dall'insieme di stati considerati
+        ArrayList<String> etichette_osservabilita = new ArrayList<>();
+        for(Transizione tt : this.getTransizioni()){
+            if(a_sc.contains((StatoComportamentale) tt.getIniziale())){
+                if(!etichette_osservabilita.contains(tt.getOsservabilita())){
+                    etichette_osservabilita.add(tt.getOsservabilita());
+                }
+            }
+        }
+        // per ogni etichetta di osservabilità possibile
+        for(String e_o : etichette_osservabilita){
+            // ciclo sulle transizioni
+            for(Transizione tt : this.getTransizioni()){
+                // cerco quelle che hanno una delle etichette di osservabilità possibili e che partono da uno degli stati considerati
+                if(tt.getOsservabilita().equals(e_o) && a_sc.contains((StatoComportamentale) tt.getIniziale())){
+                    
+                }
+            }
+        }
         return true;
         
     }
     
+    /**
+     * Funzione che calcola gli stati successivi all'interno dell'automa collegati da una transizione con etichetta di osservabilità nulla
+     * @param a_sc Un ArrayList contenente gli stati confine attuali
+     * @return Un ArrayList contenente tutti gli stati successivi collegati da transizioni ad osservabilità nulla
+     */
     public ArrayList<StatoComportamentale> successiviOsservabilitaNull(ArrayList<StatoComportamentale> a_sc){
         ArrayList<StatoComportamentale> ret = new ArrayList<>();
         // aggiungo lo stato passato

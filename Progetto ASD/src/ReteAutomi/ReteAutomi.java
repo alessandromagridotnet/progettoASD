@@ -217,7 +217,7 @@ public class ReteAutomi {
                             sc.pushStato(st);
                             
                             // loop sulle coppie evento link in uscita alla transizione abilitata
-                            if (t.getIngresso().getEvento().getNome()!="NULL"){
+                            if (!t.getIngresso().getEvento().getNome().equals("NULL")){
                                for (Coppia cp_s : sc.getCoppie()){
                                    if (cp_s.getLink().equals(t.getIngresso().getLink())){
                                        cp_s.setEvento(eventoNull);
@@ -278,7 +278,7 @@ public class ReteAutomi {
     }
     
     /**
-     * Funzione che calcola il primo Stato all'interno dell'automa chiamato StatoComportamentale
+     * Funzione che calcola il primo Stato all'interno dell'automa chiamato StatoComportamentale decorato
      * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
      * @return boolean
      */
@@ -314,7 +314,7 @@ public class ReteAutomi {
     }
     
     /**
-     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa StatoComportamentale
+     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa StatoComportamentale decorato
      * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
      * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaStatoComportamentale()")
      * @param conteggio un intero che indica il numero di stati generati dal sistema
@@ -368,7 +368,7 @@ public class ReteAutomi {
                             sc.pushStato(st);
                             
                             // loop sulle coppie evento link in uscita alla transizione abilitata
-                            if (t.getIngresso().getEvento().getNome()!="NULL"){
+                            if (!t.getIngresso().getEvento().getNome().equals("NULL")){
                                for (Coppia cp_s : sc.getCoppie()){
                                    if (cp_s.getLink().equals(t.getIngresso().getLink())){
                                        cp_s.setEvento(eventoNull);
