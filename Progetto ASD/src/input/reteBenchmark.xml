@@ -1,5 +1,5 @@
 <ReteAutomi>
-    <Nome>ReteBaseZanella</Nome>
+    <Nome>ReteBanchmark</Nome>
     <Automi xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
         <Automa>
             <Nome>C1</Nome>
@@ -28,6 +28,8 @@
                             <IdLink>NULL</IdLink>
                          </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>NULL</Osservabilita>
+                    <Rilevanza>NULL</Rilevanza>
                 </Transizione>
                 <Transizione>
                     <Nome>t1b</Nome>
@@ -43,6 +45,8 @@
                             <IdLink>NULL</IdLink>
                          </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>NULL</Osservabilita>
+                    <Rilevanza>NULL</Rilevanza>
                 </Transizione>
                 <Transizione>
                     <Nome>t1c</Nome>
@@ -58,6 +62,8 @@
                             <IdLink>NULL</IdLink>
                          </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>NULL</Osservabilita>
+                    <Rilevanza>f1</Rilevanza>
                 </Transizione>
             </Transizioni>
         </Automa>
@@ -92,6 +98,8 @@
                             <IdLink>L2</IdLink>
                         </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>o1</Osservabilita>
+                    <Rilevanza>NULL</Rilevanza>
                 </Transizione>
                 <Transizione>
                     <Nome>t2b</Nome>
@@ -107,6 +115,8 @@
                             <IdLink>L1</IdLink>
                         </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>o2</Osservabilita>
+                    <Rilevanza>NULL</Rilevanza>
                 </Transizione>
             </Transizioni>
         </Automa>
@@ -137,6 +147,8 @@
                             <IdLink>L2</IdLink>
                         </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>NULL</Osservabilita>
+                    <Rilevanza>NULL</Rilevanza>
                 </Transizione>
                 <Transizione>
                     <Nome>t3b</Nome>
@@ -152,6 +164,8 @@
                             <IdLink>NULL</IdLink>
                         </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>NULL</Osservabilita>
+                    <Rilevanza>NULL</Rilevanza>
                 </Transizione>
                 <Transizione>
                     <Nome>t3c</Nome>
@@ -167,6 +181,8 @@
                             <IdLink>NULL</IdLink>
                          </Coppia>
                     </CoppieUscita>
+                    <Osservabilita>NULL</Osservabilita>
+                    <Rilevanza>f3</Rilevanza>
                 </Transizione>
             </Transizioni>
         </Automa>

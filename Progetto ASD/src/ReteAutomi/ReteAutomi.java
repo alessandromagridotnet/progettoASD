@@ -57,7 +57,7 @@ public class ReteAutomi {
             SAXBuilder builder = new SAXBuilder();
             Element root = builder.build(new File(file)).getRootElement();
             ReteAutomi rete =new ReteAutomi();
-            rete.setNome(root.getChild("Nome").getText());
+            rete.setNome(root.getChildText("Nome"));
 
             List listAutomi =root.getChild("Automi").getChildren("Automa");
             // Automi
@@ -113,8 +113,10 @@ public class ReteAutomi {
      */
     public String toXML(){
         String xml = "";
+        System.out.println("Composta da " + this.getAutomi().size() + " automi e da " + this.getLinks().size() + " links");
         xml += "<ReteAutomi>" + System.lineSeparator();
             xml += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
+            xml += "<Descrizione>Composta da " + this.getAutomi().size() + " automi e da " + this.getLinks().size() + " links</Descrizione>" + System.lineSeparator();
             xml += "<Automi>" + System.lineSeparator();
                 for(Automa a : this.automi){
                     xml += a.toXML();

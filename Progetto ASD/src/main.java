@@ -112,9 +112,9 @@ public class main {
             System.out.println("*******************************************************************************");
             System.out.println("");
             System.out.println("1) per esportare la rete caricata ");
-            System.out.println("2) per calcolare lo stato comportamentale ");
-            System.out.println("3) potatura dello stato comportamentale ");
-            System.out.println("4) per calcolare lo stato comportamentale decorato");
+            System.out.println("2) per calcolare lo spazio comportamentale ");
+            System.out.println("3) potatura dello spazio comportamentale ");
+            System.out.println("4) per calcolare lo spazio comportamentale decorato");
             System.out.println("5) per calcolare la determinizzazione");
             System.out.println("10) per visualizzare la rete caricata ");
             System.out.println("0) per tornare al menu principale ");
@@ -167,9 +167,7 @@ public class main {
                             A_tmp.determinizzazione(A_out);
                             
                             String[] osservazione_lineare = acquisizione_osservazione_lineare();
-                            
-                            //A_out.ricerca_dizionario(osservazione_lineare);
-                            
+                            A_out.ricerca_dizionario(osservazione_lineare);
                             
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
@@ -212,7 +210,7 @@ public class main {
         
         private static boolean mostraRete (ReteAutomi RA){
             try{
-                System.out.println("La rete"+RA.getNome()+" presenta questi elementi:");
+                System.out.println("La rete "+RA.getNome()+" presenta questi elementi:");
                 System.out.println("AUTOMI:");
                 for (Automa automa : RA.getAutomi()) {
                    System.out.println("Automa "+automa.getNome());
@@ -229,7 +227,7 @@ public class main {
                         // casto a TransizioneStati perchè so che può essere solo quello
                         TransizioneStati transizione = (TransizioneStati) tt;
                        System.out.println("Transizione "+transizione.getNome());
-                       System.out.println("La transizione parte dall'automa "+transizione.getIniziale().getId()+" e arriva all'automa "+transizione.getFinale().getId());
+                       System.out.println("La transizione parte dallo stato "+transizione.getIniziale().getId()+" e arriva allo stato "+transizione.getFinale().getId());
                        System.out.println("");
                        if (transizione.getIngresso() != null ) {
                            System.out.println("Questa transizione richiede in ingresso l'evento " + transizione.getIngresso().getEvento().getNome() + " trasportato nel link " + transizione.getIngresso().getLink());

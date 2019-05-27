@@ -52,9 +52,10 @@ public class Automa {
      */
     public String toXML(){
         String xml = "";
-        
+        System.out.println("Questo automa è composto da " + this.getStati().size() + " stati e da " + this.getTransizioni().size() + " transizioni");
         xml += "<Automa>" + System.lineSeparator();
             xml += "<Nome>" + this.getNome() + "</Nome>" + System.lineSeparator();
+            xml += "<Descrizione>Questo automa è composto da " + this.getStati().size() + " stati e da " + this.getTransizioni().size() + " transizioni</Descrizione>" + System.lineSeparator();
             xml += "<Stati>" + System.lineSeparator();
                 for(Stato s : this.stati){
                     xml += s.toXML();
@@ -202,9 +203,10 @@ public class Automa {
         StatoComportamentale si = new StatoComportamentale();
         // trovo lo stato iniziale
         for(Stato s : this.getStati()){
-            if(s.getIniziale()){
-                si.clone((StatoComportamentale) s);
-                si.setIniziale(true);
+            StatoComportamentale sc = (StatoComportamentale) s;
+            sc.setConfermato(0);
+            if(sc.getIniziale()){
+                si.clone(sc);
                 break;
             }
         }
@@ -233,6 +235,12 @@ public class Automa {
                 if(s_c.getFinale()){
                     nuovo.setFinale(true);
                 }
+                if(s_c.getIniziale()){
+                    nuovo.setIniziale(true);
+                }
+            }
+            if(nuovo.getFinale()){
+                calcola_diagnosi(nuovo);
             }
             // aggiungi stato e completa il link
             A_out.pushStato(nuovo);
@@ -240,7 +248,6 @@ public class Automa {
             // termina
             return true;
         }
-        
         // trova tutte le possibili etichette di osservabilità in uscita dall'insieme di stati considerati
         ArrayList<String> etichette_osservabilita = new ArrayList<>();
         for(Transizione tt : this.getTransizioni()){
@@ -268,8 +275,8 @@ public class Automa {
         }
         
         for (Map.Entry<String, ArrayList<StatoComportamentale>> entry : map.entrySet()) {
-            // creo una transizione che parte dallo stato nuovo appena inserito e che ha la giusta etichetta di relevanza
-            // lasio a null lo stato finale che setterò al prossimo loop
+            // creo una transizione che parte dallo stato nuovo appena inserito e che ha la giusta etichetta di osservabilità
+            // lacsio a null lo stato finale che setterò al prossimo loop
             TransizioneComportamentale tc = new TransizioneComportamentale();
             tc.setIniziale(nuovo);
             tc.setFinale(null);
@@ -288,6 +295,7 @@ public class Automa {
      * @return Un ArrayList contenente tutti gli stati successivi collegati da transizioni ad osservabilità nulla
      */
     public ArrayList<StatoComportamentale> successiviOsservabilitaNull(ArrayList<StatoComportamentale> a_sc){
+//        System.out.println("1000");
         ArrayList<StatoComportamentale> ret = new ArrayList<>();
         // aggiunge gli stati passati
         if(!a_sc.isEmpty()){
@@ -301,22 +309,24 @@ public class Automa {
             // ciclo sulle transizioni
             for(Transizione tt : this.getTransizioni()){
                 TransizioneComportamentale t = (TransizioneComportamentale) tt;
-                ArrayList<StatoComportamentale> finale = new ArrayList<>();
+                //ArrayList<StatoComportamentale> finale = new ArrayList<>();
                 for(StatoComportamentale sc : a_sc){
                     // se la transizione parte dallo stato comportamentale passato e ha etichetta di osservabilità nulla
                     if(t.getIniziale().equals(sc) && t.getOsservabilita().equals("NULL")){
                         // calcolo lo stato comportamentale successivo e se non è già contenuto in finale lo aggiungo
-                        if(!finale.contains((StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale())))){
-                            finale.add((StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale())));
+                        if(!ret.contains((StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale())))){
+                            ret.add((StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getFinale())));
                         }
                     }
                 }
-                // chiamata ricorsiva per cercare i figli e aggiunta dei ritorni
-                successiviOsservabilitaNull(finale).forEach((sc) -> {
-                    if(!ret.contains(sc)){
-                        ret.add(sc);
-                    }
-                });
+                if(ret.size()>a_sc.size()){
+                    // chiamata ricorsiva per cercare i figli e aggiunta dei ritorni
+                    successiviOsservabilitaNull(ret).forEach((sc) -> {
+                        if(!ret.contains(sc)){
+                            ret.add(sc);
+                        }
+                    });
+                }
             }
         }
         return ret;
@@ -392,15 +402,8 @@ public class Automa {
                 // l'osservazione è valida 
                 if(i==osservazione_lineare.length){
                     String diagnosi = "{";
-                    for(Stato so : sc.getStati()){
-                        diagnosi = diagnosi + "{";
-                        StatoComportamentale st_co_oss = (StatoComportamentale) so;
-                        for(String rilev :st_co_oss.getRilevanza()){
-                            diagnosi = diagnosi + rilev + ",";
-                        }
-                        // rimozione dell'ultima virgola
-                        diagnosi = diagnosi.substring(0, diagnosi.length()-1);
-                        diagnosi = diagnosi + "},";
+                    for(String dia : sc.getDiagnosi()){
+                        diagnosi = diagnosi + "{" + dia + "},";
                     }
                     // rimozione dell'ultima virgola
                     diagnosi = diagnosi.substring(0, diagnosi.length()-1);
@@ -413,6 +416,27 @@ public class Automa {
         }
         if(!iniziale){
             System.out.println("Osservazione inserita non valida - iniziale");
+        }
+    }
+    
+    public void calcola_diagnosi(StatoComportamentale sc){
+        for(Stato so : sc.getStati()){
+            StatoComportamentale st_co_oss = (StatoComportamentale) so;
+            // prendo solo gli stati finali
+            if(st_co_oss.getFinale()){
+                String etichette = "";
+                if(st_co_oss.getRilevanza().size()>0){
+                    for(String rilevanza : st_co_oss.getRilevanza()){
+                        etichette = etichette + rilevanza + ",";
+                    }
+                    etichette = etichette.substring(0, etichette.length()-1);
+                }else{
+                    etichette = "";
+                }
+                if(!sc.getDiagnosi().contains(etichette)){
+                    sc.pushDiagnosi(etichette);
+                }
+            }
         }
     }
 }

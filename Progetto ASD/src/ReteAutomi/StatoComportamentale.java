@@ -19,6 +19,7 @@ public class StatoComportamentale implements Stato, Cloneable {
     private ArrayList<Coppia> coppie;
     private ArrayList<String> rilevanza;
     private int confermato; // 0 se è da rimuovere | 1 se è stato visitato | 2 se confermato
+    private ArrayList<String> diagnosi;
 
     public StatoComportamentale() {
         this.id = "NULL";
@@ -28,6 +29,7 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.coppie = new ArrayList<>();
         this.confermato = 0;
         this.rilevanza = new ArrayList<>();
+        this.diagnosi = new ArrayList<>();
     }
     
     @Override
@@ -82,6 +84,14 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.rilevanza.add(rilevanza);
     }
     
+    public ArrayList<String> getDiagnosi() {
+        return this.diagnosi;
+    }
+    
+    public void pushDiagnosi(String diagnosi){
+        this.diagnosi.add(diagnosi);
+    }
+    
     public int getConfermato() {
         return confermato;
     }
@@ -113,9 +123,14 @@ public class StatoComportamentale implements Stato, Cloneable {
             xml += "</Coppie>" + System.lineSeparator();
             xml += "<Rilevanza>" + System.lineSeparator();
             for(String r : this.getRilevanza()){
-                xml += "<Etichetta>" + r + "</Etichetta>";
+                xml += "<Etichetta>" + r + "</Etichetta>" + System.lineSeparator();
             }
             xml += "</Rilevanza>" + System.lineSeparator();
+            xml += "<Diagnosi>" + System.lineSeparator();
+            for(String d : this.getDiagnosi()){
+                xml += "<Etichetta>" + d + "</Etichetta>" + System.lineSeparator();
+            }
+            xml += "</Diagnosi>" + System.lineSeparator();
             
         xml += "</Stato>" + System.lineSeparator();
         
