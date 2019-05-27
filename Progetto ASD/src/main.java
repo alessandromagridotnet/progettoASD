@@ -14,7 +14,8 @@ import ReteAutomi.Coppia;
 import ReteAutomi.TransizioneStati;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 /**
  *
  * @author alessandro
@@ -165,6 +166,9 @@ public class main {
                             
                             A_tmp.determinizzazione(A_out);
                             
+                            String[] osservazione_lineare = acquisizione_osservazione_lineare();
+                            
+                            //A_out.ricerca_dizionario(osservazione_lineare);
                             
                             
                             tmp = new ReteAutomi();
@@ -184,6 +188,26 @@ public class main {
                 }
             }
             return false;
+        }
+        
+        /**
+         * Funzione per l'acquisizione da linea di comando dell'osservazione lineare da cercare
+         * @return 
+         */
+        private static String[] acquisizione_osservazione_lineare(){
+            String[] ret_arr;
+            //
+            Scanner scanner = new Scanner(System.in);
+            String osservazione = "";
+        
+            while(!(osservazione.startsWith("<") && osservazione.endsWith(">"))){
+                System.out.println("Inserire l'osservazione lineare desiderata nel formato <o1,o2,o3,...>");
+                osservazione = scanner.nextLine();
+            }
+            
+            osservazione = osservazione.substring(1, osservazione.length()-1);
+            ret_arr = osservazione.split(",");
+            return ret_arr;
         }
         
         private static boolean mostraRete (ReteAutomi RA){

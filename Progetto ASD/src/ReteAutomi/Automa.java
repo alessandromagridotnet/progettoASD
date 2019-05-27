@@ -204,6 +204,7 @@ public class Automa {
         for(Stato s : this.getStati()){
             if(s.getIniziale()){
                 si.clone((StatoComportamentale) s);
+                si.setIniziale(true);
                 break;
             }
         }
@@ -224,6 +225,13 @@ public class Automa {
             for(Transizione trans : A_out.getTransizioni()){
                 if(trans.getFinale()==null){
                     trans.setFinale(nuovo);
+                }
+            }
+            // controllo se è uno stato finale
+            for(Stato s : nuovo.getStati()){
+                StatoComportamentale s_c = (StatoComportamentale)s;
+                if(s_c.getFinale()){
+                    nuovo.setFinale(true);
                 }
             }
             // aggiungi stato e completa il link
@@ -347,5 +355,64 @@ public class Automa {
             }
         }
         return ret;
+    }
+    
+    /**
+     * Funzione per la ricerca di un dizionario di osservazioni sull'automa this
+     * @param osservazione_lineare un'array di stringhe String[] contenente le varie etichette che indicano il percorso che mi aspetto di trovare
+     */
+    public void ricerca_dizionario(String[] osservazione_lineare){
+        int i=0;
+        boolean iniziale = false;
+        // cerco lo stato iniziale nell'automa
+        for(Stato st: this.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) st;
+            if(sc.getIniziale()){
+                iniziale=true;
+                // ciclo sulle transizioni per trovare quelle che partono dallo stato iniziale
+                i=0;
+                while(i < osservazione_lineare.length){
+                    boolean trovato = false;
+                    for(Transizione tr : this.getTransizioni()){
+                        TransizioneComportamentale trc = (TransizioneComportamentale) tr;
+                        if(trc.getIniziale().equals(sc)){
+                            if(trc.getOsservabilita().equals(osservazione_lineare[i])){
+                                i=i+1;
+                                trovato=true;
+                                sc = (StatoComportamentale) trc.getFinale();
+                                break;
+                            }
+                        }
+                    }
+                    if(!trovato){
+                        System.out.println("Osservazione inserita non valida " + i);
+                        break;
+                    }
+                }
+                // l'osservazione è valida 
+                if(i==osservazione_lineare.length){
+                    String diagnosi = "{";
+                    for(Stato so : sc.getStati()){
+                        diagnosi = diagnosi + "{";
+                        StatoComportamentale st_co_oss = (StatoComportamentale) so;
+                        for(String rilev :st_co_oss.getRilevanza()){
+                            diagnosi = diagnosi + rilev + ",";
+                        }
+                        // rimozione dell'ultima virgola
+                        diagnosi = diagnosi.substring(0, diagnosi.length()-1);
+                        diagnosi = diagnosi + "},";
+                    }
+                    // rimozione dell'ultima virgola
+                    diagnosi = diagnosi.substring(0, diagnosi.length()-1);
+                    diagnosi = diagnosi + "}";
+                    
+                    System.out.println("La diagnosi trovata è: ");
+                    System.out.println(diagnosi);
+                }
+            }
+        }
+        if(!iniziale){
+            System.out.println("Osservazione inserita non valida - iniziale");
+        }
     }
 }

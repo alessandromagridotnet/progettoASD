@@ -57,19 +57,6 @@ public class StatoSemplice implements Stato, Cloneable{
         }
     }
     
-//    public boolean equals(Stato s){
-//        boolean result = false;
-//        
-//        if(s != null && s instanceof StatoSemplice){
-//            if (this.getId().equals(s.getId())) {
-//                if(this.getIniziale() == s.getIniziale()){
-//                    result = true;
-//                }
-//            }
-//        }
-//        
-//        return result;
-//    }
     /**
      * Funzione per colonare l'oggetto e non fare solo una copia del puntatore
      * @return StatoSemplice
