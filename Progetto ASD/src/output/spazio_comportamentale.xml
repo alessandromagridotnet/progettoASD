@@ -1,1052 +1,528 @@
 <ReteAutomi>
-<Nome>null</Nome>
-<Descrizione>Composta da 1 automi e da 0 links</Descrizione>
-<Automi>
-<Automa>
-<Nome>null</Nome>
-<Descrizione>Questo automa è composto da 22 stati e da 37 transizioni</Descrizione>
-<Stati>
-<Stato>
-<ID>0</ID>
-<Iniziale>true</Iniziale>
-<Finale>true</Finale>
-<Stati>
-<Stato>
-<ID>10</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>1</ID>
-<Iniziale>false</Iniziale>
-<Finale>true</Finale>
-<Stati>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>2</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>3</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>4</ID>
-<Iniziale>false</Iniziale>
-<Finale>true</Finale>
-<Stati>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>5</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>6</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>7</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>8</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>10</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>9</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>10</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>10</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>12</ID>
-<Iniziale>false</Iniziale>
-<Finale>true</Finale>
-<Stati>
-<Stato>
-<ID>10</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>13</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>10</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>14</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>15</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>e3</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>16</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>17</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>20</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>18</ID>
-<Iniziale>false</Iniziale>
-<Finale>true</Finale>
-<Stati>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>19</ID>
-<Iniziale>false</Iniziale>
-<Finale>true</Finale>
-<Stati>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>11</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>20</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>10</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>30</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>false</Iniziale>
-<Finale>false</Finale>
-<Stati>
-<Stato>
-<ID>10</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>21</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-<Stato>
-<ID>31</ID>
-<Iniziale>true</Iniziale>
-</Stato>
-</Stati>
-<Coppie>
-<Coppia>
-<IdEvento>e1</IdEvento>
-<IdLink>L1</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L2</IdLink>
-</Coppia>
-<Coppia>
-<IdEvento>NULL</IdEvento>
-<IdLink>L3</IdLink>
-</Coppia>
-</Coppie>
-<Rilevanza>
-</Rilevanza>
-<Diagnosi>
-</Diagnosi>
-</Stato>
-</Stati>
-<Transizioni>
-<Transizione>
-<Nome>t1c</Nome>
-<IdStatoIniziale>0</IdStatoIniziale>
-<IdStatoFinale>1</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t2a</Nome>
-<IdStatoIniziale>1</IdStatoIniziale>
-<IdStatoFinale>2</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3a</Nome>
-<IdStatoIniziale>1</IdStatoIniziale>
-<IdStatoFinale>3</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3b</Nome>
-<IdStatoIniziale>3</IdStatoIniziale>
-<IdStatoFinale>1</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3c</Nome>
-<IdStatoIniziale>3</IdStatoIniziale>
-<IdStatoFinale>4</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t2a</Nome>
-<IdStatoIniziale>4</IdStatoIniziale>
-<IdStatoFinale>5</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3b</Nome>
-<IdStatoIniziale>5</IdStatoIniziale>
-<IdStatoFinale>6</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3a</Nome>
-<IdStatoIniziale>6</IdStatoIniziale>
-<IdStatoFinale>5</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3c</Nome>
-<IdStatoIniziale>5</IdStatoIniziale>
-<IdStatoFinale>7</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t2a</Nome>
-<IdStatoIniziale>0</IdStatoIniziale>
-<IdStatoFinale>8</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1a</Nome>
-<IdStatoIniziale>8</IdStatoIniziale>
-<IdStatoFinale>9</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t2b</Nome>
-<IdStatoIniziale>9</IdStatoIniziale>
-<IdStatoFinale>10</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1c</Nome>
-<IdStatoIniziale>8</IdStatoIniziale>
-<IdStatoFinale>2</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3a</Nome>
-<IdStatoIniziale>0</IdStatoIniziale>
-<IdStatoFinale>11</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1c</Nome>
-<IdStatoIniziale>11</IdStatoIniziale>
-<IdStatoFinale>3</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3b</Nome>
-<IdStatoIniziale>11</IdStatoIniziale>
-<IdStatoFinale>0</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3c</Nome>
-<IdStatoIniziale>11</IdStatoIniziale>
-<IdStatoFinale>12</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1c</Nome>
-<IdStatoIniziale>12</IdStatoIniziale>
-<IdStatoFinale>4</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t2a</Nome>
-<IdStatoIniziale>12</IdStatoIniziale>
-<IdStatoFinale>13</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1a</Nome>
-<IdStatoIniziale>13</IdStatoIniziale>
-<IdStatoFinale>14</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t2b</Nome>
-<IdStatoIniziale>14</IdStatoIniziale>
-<IdStatoFinale>15</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3b</Nome>
-<IdStatoIniziale>15</IdStatoIniziale>
-<IdStatoFinale>16</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3a</Nome>
-<IdStatoIniziale>16</IdStatoIniziale>
-<IdStatoFinale>15</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3c</Nome>
-<IdStatoIniziale>15</IdStatoIniziale>
-<IdStatoFinale>17</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3b</Nome>
-<IdStatoIniziale>14</IdStatoIniziale>
-<IdStatoFinale>18</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t2b</Nome>
-<IdStatoIniziale>18</IdStatoIniziale>
-<IdStatoFinale>16</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3a</Nome>
-<IdStatoIniziale>18</IdStatoIniziale>
-<IdStatoFinale>14</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3c</Nome>
-<IdStatoIniziale>14</IdStatoIniziale>
-<IdStatoFinale>19</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t2b</Nome>
-<IdStatoIniziale>19</IdStatoIniziale>
-<IdStatoFinale>17</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1c</Nome>
-<IdStatoIniziale>13</IdStatoIniziale>
-<IdStatoFinale>5</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3b</Nome>
-<IdStatoIniziale>13</IdStatoIniziale>
-<IdStatoFinale>20</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1a</Nome>
-<IdStatoIniziale>20</IdStatoIniziale>
-<IdStatoFinale>18</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1c</Nome>
-<IdStatoIniziale>20</IdStatoIniziale>
-<IdStatoFinale>6</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3a</Nome>
-<IdStatoIniziale>20</IdStatoIniziale>
-<IdStatoFinale>13</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t3c</Nome>
-<IdStatoIniziale>13</IdStatoIniziale>
-<IdStatoFinale>21</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1a</Nome>
-<IdStatoIniziale>21</IdStatoIniziale>
-<IdStatoFinale>19</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-<Transizione>
-<Nome>t1c</Nome>
-<IdStatoIniziale>21</IdStatoIniziale>
-<IdStatoFinale>7</IdStatoFinale>
-<Osservabilita>NULL</Osservabilita>
-</Transizione>
-</Transizioni>
-</Automa>
-</Automi>
-<Links>
-</Links>
+   <Nome>null</Nome>
+   <Descrizione>Composta da 1 automi e da 0 links</Descrizione>
+   <Automi>
+      <Automa>
+         <Nome>null</Nome>
+         <Descrizione>Questo automa è composto da 15 stati e da 18 transizioni</Descrizione>
+         <Stati>
+            <Stato>
+               <ID>0</ID>
+               <Iniziale>true</Iniziale>
+               <Finale>true</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>20</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>30</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>1</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>20</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>31</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>e2</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>2</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>31</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>21</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>e3</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>3</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>true</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>21</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>30</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>4</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>30</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>20</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>e3</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>5</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>20</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>31</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>e2</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>e3</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>6</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>20</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>30</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>e2</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>7</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>30</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>21</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>e3</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>8</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>21</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>31</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>e2</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>e3</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>9</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>21</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>30</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>e2</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>10</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>30</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>20</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>e2</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>e3</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>11</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>21</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>31</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>e2</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>12</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>true</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>21</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>31</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>13</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>false</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>31</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>20</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>e3</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+            <Stato>
+               <ID>14</ID>
+               <Iniziale>false</Iniziale>
+               <Finale>true</Finale>
+               <Stati>
+                  <Stato>
+                     <ID>20</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+                  <Stato>
+                     <ID>31</ID>
+                     <Iniziale>true</Iniziale>
+                  </Stato>
+               </Stati>
+               <Coppie>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L2</IdLink>
+                  </Coppia>
+                  <Coppia>
+                     <IdEvento>NULL</IdEvento>
+                     <IdLink>L3</IdLink>
+                  </Coppia>
+               </Coppie>
+               <Rilevanza/>
+               <Diagnosi/>
+            </Stato>
+         </Stati>
+         <Transizioni>
+            <Transizione>
+               <Nome>t3a</Nome>
+               <IdStatoIniziale>0</IdStatoIniziale>
+               <IdStatoFinale>1</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t2a</Nome>
+               <IdStatoIniziale>1</IdStatoIniziale>
+               <IdStatoFinale>2</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3b</Nome>
+               <IdStatoIniziale>2</IdStatoIniziale>
+               <IdStatoFinale>3</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t2b</Nome>
+               <IdStatoIniziale>3</IdStatoIniziale>
+               <IdStatoFinale>4</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3a</Nome>
+               <IdStatoIniziale>4</IdStatoIniziale>
+               <IdStatoFinale>5</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3b</Nome>
+               <IdStatoIniziale>5</IdStatoIniziale>
+               <IdStatoFinale>6</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t2a</Nome>
+               <IdStatoIniziale>6</IdStatoIniziale>
+               <IdStatoFinale>7</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3a</Nome>
+               <IdStatoIniziale>7</IdStatoIniziale>
+               <IdStatoFinale>8</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3b</Nome>
+               <IdStatoIniziale>8</IdStatoIniziale>
+               <IdStatoFinale>9</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t2b</Nome>
+               <IdStatoIniziale>9</IdStatoIniziale>
+               <IdStatoFinale>10</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3c</Nome>
+               <IdStatoIniziale>8</IdStatoIniziale>
+               <IdStatoFinale>11</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t2b</Nome>
+               <IdStatoIniziale>11</IdStatoIniziale>
+               <IdStatoFinale>5</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3c</Nome>
+               <IdStatoIniziale>5</IdStatoIniziale>
+               <IdStatoFinale>1</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3a</Nome>
+               <IdStatoIniziale>3</IdStatoIniziale>
+               <IdStatoFinale>11</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3c</Nome>
+               <IdStatoIniziale>2</IdStatoIniziale>
+               <IdStatoFinale>12</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t2b</Nome>
+               <IdStatoIniziale>12</IdStatoIniziale>
+               <IdStatoFinale>13</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3b</Nome>
+               <IdStatoIniziale>13</IdStatoIniziale>
+               <IdStatoFinale>0</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+            <Transizione>
+               <Nome>t3c</Nome>
+               <IdStatoIniziale>13</IdStatoIniziale>
+               <IdStatoFinale>14</IdStatoFinale>
+               <Osservabilita>NULL</Osservabilita>
+            </Transizione>
+         </Transizioni>
+      </Automa>
+   </Automi>
+   <Links/>
 </ReteAutomi>

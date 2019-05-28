@@ -371,7 +371,7 @@ public class Automa {
      * Funzione per la ricerca di un dizionario di osservazioni sull'automa this
      * @param osservazione_lineare un'array di stringhe String[] contenente le varie etichette che indicano il percorso che mi aspetto di trovare
      */
-    public void ricerca_dizionario(String[] osservazione_lineare){
+    public String ricerca_dizionario(String[] osservazione_lineare){
         int i=0;
         boolean iniziale = false;
         // cerco lo stato iniziale nell'automa
@@ -396,7 +396,7 @@ public class Automa {
                     }
                     if(!trovato){
                         System.out.println("Osservazione inserita non valida " + i);
-                        break;
+                        return "Osservazione inserita non valida";
                     }
                 }
                 // l'osservazione è valida 
@@ -411,12 +411,15 @@ public class Automa {
                     
                     System.out.println("La diagnosi trovata è: ");
                     System.out.println(diagnosi);
+                    return "La diagnosi trovata è: " + diagnosi;
                 }
             }
         }
         if(!iniziale){
             System.out.println("Osservazione inserita non valida - iniziale");
+            return "Osservazione inserita non valida";
         }
+        return "Non dovrebbe capitare";
     }
     
     public void calcola_diagnosi(StatoComportamentale sc){

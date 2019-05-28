@@ -111,16 +111,18 @@ public class main {
             System.out.println("***************************** MENU SECONDO LIVELLO ****************************");
             System.out.println("*******************************************************************************");
             System.out.println("");
-            System.out.println("1) per esportare la rete caricata ");
+            System.out.println("1) per esportare la rete caricata (per controllare che sia stata caricata correttamente la rete appena importata)");
             System.out.println("2) per calcolare lo spazio comportamentale ");
             System.out.println("3) potatura dello spazio comportamentale ");
             System.out.println("4) per calcolare lo spazio comportamentale decorato");
             System.out.println("5) per calcolare la determinizzazione");
+            System.out.println("6) per la lettura della diagnosi relativa ad un'osservazione lineare");
             System.out.println("10) per visualizzare la rete caricata ");
             System.out.println("0) per tornare al menu principale ");
             
             Automa A_out = new Automa();
             ReteAutomi tmp = new ReteAutomi();
+            Automa A_tmp;
             String dir;
             // bugfix temporaneo per i path di linux e windows
             if(System.getProperty("os.name").compareTo("Linux") == 0){
@@ -159,7 +161,19 @@ public class main {
                             
                             return tmp.storeIntoFile(dir + "spazio_comportamentale_decorato.xml");
                         case 5:
-                            Automa A_tmp = new Automa();
+                            A_tmp = new Automa();
+                            A_out = new Automa();
+                            RA.calcolaStatoComportamentaleDecorato(A_tmp);
+                            A_tmp.potatura();
+                            
+                            A_tmp.determinizzazione(A_out);
+                            
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_out);
+                            
+                            return tmp.storeIntoFile(dir + "spazio_comportamentale_decorato_determinato.xml");
+                        case 6:
+                            A_tmp = new Automa();
                             A_out = new Automa();
                             RA.calcolaStatoComportamentaleDecorato(A_tmp);
                             A_tmp.potatura();
@@ -167,12 +181,9 @@ public class main {
                             A_tmp.determinizzazione(A_out);
                             
                             String[] osservazione_lineare = acquisizione_osservazione_lineare();
-                            A_out.ricerca_dizionario(osservazione_lineare);
+                            String diagnosi = A_out.ricerca_dizionario(osservazione_lineare);
                             
-                            tmp = new ReteAutomi();
-                            tmp.pushAutoma(A_out);
-                            
-                            return tmp.storeIntoFile(dir + "spazio_comportamentale_decorato_determinato.xml");
+                            return storeIntoFile(dir + "diagnosi.txt", diagnosi);
                         case 10:
                             return mostraRete(RA);
                         case 0:
@@ -259,5 +270,24 @@ public class main {
                 return false;
             }
         }
+        
+        
 
+
+    /**
+     * Funzione che salva la stringa passata in un file
+     * @param fileName path e nome del file in cui si vuole salvare la stringa generata
+     * @param content La stringa che si vuole salvare nel file
+     * @return boolean
+     */
+    public static boolean storeIntoFile(String fileName, String content){
+        try (PrintWriter out = new PrintWriter(fileName)) {
+            out.print(content);
+            System.out.println("Salvataggio eseguito correttamente");
+            return true;
+        }catch(Exception e){
+            System.out.println("Errore durante il salvataggio del file");
+            return false;
+        }
+    }
 }
