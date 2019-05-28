@@ -199,7 +199,6 @@ public class Automa {
      * @return boolean
      */
     public boolean determinizzazione(Automa A_out){
-        boolean chk = false;
         StatoComportamentale si = new StatoComportamentale();
         // trovo lo stato iniziale
         for(Stato s : this.getStati()){
@@ -213,16 +212,25 @@ public class Automa {
         ArrayList<StatoComportamentale> arr_sc = new ArrayList<>();
         arr_sc.add(si);
         // chiamata alla funzione ricorsiva
-        return determinizzazioneRicorsiva(A_out, arr_sc);
+        return determinizzazioneRicorsiva(A_out, arr_sc, 0);
     }
     
-    public boolean determinizzazioneRicorsiva(Automa A_out, ArrayList<StatoComportamentale> a_sc){
+    public boolean determinizzazioneRicorsiva(Automa A_out, ArrayList<StatoComportamentale> a_sc, int incrementale){
         StatoComportamentale nuovo = new StatoComportamentale();
         // calcola tutti gli stati successivi a quelli passati che siano collegati da transizioni con osservabilità nulla
         successiviOsservabilitaNull(a_sc).forEach((sc) -> {
             nuovo.getStati().add(sc);
         });
-        if(!A_out.getStati().contains(nuovo)){
+        boolean contains = false;
+        for(Stato check_state : A_out.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) check_state;
+            if(sc.equalsNotId(nuovo)){
+                nuovo.clone(sc);
+                contains = true;
+                break;
+            }
+        }
+        if(!contains){
             // cerco se esiste una transizione pendente senza stato finale e la aggiorno
             for(Transizione trans : A_out.getTransizioni()){
                 if(trans.getFinale()==null){
@@ -242,9 +250,17 @@ public class Automa {
             if(nuovo.getFinale()){
                 calcola_diagnosi(nuovo);
             }
+            nuovo.setId("b" + incrementale);
+            incrementale = incrementale + 1;
             // aggiungi stato e completa il link
             A_out.pushStato(nuovo);
         }else{
+            // cerco se esiste una transizione pendente senza stato finale e la aggiorno
+            for(Transizione trans : A_out.getTransizioni()){
+                if(trans.getFinale()==null){
+                    trans.setFinale(nuovo);
+                }
+            }
             // termina
             return true;
         }
@@ -283,7 +299,7 @@ public class Automa {
             tc.setOsservabilita(entry.getKey());
             A_out.pushTransizioni(tc);
             
-            determinizzazioneRicorsiva(A_out, entry.getValue());
+            determinizzazioneRicorsiva(A_out, entry.getValue(), incrementale);
         }
         return true;
         
@@ -295,7 +311,6 @@ public class Automa {
      * @return Un ArrayList contenente tutti gli stati successivi collegati da transizioni ad osservabilità nulla
      */
     public ArrayList<StatoComportamentale> successiviOsservabilitaNull(ArrayList<StatoComportamentale> a_sc){
-//        System.out.println("1000");
         ArrayList<StatoComportamentale> ret = new ArrayList<>();
         // aggiunge gli stati passati
         if(!a_sc.isEmpty()){
@@ -332,7 +347,6 @@ public class Automa {
         return ret;
     }
     
-    
     /**
      * Funzione che trova gli stati comportamentali successivi
      * @param sc Lo stato comportamentale rifermento
@@ -368,8 +382,50 @@ public class Automa {
     }
     
     /**
+     * Funzione che verifica la validità di una osservazione lineare
+     * @param osservazione_lineare un array di stringhe String[] contenente le varie etichette che indicano il percorso che mi aspetto di trovare
+     * @return boolean
+     */
+    public boolean osservazione_valida(String[] osservazione_lineare){
+        int i=0;
+        // cerco lo stato iniziale nell'automa
+        for(Stato st: this.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) st;
+            if(sc.getIniziale()){
+                // ciclo sulle transizioni per trovare quelle che partono dallo stato iniziale
+                i=0;
+                while(i < osservazione_lineare.length){
+                    boolean trovato = false;
+                    for(Transizione tr : this.getTransizioni()){
+                        TransizioneComportamentale trc = (TransizioneComportamentale) tr;
+                        if(trc.getIniziale().equals(sc)){
+                            if(trc.getOsservabilita().equals(osservazione_lineare[i])){
+                                i=i+1;
+                                trovato=true;
+                                sc = (StatoComportamentale) trc.getFinale();
+                                break;
+                            }
+                        }
+                    }
+                    if(!trovato){
+                        System.out.println("Osservazione inserita non valida ");
+                        return false;
+                    }
+                }
+                // l'osservazione è valida 
+                if(i==osservazione_lineare.length){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
      * Funzione per la ricerca di un dizionario di osservazioni sull'automa this
-     * @param osservazione_lineare un'array di stringhe String[] contenente le varie etichette che indicano il percorso che mi aspetto di trovare
+     * @param osservazione_lineare un array di stringhe String[] contenente le varie etichette che indicano il percorso che mi aspetto di trovare
      */
     public String ricerca_dizionario(String[] osservazione_lineare){
         int i=0;
@@ -395,7 +451,7 @@ public class Automa {
                         }
                     }
                     if(!trovato){
-                        System.out.println("Osservazione inserita non valida " + i);
+                        System.out.println("Osservazione inserita non valida ");
                         return "Osservazione inserita non valida";
                     }
                 }
@@ -416,12 +472,17 @@ public class Automa {
             }
         }
         if(!iniziale){
-            System.out.println("Osservazione inserita non valida - iniziale");
+            System.out.println("Osservazione inserita non valida");
             return "Osservazione inserita non valida";
         }
         return "Non dovrebbe capitare";
     }
     
+    /**
+     * Funzione che calcola la diagnosi di un macrostato a partire dalle etichette di osservabilità degli stati contenuti
+     * La diagnosi viene messa nell'attributo diagnosi del macrostato
+     * @param sc Il macrostato in oggetto
+     */
     public void calcola_diagnosi(StatoComportamentale sc){
         for(Stato so : sc.getStati()){
             StatoComportamentale st_co_oss = (StatoComportamentale) so;
@@ -440,6 +501,56 @@ public class Automa {
                     sc.pushDiagnosi(etichette);
                 }
             }
+        }
+    }
+    
+    public void estrai_osservazione(String[] osservazione_lineare){
+        StatoComportamentale si = new StatoComportamentale();
+        // trovo lo stato iniziale
+        for(Stato s : this.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) s;
+            sc.setConfermato(0);
+            if(sc.getIniziale()){
+                sc.setConfermato(2);
+                si=sc;
+                break;
+            }
+        }
+        ArrayList<StatoComportamentale> arr_sc = new ArrayList<>();
+        arr_sc.add(si);
+        // chiamata alla funzione ricorsiva
+        estrai_osservazione_ricorsiva(arr_sc, osservazione_lineare, 0);
+    }
+    
+    public void estrai_osservazione_ricorsiva(ArrayList<StatoComportamentale> a_sc, String[] osservazione_lineare, int position){
+        // calcola tutti gli stati successivi a quelli passati che siano collegati da transizioni con osservabilità nulla
+        successiviOsservabilitaNull(a_sc).forEach((sc) -> {
+            if(a_sc.indexOf(sc)<0){
+                a_sc.get(a_sc.indexOf(sc)).setConfermato(2);
+            }
+        });
+        String osservazione = "";
+        // finche ci sono osservazioni estraibili dall'osservazione lineare
+        while(position < osservazione_lineare.length){
+            osservazione = osservazione_lineare[position];
+            // ciclo tutte le transizioni
+            for(Transizione tt : this.getTransizioni()){
+                // se la transizione ha la giusta etichetta di osservabilità e parte da uno stato tra quelli da considerare
+                if(tt.getOsservabilita().equals(osservazione) && ((StatoComportamentale)tt.getIniziale()).getConfermato()==2){
+                    ((StatoComportamentale)tt.getFinale()).setConfermato(1);
+                }
+            }
+            for(Stato s : this.getStati()){
+                StatoComportamentale sc = (StatoComportamentale) s;
+                if(sc.getConfermato()==2){
+                    // visitato, confermato ma non più sulla frontiera
+                    sc.setConfermato(3);
+                }else if(sc.getConfermato()==1){
+                    // è la nuova frontiera
+                    sc.setConfermato(2);
+                }
+            }
+            position++;
         }
     }
 }

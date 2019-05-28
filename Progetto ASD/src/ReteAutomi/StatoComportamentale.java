@@ -161,6 +161,9 @@ public class StatoComportamentale implements Stato, Cloneable {
         for(String e : sc.getRilevanza()){
             this.pushRilevanza(e);
         }
+        for(String d : sc.getDiagnosi()){
+            this.pushDiagnosi(d);
+        }
     }
     
     /**

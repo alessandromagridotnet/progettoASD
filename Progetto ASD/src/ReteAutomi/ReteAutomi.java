@@ -112,7 +112,7 @@ public class ReteAutomi {
      */
     public boolean storeIntoFile(String fileName){
         try (PrintWriter out = new PrintWriter(fileName)) {
-            out.print(this.toPrettyString(this.toXML(),4));
+            out.print(this.toPrettyString(this.toXML()));
             System.out.println("Salvataggio eseguito correttamente");
             return true;
         }catch(Exception e){
@@ -445,6 +445,21 @@ public class ReteAutomi {
         return true;
     }
     
+    /**
+     * Funzione per aggiungere automaticamente l'indentatura alle stringhe contenenti xml, parametro di indentazione automatico a 4
+     * @param xml la stringa xml
+     * @return 
+     */
+    public static String toPrettyString(String xml){
+        return toPrettyString(xml, 4);
+    }
+    
+    /**
+     * Funzione per aggiungere automaticamente l'indentatura alle stringhe contenenti xml
+     * @param xml la stringa xml
+     * @param indent la dimensione dell'indentazione in numero di spazi
+     * @return 
+     */
     public static String toPrettyString(String xml, int indent) {
         try {
             // Turn xml string into a document

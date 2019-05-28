@@ -117,9 +117,12 @@ public class main {
             System.out.println("4) per calcolare lo spazio comportamentale decorato");
             System.out.println("5) per calcolare la determinizzazione");
             System.out.println("6) per la lettura della diagnosi relativa ad un'osservazione lineare");
+            System.out.println("7) per la generazione dello spazio comportamentale relativo ad un'osservazione");
             System.out.println("10) per visualizzare la rete caricata ");
             System.out.println("0) per tornare al menu principale ");
             
+            String diagnosi;
+            String[] osservazione_lineare;
             Automa A_out = new Automa();
             ReteAutomi tmp = new ReteAutomi();
             Automa A_tmp;
@@ -180,10 +183,29 @@ public class main {
                             
                             A_tmp.determinizzazione(A_out);
                             
-                            String[] osservazione_lineare = acquisizione_osservazione_lineare();
-                            String diagnosi = A_out.ricerca_dizionario(osservazione_lineare);
+                            osservazione_lineare = acquisizione_osservazione_lineare();
+                            diagnosi = A_out.ricerca_dizionario(osservazione_lineare);
                             
                             return storeIntoFile(dir + "diagnosi.txt", diagnosi);
+                        case 7:
+                            A_tmp = new Automa();
+                            A_out = new Automa();
+                            RA.calcolaStatoComportamentaleDecorato(A_tmp);
+                            A_tmp.potatura();
+                            
+                            A_tmp.determinizzazione(A_out);
+                            
+                            osservazione_lineare = acquisizione_osservazione_lineare();
+                            // controllo se l'osservazione è valida
+                            if(A_out.osservazione_valida(osservazione_lineare)){
+                                A_tmp.estrai_osservazione(osservazione_lineare);
+                                
+                                tmp = new ReteAutomi();
+                                tmp.pushAutoma(A_tmp);
+
+                                return tmp.storeIntoFile(dir + "spazio_comportamentale_osservazione.xml");
+                            }
+                            return false;
                         case 10:
                             return mostraRete(RA);
                         case 0:
