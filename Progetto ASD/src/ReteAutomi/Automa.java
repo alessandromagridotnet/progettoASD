@@ -522,6 +522,12 @@ public class Automa {
         estrai_osservazione_ricorsiva(arr_sc, osservazione_lineare, 0);
     }
     
+    /**
+     * DA FINIRE E RIVEDERE
+     * @param a_sc
+     * @param osservazione_lineare
+     * @param position 
+     */
     public void estrai_osservazione_ricorsiva(ArrayList<StatoComportamentale> a_sc, String[] osservazione_lineare, int position){
         // calcola tutti gli stati successivi a quelli passati che siano collegati da transizioni con osservabilità nulla
         successiviOsservabilitaNull(a_sc).forEach((sc) -> {
