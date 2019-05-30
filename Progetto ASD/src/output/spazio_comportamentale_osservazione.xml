@@ -7,7 +7,7 @@
             <Descrizione>Questo automa è composto da 8 stati e da 7 transizioni</Descrizione>
             <Stati>
                 <Stato>
-                    <ID>a0</ID>
+                    <ID>b0</ID>
                     <Iniziale>true</Iniziale>
                     <Finale>true</Finale>
                     <Stati>
@@ -34,7 +34,7 @@
                     <Diagnosi/>
                 </Stato>
                 <Stato>
-                    <ID>a1</ID>
+                    <ID>b1</ID>
                     <Iniziale>false</Iniziale>
                     <Finale>false</Finale>
                     <Stati>
@@ -61,7 +61,7 @@
                     <Diagnosi/>
                 </Stato>
                 <Stato>
-                    <ID>a2</ID>
+                    <ID>b2</ID>
                     <Iniziale>false</Iniziale>
                     <Finale>false</Finale>
                     <Stati>
@@ -88,7 +88,7 @@
                     <Diagnosi/>
                 </Stato>
                 <Stato>
-                    <ID>a3</ID>
+                    <ID>b3</ID>
                     <Iniziale>false</Iniziale>
                     <Finale>true</Finale>
                     <Stati>
@@ -115,7 +115,7 @@
                     <Diagnosi/>
                 </Stato>
                 <Stato>
-                    <ID>a23</ID>
+                    <ID>b4</ID>
                     <Iniziale>false</Iniziale>
                     <Finale>false</Finale>
                     <Stati>
@@ -145,7 +145,7 @@
                     <Diagnosi/>
                 </Stato>
                 <Stato>
-                    <ID>a24</ID>
+                    <ID>b5</ID>
                     <Iniziale>false</Iniziale>
                     <Finale>true</Finale>
                     <Stati>
@@ -175,7 +175,7 @@
                     <Diagnosi/>
                 </Stato>
                 <Stato>
-                    <ID>a25</ID>
+                    <ID>b6</ID>
                     <Iniziale>false</Iniziale>
                     <Finale>true</Finale>
                     <Stati>
@@ -205,7 +205,7 @@
                     <Diagnosi/>
                 </Stato>
                 <Stato>
-                    <ID>a27</ID>
+                    <ID>b7</ID>
                     <Iniziale>false</Iniziale>
                     <Finale>true</Finale>
                     <Stati>
@@ -237,44 +237,44 @@
             <Transizioni>
                 <Transizione>
                     <Nome>t3a</Nome>
-                    <IdStatoIniziale>a0</IdStatoIniziale>
-                    <IdStatoFinale>a1</IdStatoFinale>
+                    <IdStatoIniziale>b0</IdStatoIniziale>
+                    <IdStatoFinale>b1</IdStatoFinale>
                     <Osservabilita>o3</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t2a</Nome>
-                    <IdStatoIniziale>a1</IdStatoIniziale>
-                    <IdStatoFinale>a2</IdStatoFinale>
+                    <IdStatoIniziale>b1</IdStatoIniziale>
+                    <IdStatoFinale>b2</IdStatoFinale>
                     <Osservabilita>o2</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3b</Nome>
-                    <IdStatoIniziale>a2</IdStatoIniziale>
-                    <IdStatoFinale>a3</IdStatoFinale>
+                    <IdStatoIniziale>b2</IdStatoIniziale>
+                    <IdStatoFinale>b3</IdStatoFinale>
                     <Osservabilita>NULL</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3b</Nome>
-                    <IdStatoIniziale>a23</IdStatoIniziale>
-                    <IdStatoFinale>a24</IdStatoFinale>
+                    <IdStatoIniziale>b4</IdStatoIniziale>
+                    <IdStatoFinale>b5</IdStatoFinale>
                     <Osservabilita>NULL</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3c</Nome>
-                    <IdStatoIniziale>a23</IdStatoIniziale>
-                    <IdStatoFinale>a25</IdStatoFinale>
+                    <IdStatoIniziale>b4</IdStatoIniziale>
+                    <IdStatoFinale>b6</IdStatoFinale>
                     <Osservabilita>NULL</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3c</Nome>
-                    <IdStatoIniziale>a2</IdStatoIniziale>
-                    <IdStatoFinale>a27</IdStatoFinale>
+                    <IdStatoIniziale>b2</IdStatoIniziale>
+                    <IdStatoFinale>b7</IdStatoFinale>
                     <Osservabilita>NULL</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t2b</Nome>
-                    <IdStatoIniziale>a27</IdStatoIniziale>
-                    <IdStatoFinale>a23</IdStatoFinale>
+                    <IdStatoIniziale>b7</IdStatoIniziale>
+                    <IdStatoFinale>b4</IdStatoFinale>
                     <Osservabilita>NULL</Osservabilita>
                 </Transizione>
             </Transizioni>

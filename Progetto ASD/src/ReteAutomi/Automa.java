@@ -373,7 +373,8 @@ public class Automa {
         ArrayList<StatoComportamentale> ret = new ArrayList<>();
         for(Transizione tt : this.getTransizioni()){
             TransizioneComportamentale t = (TransizioneComportamentale) tt;
-            if(t.getFinale().equals(sc)){
+            // se la transizione ha come finale lo stato di riferimento e lo stato iniziale esiste nell'automa
+            if(t.getFinale().equals(sc) && this.getStati().indexOf(t.getIniziale())>=0){
                 StatoComportamentale temporaneo = (StatoComportamentale) this.getStati().get(this.getStati().indexOf(t.getIniziale()));
                 ret.add(temporaneo);
             }
@@ -505,41 +506,65 @@ public class Automa {
     }
     
     public void estrai_osservazione(String[] osservazione_lineare){
-        StatoComportamentale si = new StatoComportamentale();
+        // rappresenta in generale la frontiera da cui parte la ricerca, nello specifico contiene solo lo stato iniziale
+        ArrayList<StatoComportamentale> arr_sc = new ArrayList<>();
         // trovo lo stato iniziale
         for(Stato s : this.getStati()){
             StatoComportamentale sc = (StatoComportamentale) s;
             sc.setConfermato(0);
             if(sc.getIniziale()){
                 sc.setConfermato(2);
-                si=sc;
-                break;
             }
         }
-        ArrayList<StatoComportamentale> arr_sc = new ArrayList<>();
-        arr_sc.add(si);
         // chiamata alla funzione ricorsiva
-        estrai_osservazione_ricorsiva(arr_sc, osservazione_lineare, 0);
+        estrai_osservazione_ricorsiva(osservazione_lineare, 0, false);
+        
+        int size = 0;
+        while(size < this.getStati().size()){
+            StatoComportamentale sc = (StatoComportamentale) this.getStati().get(size);
+            if(sc.getConfermato()==0){
+                this.getStati().remove(sc);
+            }else{
+                ++size;
+            }
+        }
+        
+        // RESET VARIABLES
+        for(Stato s : this.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) s;
+            sc.setConfermato(0);
+        }
+        this.potatura();
+        this.ridenominazione("b");
     }
     
     /**
-     * DA FINIRE E RIVEDERE
-     * @param a_sc
-     * @param osservazione_lineare
-     * @param position 
+     * funzione che lascia nell'automa attuale solamente gli stati e le transizioni facenti parte dell'osservazione lineare ricevuta in ingresso
+     * @param osservazione_lineare un array contenete le etichette di osservabilità richieste dall'osservazione lineare
+     * @param position la posizione dell'etichetta di osservabilità da considerate
      */
-    public void estrai_osservazione_ricorsiva(ArrayList<StatoComportamentale> a_sc, String[] osservazione_lineare, int position){
+    public void estrai_osservazione_ricorsiva(String[] osservazione_lineare, int position, boolean last){
+        // calcolo l'array a_sc che contiene tutti gli stati frontiera da cui partirà la ricerca degli stati connessi da transizioni con osservabilità nulla
+        ArrayList<StatoComportamentale> a_sc = new ArrayList<>();
+        for(Stato s : this.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) s;
+            if(sc.getConfermato()==2){
+                a_sc.add(sc);
+            }
+        }
         // calcola tutti gli stati successivi a quelli passati che siano collegati da transizioni con osservabilità nulla
         successiviOsservabilitaNull(a_sc).forEach((sc) -> {
             if(a_sc.indexOf(sc)<0){
-                a_sc.get(a_sc.indexOf(sc)).setConfermato(2);
+                ((StatoComportamentale) this.getStati().get(this.getStati().indexOf(sc))).setConfermato(2);
             }
         });
-        String osservazione = "";
-        // finche ci sono osservazioni estraibili dall'osservazione lineare
-        while(position < osservazione_lineare.length){
+        // bugfix per aggiungere gli stati collegati da transizione null all'ultimo giro
+        if(!last){
+            String osservazione = "";
+        
+            // estraggo la transizione da considerare
             osservazione = osservazione_lineare[position];
-            // ciclo tutte le transizioni
+            // ciclo tutte le transizioni disponibili
             for(Transizione tt : this.getTransizioni()){
                 // se la transizione ha la giusta etichetta di osservabilità e parte da uno stato tra quelli da considerare
                 if(tt.getOsservabilita().equals(osservazione) && ((StatoComportamentale)tt.getIniziale()).getConfermato()==2){
@@ -557,6 +582,33 @@ public class Automa {
                 }
             }
             position++;
+            
+            // finche ci sono osservazioni estraibili dall'osservazione lineare
+            if(position < osservazione_lineare.length){
+                estrai_osservazione_ricorsiva(osservazione_lineare, position, false);
+            }else{
+                // bugfix per aggiungere gli stati collegati da transizione null all'ultimo giro
+                estrai_osservazione_ricorsiva(osservazione_lineare, position, true);
+            }
+        }
+    }
+    
+    /**
+     * Funzione per la ridenominazione degli stati
+     * @param prefisso 
+     */
+    public void ridenominazione(String prefisso){
+        int i=0;
+        String old_id = "";
+        for(Stato s : this.getStati()){
+            old_id = s.getId();
+            s.setId(prefisso + i);
+            for(Transizione t : this.getTransizioni()){
+                if(t.getFinale().getId().equals(old_id)){
+                    t.setFinale(s);
+                }
+            }
+            i++;
         }
     }
 }
