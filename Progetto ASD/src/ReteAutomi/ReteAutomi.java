@@ -70,8 +70,8 @@ public class ReteAutomi {
         try {
             SAXBuilder builder = new SAXBuilder();
             Element root = builder.build(new File(file)).getRootElement();
-            ReteAutomi rete =new ReteAutomi();
-            rete.setNome(root.getChildText("Nome"));
+            
+            this.setNome(root.getChild("Nome").getText());
 
             List listAutomi =root.getChild("Automi").getChildren("Automa");
             // Automi

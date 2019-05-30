@@ -1,5 +1,5 @@
 <ReteAutomi>
-    <Nome>ReteBanchmark</Nome>
+    <Nome>ReteBenchmark</Nome>
     <Automi xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
         <Automa>
             <Nome>C1</Nome>
@@ -143,8 +143,8 @@
                     </Coppia>
                     <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
-                            <IdEvento>e3</IdEvento>
-                            <IdLink>L2</IdLink>
+                            <IdEvento>e2</IdEvento>
+                            <IdLink>L3</IdLink>
                         </Coppia>
                     </CoppieUscita>
                     <Osservabilita>NULL</Osservabilita>
