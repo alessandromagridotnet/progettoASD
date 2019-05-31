@@ -1,0 +1,36 @@
+<Automa>
+    <Nome></Nome>
+    <Stati>
+        <Stato>
+            <ID>0</ID>
+            <Iniziale>true</Iniziale>
+            <Finale>false</Finale>
+        </Stato>
+        <Stato>
+            <ID>2</ID>
+            <Iniziale>false</Iniziale>
+            <Finale>false</Finale>
+        </Stato>
+        <Stato>
+            <ID>3</ID>
+            <Iniziale>false</Iniziale>
+            <Finale>true</Finale>
+        </Stato>
+    </Stati>
+    <Transizioni>
+        <Transizione>
+            <Nome>tra1</Nome>
+            <IdStatoIniziale>0</IdStatoIniziale>
+            <IdStatoFinale>2</IdStatoFinale>
+            <Osservabilita>o3</Osservabilita>
+            <Rilevanza>NULL</Rilevanza>
+        </Transizione>
+        <Transizione>
+            <Nome>tra2</Nome>
+            <IdStatoIniziale>2</IdStatoIniziale>
+            <IdStatoFinale>3</IdStatoFinale>
+            <Osservabilita>o2</Osservabilita>
+            <Rilevanza>NULL</Rilevanza>
+        </Transizione>
+    </Transizioni>
+</Automa>
