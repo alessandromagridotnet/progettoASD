@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -17,6 +19,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
+import static jdk.nashorn.internal.objects.NativeArray.map;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -494,5 +497,193 @@ public class ReteAutomi {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    
+    /**
+     * Funzione che calcola il primo Stato all'interno dell'automa chiamato StatoComportamentale decorato
+     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
+     * @return boolean
+     */
+    public boolean calcolaStatoComportamentaleDecoratoOsservazione(Automa A_out, Automa osservatore){
+        
+        System.out.println(osservatore.toXML());
+        
+        // devo cercare lo stato iniziale dell'automa osservatore
+        String nome_stato_osservatore = "";
+        for(Stato s : osservatore.getStati()){
+            if(s.getIniziale()==true){
+        System.out.println(s.getId());
+                nome_stato_osservatore = s.getId();
+            }
+        }
+        System.out.println(nome_stato_osservatore);
+        
+        StatoComportamentale sc = new StatoComportamentale();
+        int[] conteggio = new int[1];
+        conteggio[0]=0;
+        sc.setId("a"+conteggio[0]+"");
+        // ciclo sugli automi per trovare gli stati iniziali di ognuno
+        this.getAutomi().forEach((a) -> {
+            a.getStati().forEach((s) -> {
+                if(s.getIniziale()){
+                    sc.pushStato(s);
+                }
+            });
+        });
+        Evento eventoNull = new Evento();
+        eventoNull.setNome("NULL");
+        this.getLinks().forEach((l) -> {
+            Coppia cp = new Coppia();
+            cp.setLink(l.getNome());
+            cp.setEvento(eventoNull);
+            sc.pushCoppia(cp);
+        });
+        sc.setFinale(true);
+        sc.setIniziale(true);
+        sc.setStatoRiconoscitore(nome_stato_osservatore);
+        A_out.pushStato(sc);
+        
+        conteggio[0]++;
+        statoComportamentaleDecoratoRicorsivoOsservazione(A_out, sc, conteggio, osservatore);
+        
+        return true;
+    }
+    
+    /**
+     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa StatoComportamentale decorato
+     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
+     * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaStatoComportamentale()")
+     * @param conteggio un intero che indica il numero di stati generati dal sistema
+     * @return boolean
+     */
+    private boolean statoComportamentaleDecoratoRicorsivoOsservazione(Automa A_out, StatoComportamentale sc_pre, int[] conteggio, Automa osservatore){
+        Evento eventoNull = new Evento();
+        eventoNull.setNome("NULL");
+        // estraggo dall'osservatore le prossime etichette di osservabilità ammesse
+        Map<Integer,String> etichette_ammesse = new HashMap<>();
+        Map<Integer,String> id_stati_finali = new HashMap<>();
+        int i = 0;
+        for(Transizione t : osservatore.getTransizioni()){
+            if(t.getIniziale().getId().equals(sc_pre.getStatoRiconoscitore())){
+                etichette_ammesse.put(i, t.getOsservabilita());
+                id_stati_finali.put(i, t.getFinale().getId());
+            }
+        }
+        // cicliamo su automi e transizioni per poter scansionare tutte le possibili transizioni
+        for (Automa a : this.getAutomi()) {
+            for(Transizione tt : a.getTransizioni()){
+                // casto a TransizioneStati perchè so che può essere solo quello
+                TransizioneStati t = (TransizioneStati) tt;
+                if(t.getOsservabilita().equals("NULL") || etichette_ammesse.containsValue(t.getOsservabilita())){
+                    // controllo se lo stato iniziale della transizione considerata è tra gli stati attualmente attivi
+                    if(sc_pre.getStati().contains(t.getIniziale())){
+                        // Controlliamo che siano verificati i prerequisiti degli eventi in ingresso
+                        if(t.getIngresso().getEvento().getNome().equals("NULL") || sc_pre.getCoppie().contains(t.getIngresso())){
+                            boolean tmp = true;
+                            for(Coppia u : t.getUscita()){
+                                for (Coppia u2 : sc_pre.getCoppie()) {
+                                    //Controlliamo che i link associati agli eventi in uscita siano liberi
+                                    if (u.getLink().equals(u2.getLink()) && !(u2.getEvento().equals(eventoNull))){
+                                        tmp = false;
+                                        break;
+                                    }
+                                }
+                                if (!tmp){
+                                    break;
+                                }
+                            }
+                            // entra nel seguente if solo se sono state verificate tutte le precondizioni
+                            if(tmp){
+                                // scaturisce l'evento e lancia una nuova istanza ricorsiva
+                                StatoComportamentale sc = new StatoComportamentale();
+                                sc.clone(sc_pre);
+                                sc.setIniziale(false);
+                                sc.setFinale(false);
+                                sc.setId("a"+conteggio[0]+"");
+                                // setta lo stato riconoscitore al quello puntato
+                                if(!t.getOsservabilita().equals("NULL")){
+                                    for (Map.Entry<Integer, String> entry : etichette_ammesse.entrySet()) {
+                                        if(entry.getValue().equals(t.getOsservabilita())){
+                                            sc.setStatoRiconoscitore(id_stati_finali.get(entry.getKey()));
+                                        }
+                                    }
+                                }
+                                
+
+                                if(!(t.getRilevanza().equals("NULL")) && !(sc.getRilevanza().contains(t.getRilevanza()))){
+                                    sc.pushRilevanza(t.getRilevanza());
+                                }
+
+                                // rimuovo lo stato iniziale della transizione dalla lista degli stati nel nuovo spazio comportamentale
+                                if(sc.getStati().contains(t.getIniziale())){
+                                    sc.getStati().remove(t.getIniziale());
+                                }
+                                // aggiungo alla lista degli stati del nuovo spazio comportamentale lo stato finale della transizione
+                                Stato st =t.getFinale().clone();
+                                st.setIniziale(true);
+                                sc.pushStato(st);
+
+                                // loop sulle coppie evento link in uscita alla transizione abilitata
+                                if (!t.getIngresso().getEvento().getNome().equals("NULL")){
+                                   for (Coppia cp_s : sc.getCoppie()){
+                                       if (cp_s.getLink().equals(t.getIngresso().getLink())){
+                                           cp_s.setEvento(eventoNull);
+                                       }
+                                   }
+                                }
+                                for(Coppia cp_u : t.getUscita()){
+                                    for (Coppia cp_s : sc.getCoppie()){
+                                        if (cp_u.getLink().equals(cp_s.getLink())){
+                                            cp_s.setEvento(cp_u.getEvento());
+                                        }
+                                    }
+                                }
+                                // controlli per determinare se lo stato è finale
+                                Integer cnt_void_link = 0;
+                                for(Coppia cp : sc.getCoppie()){
+                                    if(cp.getEvento().getNome().equals("NULL")){
+                                        cnt_void_link++;
+                                    }
+                                }
+                                // controllo se tutti i link sono vuoti
+                                if(cnt_void_link == sc.getCoppie().size()){
+                                    sc.setFinale(true);
+                                }else{
+                                    sc.setFinale(false);
+                                }
+
+                                TransizioneComportamentale t_comp = new TransizioneComportamentale();
+                                t_comp.setNome(t.getNome());
+                                t_comp.setIniziale(sc_pre);
+                                t_comp.setOsservabilita(t.getOsservabilita());
+                                // controllo che il nuovo stato generato non sia già presente nell'automa dello stato comportamentale
+                                int chk_count = 0;
+                                for(Stato s_chk : A_out.getStati()){
+                                    if(s_chk.equalsNotId(sc)){
+                                        chk_count++;
+                                        t_comp.setFinale(s_chk);
+                                        A_out.pushTransizioni(t_comp);
+                                        break;
+                                    }
+                                }
+
+                                // se il ciclo sopra ha trovato uno stato uguale nell'albero già generato allora non entro nell'if sotto
+                                if( chk_count==0){
+                                    t_comp.setFinale(sc);
+                                    // aggiunta dello stato all'Automa "statocomportamentale"
+                                    A_out.pushStato(sc);
+                                    A_out.pushTransizioni(t_comp);
+                                    // chiamata ricorsiva
+                                    conteggio[0]++;
+                                    statoComportamentaleDecoratoRicorsivo(A_out, sc, conteggio);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

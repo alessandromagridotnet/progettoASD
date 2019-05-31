@@ -1,12 +1,14 @@
 package ReteAutomi;
 
 
+import java.io.File;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.jdom.Element;
+import org.jdom.input.SAXBuilder;
 
 /**
  *
@@ -609,6 +611,45 @@ public class Automa {
                 }
             }
             i++;
+        }
+    }
+    
+    
+    
+    public boolean loadFromFile(String file) {
+        try {
+            SAXBuilder builder = new SAXBuilder();
+            Element root = builder.build(new File(file)).getRootElement();
+            
+            this.fromXMLRiconoscitore(root);
+
+            System.out.println("Caricamento completato");
+            
+            return true;
+
+        } catch (Exception e) {
+            System.err.println("Errore durante la lettura dal file");
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public void fromXMLRiconoscitore(Element xml){
+        this.setNome(xml.getChildText("Nome"));
+        // array degli stati
+        List listStati = xml.getChild("Stati").getChildren("Stato");
+        for (int j = 0; j < listStati.size(); j++) {
+            StatoRiconoscitore stato = new StatoRiconoscitore();
+            Element nodoStato = (Element) listStati.get(j);
+            stato.fromXML(nodoStato);
+            this.pushStato(stato);
+        }
+        // array delle transizioni
+        List listTransizioni = xml.getChild("Transizioni").getChildren("Transizione");
+        for (int j = 0; j < listTransizioni.size(); j++) {
+            TransizioneComportamentale transizione = new TransizioneComportamentale();
+            Element nodoTransizione = (Element) listTransizioni.get(j);
+            transizione.fromXML(nodoTransizione, this.getStati());
+            this.pushTransizioni(transizione);
         }
     }
 }

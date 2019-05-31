@@ -190,22 +190,21 @@ public class main {
                         case 7:
                             A_tmp = new Automa();
                             A_out = new Automa();
-                            RA.calcolaStatoComportamentaleDecorato(A_tmp);
-                            A_tmp.potatura();
                             
-                            A_tmp.determinizzazione(A_out);
-                            
-                            osservazione_lineare = acquisizione_osservazione_lineare();
-                            // controllo se l'osservazione è valida
-                            if(A_out.osservazione_valida(osservazione_lineare)){
-                                A_tmp.estrai_osservazione(osservazione_lineare);
-                                
+                            Automa automa_osservazione = new Automa();
+                            if(caricaOsservazione(automa_osservazione)){
+                                RA.calcolaStatoComportamentaleDecoratoOsservazione(A_tmp, automa_osservazione);
+                                A_tmp.potatura();
+
+//                                A_tmp.determinizzazione(A_out);
+
                                 tmp = new ReteAutomi();
                                 tmp.pushAutoma(A_tmp);
 
                                 return tmp.storeIntoFile(dir + "spazio_comportamentale_osservazione.xml");
+                            }else{
+                                return false;
                             }
-                            return false;
                         case 10:
                             return mostraRete(RA);
                         case 0:
@@ -296,6 +295,66 @@ public class main {
         
 
 
+        private static boolean caricaOsservazione(Automa auto) throws IOException{
+            
+            int i =0;
+            ArrayList tmpArray = new ArrayList<>();
+            boolean quit = false;
+            File dir = null;
+            
+            // bugfix temporaneo per i path di linux e windows
+            if(System.getProperty("os.name").compareTo("Linux") == 0){
+                dir = new File("src/riconoscitori/");
+            }else{
+                dir = new File("Progetto ASD\\src\\riconoscitori\\");
+            }
+            File[] directoryListing = dir.listFiles();
+            
+            System.out.println("###############################################################################");
+            
+            // controlla se sono presenti dei file nella cartella "input"
+            if (directoryListing != null) {
+                System.out.println("Segliere l'automa riconoscitore che si vuole caricare: ");
+                // stampa il menu
+                for (File child : directoryListing) {
+                    tmpArray.add(i, child.getPath());
+                    i++;
+                    System.out.println(i + ") per caricare " + child.getName());
+                }
+                System.out.println("0) tornare al menu precedente ");
+                
+                // attesa dell'input per la scelta del file da caricare
+                while(!quit){
+                    try{
+                        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                        int scelta = Integer.parseInt(br.readLine());
+
+                        if(scelta >0 && scelta <= (directoryListing.length)){
+                            if(auto.loadFromFile(tmpArray.get(scelta-1).toString())){
+                                return true;
+                            }else{
+                                // caricamento non riuscito
+                                System.err.println("Errore durante il caricamento.");
+                                quit=true;
+                                break;
+                            }
+                        }else if(scelta == 0){
+                            // uscita dal programma
+                            System.out.println("Programma terminato. Buona giornata.");
+                            quit=true;
+                        }else{
+                            System.err.println("Opzione non disponibile.");
+                        }
+                    }catch(NumberFormatException e){
+                        System.err.println("Scelta non consentita. Inserire solo valori numerici consentiti!");
+                    }
+                }
+            }else{
+                System.out.println("Non sono presenti file nella cartella input!!");
+            }
+            return false;
+        }
+        
     /**
      * Funzione che salva la stringa passata in un file
      * @param fileName path e nome del file in cui si vuole salvare la stringa generata

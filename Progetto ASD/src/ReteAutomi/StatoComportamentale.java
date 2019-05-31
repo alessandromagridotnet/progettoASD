@@ -20,6 +20,7 @@ public class StatoComportamentale implements Stato, Cloneable {
     private ArrayList<String> rilevanza;
     private int confermato; // 0 se è da rimuovere | 1 se è stato visitato | 2 se confermato
     private ArrayList<String> diagnosi;
+    private String statoRiconoscitore;
 
     public StatoComportamentale() {
         this.id = "NULL";
@@ -30,6 +31,7 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.confermato = 0;
         this.rilevanza = new ArrayList<>();
         this.diagnosi = new ArrayList<>();
+        this.statoRiconoscitore = "";
     }
     
     @Override
@@ -99,6 +101,14 @@ public class StatoComportamentale implements Stato, Cloneable {
     public void setConfermato(int confermato) {
         this.confermato = confermato;
     }
+
+    public String getStatoRiconoscitore() {
+        return statoRiconoscitore;
+    }
+
+    public void setStatoRiconoscitore(String statoRiconoscitore) {
+        this.statoRiconoscitore = statoRiconoscitore;
+    }
     
     /**
      * Funzione che ritorna una stringa contenente la rappresentazione XML
@@ -131,7 +141,7 @@ public class StatoComportamentale implements Stato, Cloneable {
                 xml += "<Etichetta>" + d + "</Etichetta>" + System.lineSeparator();
             }
             xml += "</Diagnosi>" + System.lineSeparator();
-            
+            xml += "<StatoRiconoscitore>" + this.getStatoRiconoscitore() + "</StatoRiconoscitore>" + System.lineSeparator();
         xml += "</Stato>" + System.lineSeparator();
         
         return xml;
@@ -150,6 +160,7 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.setId(sc.getId());
         this.setFinale(sc.getFinale());
         this.setIniziale(sc.getIniziale());
+        this.setStatoRiconoscitore(sc.getStatoRiconoscitore());
         for(Coppia c : sc.getCoppie()){
             Coppia cp = c.clone();
             this.pushCoppia(cp);
@@ -179,6 +190,7 @@ public class StatoComportamentale implements Stato, Cloneable {
                 if(this.getId().equals(sc.getId()) 
                     && this.getIniziale().equals(sc.getIniziale())
                     && this.getFinale().equals(sc.getFinale())
+                    && this.getStatoRiconoscitore().equals(sc.getStatoRiconoscitore())
                     ){
                         if(this.getCoppie().size()==sc.getCoppie().size()){
                             for(Coppia cp : this.getCoppie()){
@@ -221,6 +233,7 @@ public class StatoComportamentale implements Stato, Cloneable {
                 if(this.getId().equals(sc.getId()) 
                     && this.getIniziale().equals(sc.getIniziale())
                     && this.getFinale().equals(sc.getFinale())
+                    && this.getStatoRiconoscitore().equals(sc.getStatoRiconoscitore())
                     ){
                         if(this.getCoppie().size()==sc.getCoppie().size()){
                             for(Coppia cp : this.getCoppie()){

@@ -125,4 +125,34 @@ public class TransizioneComportamentale implements Transizione{
         }
         return false;
     }
+    
+    /**
+     * Funzione per caricare una transizione partendo da un elemento XML e da una lista di stati disponibili
+     * @param xml un elemento xml che contiene un LINK
+     * @param stati la lista degli stati caricati tra cui cercare iniziale e finale
+     */
+    public void fromXML(Element xml, ArrayList<Stato> stati){
+        this.setNome(xml.getChildText("Nome"));
+        // trova lo stato iniziale dalla lista degli stati disponibili
+        for(Stato s : stati){
+            if(s.getId().equals(xml.getChildText("IdStatoIniziale"))){
+                Stato s_tmp = s.clone();
+                s_tmp.setIniziale(true);
+                this.setIniziale(s_tmp);
+                break;
+            }
+        }
+        // trova lo stato finale dalla lista degli stati disponibili
+        for(Stato s : stati){
+            if(s.getId().equals(xml.getChildText("IdStatoFinale"))){
+                Stato s_tmp = s.clone();
+                s_tmp.setIniziale(false);
+                this.setFinale(s_tmp);
+                break;
+            }
+        }
+        // etichette
+        this.setOsservabilita(xml.getChildText("Osservabilita"));
+        this.setRilevanza(xml.getChildText("Rilevanza"));
+    }
 }
