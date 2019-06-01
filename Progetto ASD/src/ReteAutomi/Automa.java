@@ -652,4 +652,49 @@ public class Automa {
             this.pushTransizioni(transizione);
         }
     }
+    
+    public void fusione_dizionari(ArrayList<Automa> automi){
+        Transizione t;
+        StatoComportamentale sc = new StatoComportamentale();
+        sc.setId("U0");
+        sc.setIniziale(true);
+        this.pushStato(sc);
+        
+        for(Automa a : automi){
+            for(Stato s : a.getStati()){
+                if(s.getIniziale()){
+                    t = new TransizioneComportamentale();
+                    t.setIniziale(sc);
+                    t.setFinale(s);
+                    t.setOsservabilita("NULL");
+                    this.pushTransizioni(t);
+                    
+                    s.setIniziale(false);
+                }
+                this.pushStato(s);
+            }
+            for(Transizione tt : a.getTransizioni()){
+                this.pushTransizioni(tt);
+            }
+        }
+    }
+    
+    public void estrai_diagnosi(){
+        for(Stato s : this.getStati()){
+            StatoComportamentale sc = (StatoComportamentale) s;
+            sc.clearDiagnosi();
+            if(sc.getFinale()){
+                for(Stato ss : sc.getStati()){
+                    StatoComportamentale ssc = (StatoComportamentale) ss;
+                    if(ssc.getFinale()){
+                        for(String diagnosi : ssc.getDiagnosi()){
+                            if(!sc.getDiagnosi().contains(diagnosi)){
+                                sc.pushDiagnosi(diagnosi);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

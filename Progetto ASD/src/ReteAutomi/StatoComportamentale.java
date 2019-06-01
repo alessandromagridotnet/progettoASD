@@ -94,6 +94,11 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.diagnosi.add(diagnosi);
     }
     
+    public void clearDiagnosi(){
+        this.diagnosi=null;
+        this.diagnosi = new ArrayList<>();
+    }
+    
     public int getConfermato() {
         return confermato;
     }
@@ -160,7 +165,6 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.setId(sc.getId());
         this.setFinale(sc.getFinale());
         this.setIniziale(sc.getIniziale());
-        this.setStatoRiconoscitore(sc.getStatoRiconoscitore());
         for(Coppia c : sc.getCoppie()){
             Coppia cp = c.clone();
             this.pushCoppia(cp);
@@ -175,6 +179,7 @@ public class StatoComportamentale implements Stato, Cloneable {
         for(String d : sc.getDiagnosi()){
             this.pushDiagnosi(d);
         }
+        this.setStatoRiconoscitore(sc.getStatoRiconoscitore());
     }
     
     /**
@@ -265,41 +270,45 @@ public class StatoComportamentale implements Stato, Cloneable {
         if(o!=null){
             if(this.getClass().isInstance(o)){
                 StatoComportamentale sc = (StatoComportamentale) o;
-                if(this.getCoppie().size()==sc.getCoppie().size()){
-                    for(Coppia cp : this.getCoppie()){
-                        if(!(sc.getCoppie().contains(cp))){
-                            return false;
-                        }
-                    }
-                }else{
-                    return false;
-                }
-                if(this.getStati().size()==sc.getStati().size()){
-                    for(Stato s :this.getStati()){
-                        if(!(sc.getStati().contains(s))){
-                            return false;
-                        }
-                    }
-                }else{
-                    return false;
-                }
-                if(this.getRilevanza().size()==sc.getRilevanza().size()){
-                    for(String e :this.getRilevanza()){
-                        boolean controllo = false;
-                        for(String e2 : sc.getRilevanza()){
-                            if(e.equals(e2)){
-                                controllo = true;
-                                break;
+                if(this.getIniziale().equals(sc.getIniziale())
+                    && this.getFinale().equals(sc.getFinale())
+                    && this.getStatoRiconoscitore().equals(sc.getStatoRiconoscitore())){
+                        if(this.getCoppie().size()==sc.getCoppie().size()){
+                            for(Coppia cp : this.getCoppie()){
+                                if(!(sc.getCoppie().contains(cp))){
+                                    return false;
+                                }
                             }
-                        }
-                        if(!controllo){
+                        }else{
                             return false;
                         }
-                    }
-                }else{
-                    return false;
+                        if(this.getStati().size()==sc.getStati().size()){
+                            for(Stato s :this.getStati()){
+                                if(!(sc.getStati().contains(s))){
+                                    return false;
+                                }
+                            }
+                        }else{
+                            return false;
+                        }
+                        if(this.getRilevanza().size()==sc.getRilevanza().size()){
+                            for(String e :this.getRilevanza()){
+                                boolean controllo = false;
+                                for(String e2 : sc.getRilevanza()){
+                                    if(e.equals(e2)){
+                                        controllo = true;
+                                        break;
+                                    }
+                                }
+                                if(!controllo){
+                                    return false;
+                                }
+                            }
+                        }else{
+                            return false;
+                        }
+                        return true;
                 }
-                return true;
             }
         }
         

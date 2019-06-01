@@ -111,21 +111,30 @@ public class main {
             System.out.println("***************************** MENU SECONDO LIVELLO ****************************");
             System.out.println("*******************************************************************************");
             System.out.println("");
-            System.out.println("1) per esportare la rete caricata (per controllare che sia stata caricata correttamente la rete appena importata)");
+//            System.out.println("1) per esportare la rete caricata (per controllare che sia stata caricata correttamente la rete appena importata)");
+            System.out.println("1) per visualizzare la rete caricata ");
             System.out.println("2) per calcolare lo spazio comportamentale ");
             System.out.println("3) potatura dello spazio comportamentale ");
             System.out.println("4) per calcolare lo spazio comportamentale decorato");
             System.out.println("5) per calcolare la determinizzazione");
             System.out.println("6) per la lettura della diagnosi relativa ad un'osservazione lineare");
             System.out.println("7) per la generazione dello spazio comportamentale relativo ad un'osservazione");
-            System.out.println("10) per visualizzare la rete caricata ");
+            System.out.println("8) per la generazione dello spazio comportamentale determinizzato relativo ad un'osservazione");
+            System.out.println("9) per la lettura della diagnosi relativa ad un'osservazione lineare sullo spazio comportamentale determinizzato relativo ad un'osservazione");
+            System.out.println("10) fusione di dizionari parziali");
+            System.out.println("11) ricerca osservazione in una fusione di dizionari");
+            
             System.out.println("0) per tornare al menu principale ");
             
             String diagnosi;
             String[] osservazione_lineare;
             Automa A_out = new Automa();
+            Automa automa_osservazione = new Automa();
+            Automa automa_osservazione_2 = new Automa();
             ReteAutomi tmp = new ReteAutomi();
             Automa A_tmp;
+            ArrayList<Automa> automi; // automi di appoggio
+            
             String dir;
             // bugfix temporaneo per i path di linux e windows
             if(System.getProperty("os.name").compareTo("Linux") == 0){
@@ -140,7 +149,8 @@ public class main {
 
                     switch(scelta){
                         case 1:
-                            return RA.storeIntoFile(dir + "output.xml");
+                            return mostraRete(RA);
+//                            return RA.storeIntoFile(dir + "output.xml");
                         case 2:
                             A_out = new Automa();
                             RA.calcolaStatoComportamentale(A_out);
@@ -189,24 +199,151 @@ public class main {
                             return storeIntoFile(dir + "diagnosi.txt", diagnosi);
                         case 7:
                             A_tmp = new Automa();
-                            A_out = new Automa();
                             
-                            Automa automa_osservazione = new Automa();
+                            automa_osservazione = new Automa();
                             if(caricaOsservazione(automa_osservazione)){
-                                RA.calcolaStatoComportamentaleDecoratoOsservazione(A_tmp, automa_osservazione);
-                                A_tmp.potatura();
-
-//                                A_tmp.determinizzazione(A_out);
+                                RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
+                                A_out.potatura();
 
                                 tmp = new ReteAutomi();
-                                tmp.pushAutoma(A_tmp);
+                                tmp.pushAutoma(A_out);
 
                                 return tmp.storeIntoFile(dir + "spazio_comportamentale_osservazione.xml");
                             }else{
                                 return false;
                             }
+                        case 8:
+                            A_out = new Automa();
+                            A_tmp = new Automa();
+                            
+                            automa_osservazione = new Automa();
+                            if(caricaOsservazione(automa_osservazione)){
+                                RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
+                                A_out.potatura();
+
+                                A_out.determinizzazione(A_tmp);
+                                
+                                tmp = new ReteAutomi();
+                                tmp.pushAutoma(A_tmp);
+
+                                return tmp.storeIntoFile(dir + "spazio_comportamentale_determinizzazione_osservazione.xml");
+                            }else{
+                                return false;
+                            }
+                        case 9:
+                            A_out = new Automa();
+                            A_tmp = new Automa();
+                            
+                            automa_osservazione = new Automa();
+                            if(caricaOsservazione(automa_osservazione)){
+                                RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
+                                A_out.potatura();
+
+                                A_out.determinizzazione(A_tmp);
+                            
+                                osservazione_lineare = acquisizione_osservazione_lineare();
+                                diagnosi = A_tmp.ricerca_dizionario(osservazione_lineare);
+
+                                return storeIntoFile(dir + "diagnosi.txt", diagnosi);
+                            }else{
+                                return false;
+                            }
                         case 10:
-                            return mostraRete(RA);
+                            A_out = new Automa();
+                            A_tmp = new Automa();
+                            automi = new ArrayList<>();
+                            
+                            automa_osservazione = new Automa();
+                            automa_osservazione_2 = new Automa();
+                            if(caricaOsservazione(automa_osservazione)){
+                                RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
+                                A_out.potatura();
+                                A_out.determinizzazione(A_tmp);
+                                A_tmp.ridenominazione("x");
+                                automi.add(A_tmp);
+                                // fine della generazione del primo automa
+                                A_out = null;
+                                A_out = new Automa();
+                                A_tmp = null;
+                                A_tmp = new Automa();
+                                if(caricaOsservazione(automa_osservazione_2)){
+                                    RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione_2);
+                                    A_out.potatura();
+                                    A_out.determinizzazione(A_tmp);
+                                    A_tmp.ridenominazione("y");
+                                    
+                                    automi.add(A_tmp);
+                                    
+                                    A_out = new Automa();
+                                    A_out.fusione_dizionari(automi);
+                                    
+                                    tmp = new ReteAutomi();
+                                    tmp.pushAutoma(A_out);
+                                    
+                                    System.out.println("");
+                                    System.out.println("----- SALVATAGGIO RELATIVO ALLA FUSIONE DIZIONARI ------");
+                                    tmp.storeIntoFile(dir + "fusione_dizionari.xml");
+                                    
+                                    A_tmp = null;
+                                    A_tmp = new Automa();
+                                    
+                                    A_out.determinizzazione(A_tmp);
+                                    
+                                    tmp = new ReteAutomi();
+                                    tmp.pushAutoma(A_tmp);
+
+                                    System.out.println("");
+                                    System.out.println("----- SALVATAGGIO RELATIVO ALLA DETERMINIZZAZIONE DELLA FUSIONE DIZIONARI ------");
+                                    return tmp.storeIntoFile(dir + "determinizzazione_fusione_dizionari.xml");
+                                    }
+                            }else{
+                                return false;
+                            }
+                        case 11:
+                            A_out = new Automa();
+                            A_tmp = new Automa();
+                            automi = new ArrayList<>();
+                            
+                            automa_osservazione = new Automa();
+                            automa_osservazione_2 = new Automa();
+                            if(caricaOsservazione(automa_osservazione)){
+                                RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
+                                A_out.potatura();
+                                A_out.determinizzazione(A_tmp);
+                                A_tmp.ridenominazione("x");
+                                automi.add(A_tmp);
+                                // fine della generazione del primo automa
+                                A_out = null;
+                                A_out = new Automa();
+                                A_tmp = null;
+                                A_tmp = new Automa();
+                                if(caricaOsservazione(automa_osservazione_2)){
+                                    RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione_2);
+                                    A_out.potatura();
+                                    A_out.determinizzazione(A_tmp);
+                                    A_tmp.ridenominazione("y");
+                                    
+                                    automi.add(A_tmp);
+                                    
+                                    A_out = new Automa();
+                                    A_out.fusione_dizionari(automi);
+                                    
+                                    
+                                    A_tmp = null;
+                                    A_tmp = new Automa();
+                                    
+                                    A_out.determinizzazione(A_tmp);
+                                    
+                                    A_tmp.estrai_diagnosi();
+                                    
+                                    osservazione_lineare = acquisizione_osservazione_lineare();
+                                    diagnosi = A_tmp.ricerca_dizionario(osservazione_lineare);
+
+                                    return storeIntoFile(dir + "diagnosi.txt", diagnosi);
+                                }
+                            }else{
+                                return false;
+                            }
                         case 0:
                             return false;
                         default:

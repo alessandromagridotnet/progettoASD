@@ -507,19 +507,17 @@ public class ReteAutomi {
      */
     public boolean calcolaStatoComportamentaleDecoratoOsservazione(Automa A_out, Automa osservatore){
         
-        System.out.println(osservatore.toXML());
-        
+        StatoComportamentale sc = new StatoComportamentale();
         // devo cercare lo stato iniziale dell'automa osservatore
         String nome_stato_osservatore = "";
         for(Stato s : osservatore.getStati()){
-            if(s.getIniziale()==true){
-        System.out.println(s.getId());
-                nome_stato_osservatore = s.getId();
+            StatoRiconoscitore sr = (StatoRiconoscitore) s;
+            if(sr.getIniziale()==true){
+                nome_stato_osservatore = sr.getId();
+                sc.setFinale(sr.getFinale());
             }
         }
-        System.out.println(nome_stato_osservatore);
         
-        StatoComportamentale sc = new StatoComportamentale();
         int[] conteggio = new int[1];
         conteggio[0]=0;
         sc.setId("a"+conteggio[0]+"");
@@ -539,7 +537,6 @@ public class ReteAutomi {
             cp.setEvento(eventoNull);
             sc.pushCoppia(cp);
         });
-        sc.setFinale(true);
         sc.setIniziale(true);
         sc.setStatoRiconoscitore(nome_stato_osservatore);
         A_out.pushStato(sc);
@@ -560,14 +557,15 @@ public class ReteAutomi {
     private boolean statoComportamentaleDecoratoRicorsivoOsservazione(Automa A_out, StatoComportamentale sc_pre, int[] conteggio, Automa osservatore){
         Evento eventoNull = new Evento();
         eventoNull.setNome("NULL");
+        boolean controllo_riconoscitore=false;
         // estraggo dall'osservatore le prossime etichette di osservabilità ammesse
         Map<Integer,String> etichette_ammesse = new HashMap<>();
         Map<Integer,String> id_stati_finali = new HashMap<>();
         int i = 0;
-        for(Transizione t : osservatore.getTransizioni()){
-            if(t.getIniziale().getId().equals(sc_pre.getStatoRiconoscitore())){
-                etichette_ammesse.put(i, t.getOsservabilita());
-                id_stati_finali.put(i, t.getFinale().getId());
+        for(Transizione t_o : osservatore.getTransizioni()){
+            if(t_o.getIniziale().getId().equals(sc_pre.getStatoRiconoscitore())){
+                etichette_ammesse.put(i, t_o.getOsservabilita());
+                id_stati_finali.put(i, t_o.getFinale().getId());
             }
         }
         // cicliamo su automi e transizioni per poter scansionare tutte le possibili transizioni
@@ -646,8 +644,14 @@ public class ReteAutomi {
                                         cnt_void_link++;
                                     }
                                 }
+                                for(Stato s_r : osservatore.getStati()){
+                                    StatoRiconoscitore sr = (StatoRiconoscitore) s_r;
+                                    if(sc.getStatoRiconoscitore().equals(sr.getId())){
+                                        controllo_riconoscitore=sr.getFinale();
+                                    }
+                                }
                                 // controllo se tutti i link sono vuoti
-                                if(cnt_void_link == sc.getCoppie().size()){
+                                if(cnt_void_link == sc.getCoppie().size() && controllo_riconoscitore){
                                     sc.setFinale(true);
                                 }else{
                                     sc.setFinale(false);
@@ -676,7 +680,7 @@ public class ReteAutomi {
                                     A_out.pushTransizioni(t_comp);
                                     // chiamata ricorsiva
                                     conteggio[0]++;
-                                    statoComportamentaleDecoratoRicorsivo(A_out, sc, conteggio);
+                                    statoComportamentaleDecoratoRicorsivoOsservazione(A_out, sc, conteggio, osservatore);
                                 }
                             }
                         }
