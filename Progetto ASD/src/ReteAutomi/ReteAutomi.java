@@ -563,9 +563,10 @@ public class ReteAutomi {
         Map<Integer,String> id_stati_finali = new HashMap<>();
         int i = 0;
         for(Transizione t_o : osservatore.getTransizioni()){
-            if(t_o.getIniziale().getId().equals(sc_pre.getStatoRiconoscitore())){
-                etichette_ammesse.put(i, t_o.getOsservabilita());
-                id_stati_finali.put(i, t_o.getFinale().getId());
+            TransizioneComportamentale tc = (TransizioneComportamentale) t_o;
+            if(tc.getIniziale().getId().equals(sc_pre.getStatoRiconoscitore())){
+                etichette_ammesse.put(i, tc.getOsservabilita());
+                id_stati_finali.put(i, tc.getFinale().getId());
             }
         }
         // cicliamo su automi e transizioni per poter scansionare tutte le possibili transizioni
@@ -754,7 +755,7 @@ public class ReteAutomi {
             for(Transizione tt : a.getTransizioni()){
                 // casto a TransizioneStati perchè so che può essere solo quello
                 TransizioneStati t = (TransizioneStati) tt;
-                StatoComportamentale stato_finale_scenario = new StatoComportamentale();
+                StatoRiconoscitore stato_finale_scenario = new StatoRiconoscitore();
                 if(controllo_transizioni_scenario(t, transizioni_scenario_abilitate, stato_finale_scenario)){
                     // controllo se lo stato iniziale della transizione considerata è tra gli stati attualmente attivi
                     if(sc_pre.getStati().contains(t.getIniziale())){
@@ -859,10 +860,12 @@ public class ReteAutomi {
         return true;
     }
     
-    private boolean controllo_transizioni_scenario(TransizioneStati t, ArrayList<TransizioneScenario>transizioni_scenario_abilitate, StatoComportamentale stato_finale_scenario){
+    private boolean controllo_transizioni_scenario(TransizioneStati t, ArrayList<TransizioneScenario>transizioni_scenario_abilitate, StatoRiconoscitore stato_finale_scenario){
         for(TransizioneScenario ts : transizioni_scenario_abilitate){
             if(t.getNome().equals(ts.getNome())){
-                stato_finale_scenario = (StatoComportamentale) ts.getFinale();
+                stato_finale_scenario.setId(ts.getFinale().getId());
+                stato_finale_scenario.setIniziale(ts.getFinale().getIniziale());
+                stato_finale_scenario.setFinale(((StatoRiconoscitore)ts.getFinale()).getFinale());
                 return true;
             }
         }

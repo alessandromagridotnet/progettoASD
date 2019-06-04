@@ -7,7 +7,7 @@ import org.jdom.Element;
  *
  * @author alessandro
  */
-public class TransizioneScenario {
+public class TransizioneScenario implements Transizione{
     private String nome;
     private Stato iniziale, finale;
 
@@ -17,31 +17,32 @@ public class TransizioneScenario {
     }
 
     
+    @Override
     public String getNome() {
         return nome;
     }
 
-    
+    @Override
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    
+    @Override
     public Stato getIniziale() {
         return iniziale;
     }
 
-    
+    @Override
     public void setIniziale(Stato iniziale) {
         this.iniziale = iniziale;
     }
 
-    
+    @Override
     public Stato getFinale() {
         return finale;
     }
 
-    
+    @Override
     public void setFinale(Stato finale) {
         this.finale = finale;
     }
@@ -50,7 +51,7 @@ public class TransizioneScenario {
      * Funzione che ritorna una stringa contenente la rappresentazione XML
      * @return String
      */
-    
+    @Override
     public String toXML(){
         String str = "";
         
@@ -70,7 +71,7 @@ public class TransizioneScenario {
         return str;
     }
     
-    
+    @Override
     public boolean equals(Object o){
         if(o!=null){
             if(this.getClass().isInstance(o)){

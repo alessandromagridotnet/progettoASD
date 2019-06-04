@@ -158,97 +158,204 @@ public class main {
                         RA.calcolaStatoComportamentale(A_out);
                         tmp = new ReteAutomi();
                         tmp.pushAutoma(A_out);
-
-                        return tmp.storeIntoFile(dir + "spazio_comportamentale.xml");
+                        System.out.println("");
+                        System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE ------");
+                        return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale.xml");
                     case 3:
                         A_out = new Automa();
                         RA.calcolaStatoComportamentale(A_out);
-                        A_out.potatura();
                         tmp = new ReteAutomi();
                         tmp.pushAutoma(A_out);
-                        return tmp.storeIntoFile(dir + "spazio_comportamentale_potato.xml");
+                        System.out.println("");
+                        System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE ------");
+                        if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale.xml") && proseguire()){
+                            A_out.potatura();
+                            tmp=null;
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_out);
+                            System.out.println("");
+                            System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE POTATO ------");
+                            return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_potato.xml");
+                        }else{
+                            break;
+                        }
                     case 4:
                         A_out = new Automa();
                         RA.calcolaStatoComportamentaleDecorato(A_out);
-                        A_out.potatura();
                         tmp = new ReteAutomi();
                         tmp.pushAutoma(A_out);
-
-                        return tmp.storeIntoFile(dir + "spazio_comportamentale_decorato.xml");
+                        System.out.println("");
+                        System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO ------");
+                        if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato.xml") && proseguire()){
+                            A_out.potatura();
+                            tmp = null;
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_out);
+                            System.out.println("");
+                            System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO POTATO ------");
+                            return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato_potato.xml");
+                        }else{
+                            break;
+                        }
                     case 5:
                         A_tmp = new Automa();
                         A_out = new Automa();
                         RA.calcolaStatoComportamentaleDecorato(A_tmp);
-                        A_tmp.potatura();
-
-                        A_tmp.determinizzazione(A_out);
-
                         tmp = new ReteAutomi();
-                        tmp.pushAutoma(A_out);
-
-                        return tmp.storeIntoFile(dir + "spazio_comportamentale_decorato_determinato.xml");
+                        tmp.pushAutoma(A_tmp);
+                        System.out.println("");
+                        System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO ------");
+                        if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato.xml") && proseguire()){
+                            A_tmp.potatura();
+                            tmp = null;
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_tmp);
+                            System.out.println("");
+                            System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO POTATO ------");
+                            if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato_potato.xml") && proseguire()){
+                                A_tmp.determinizzazione(A_out);
+                                tmp = null;
+                                tmp = new ReteAutomi();
+                                tmp.pushAutoma(A_out);
+                                System.out.println("");
+                                System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO DETERMINIZZATO ------");
+                                return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato_determinizzato.xml");
+                            }else{
+                                break;
+                            }
+                        }else{
+                            break;
+                        }
                     case 6:
                         A_tmp = new Automa();
                         A_out = new Automa();
                         RA.calcolaStatoComportamentaleDecorato(A_tmp);
-                        A_tmp.potatura();
-
-                        A_tmp.determinizzazione(A_out);
-
-                        osservazione_lineare = acquisizione_osservazione_lineare();
-                        diagnosi = A_out.ricerca_dizionario(osservazione_lineare);
-
-                        return storeIntoFile(dir + "diagnosi.txt", diagnosi);
+                        tmp = new ReteAutomi();
+                        tmp.pushAutoma(A_tmp);
+                        System.out.println("");
+                        System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO ------");
+                        if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato.xml") && proseguire()){
+                            A_tmp.potatura();
+                            tmp = null;
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_tmp);
+                            System.out.println("");
+                            System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO POTATO ------");
+                            if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato_potato.xml") && proseguire()){
+                                A_tmp.determinizzazione(A_out);
+                                tmp = null;
+                                tmp = new ReteAutomi();
+                                tmp.pushAutoma(A_out);
+                                System.out.println("");
+                                System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO DETERMINIZZATO ------");
+                                if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato_determinato.xml") && proseguire()){
+                                    osservazione_lineare = acquisizione_osservazione_lineare();
+                                    diagnosi = A_out.ricerca_dizionario(osservazione_lineare);
+                                    System.out.println("");
+                                    System.out.println("----- SALVATAGGIO DELLA DIAGNOSI ------");
+                                    return storeIntoFile(dir + RA.getNome() + "-diagnosi.txt", diagnosi);
+                                }
+                            }else{
+                                break;
+                            }
+                        }else{
+                            break;
+                        }
                     case 7:
-                        A_tmp = new Automa();
-
+                        A_out = new Automa();
                         automa_osservazione = new Automa();
-                        if(caricaOsservazione(automa_osservazione)){
+                        if(caricaOsservazione(automa_osservazione) && proseguire()){
                             RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
-                            A_out.potatura();
-
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
-
-                            return tmp.storeIntoFile(dir + "spazio_comportamentale_osservazione.xml");
+                            System.out.println("");
+                            System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE RELATIVO AD UNA OSSERVAZIONE ------");
+                            if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione.xml") && proseguire()){
+                                A_out.potatura();
+                                tmp = null;
+                                tmp = new ReteAutomi();
+                                tmp.pushAutoma(A_out);
+                                System.out.println("");
+                                System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE POTATO RELATIVO AD UNA OSSERVAZIONE ------");
+                                return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione_potato.xml");
+                            }else{
+                                break;
+                            }
                         }else{
-                            return false;
+                            break;
                         }
                     case 8:
                         A_out = new Automa();
                         A_tmp = new Automa();
 
                         automa_osservazione = new Automa();
-                        if(caricaOsservazione(automa_osservazione)){
+                        if(caricaOsservazione(automa_osservazione) && proseguire()){
                             RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
-                            A_out.potatura();
-
-                            A_out.determinizzazione(A_tmp);
-
                             tmp = new ReteAutomi();
-                            tmp.pushAutoma(A_tmp);
-
-                            return tmp.storeIntoFile(dir + "spazio_comportamentale_determinizzazione_osservazione.xml");
+                            tmp.pushAutoma(A_out);
+                            System.out.println("");
+                            System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE RELATIVO AD UNA OSSERVAZIONE ------");
+                            if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione.xml") && proseguire()){
+                                A_out.potatura();
+                                tmp = null;
+                                tmp = new ReteAutomi();
+                                tmp.pushAutoma(A_out);
+                                System.out.println("");
+                                System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE POTATO RELATIVO AD UNA OSSERVAZIONE ------");
+                                if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione_potato.xml") && proseguire()){
+                                    A_out.determinizzazione(A_tmp);
+                                    tmp = null;
+                                    tmp = new ReteAutomi();
+                                    tmp.pushAutoma(A_tmp);
+                                    System.out.println("");
+                                    System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE POTATO RELATIVO AD UNA OSSERVAZIONE E DETERMINIZZATO ------");
+                                    return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_determinizzazione_osservazione.xml");
+                                }
+                            }else{
+                                break;
+                            }
                         }else{
-                            return false;
+                            break;
                         }
                     case 9:
                         A_out = new Automa();
                         A_tmp = new Automa();
-
                         automa_osservazione = new Automa();
-                        if(caricaOsservazione(automa_osservazione)){
+                        if(caricaOsservazione(automa_osservazione) && proseguire()){
                             RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
-                            A_out.potatura();
-
-                            A_out.determinizzazione(A_tmp);
-
-                            osservazione_lineare = acquisizione_osservazione_lineare();
-                            diagnosi = A_tmp.ricerca_dizionario(osservazione_lineare);
-
-                            return storeIntoFile(dir + "diagnosi.txt", diagnosi);
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_out);
+                            System.out.println("");
+                            System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE RELATIVO AD UNA OSSERVAZIONE ------");
+                            if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione.xml") && proseguire()){
+                                A_out.potatura();
+                                tmp = null;
+                                tmp = new ReteAutomi();
+                                tmp.pushAutoma(A_out);
+                                System.out.println("");
+                                System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE POTATO RELATIVO AD UNA OSSERVAZIONE ------");
+                                if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione_potato.xml") && proseguire()){
+                                    A_out.determinizzazione(A_tmp);
+                                    tmp = null;
+                                    tmp = new ReteAutomi();
+                                    tmp.pushAutoma(A_tmp);
+                                    System.out.println("");
+                                    System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE POTATO RELATIVO AD UNA OSSERVAZIONE E DETERMINIZZATO ------");
+                                    if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_determinizzazione_osservazione.xml") && proseguire()){
+                                        osservazione_lineare = acquisizione_osservazione_lineare();
+                                        diagnosi = A_tmp.ricerca_dizionario(osservazione_lineare);
+                                        System.out.println("");
+                                        System.out.println("----- SALVATAGGIO DELLA DIAGNOSI ------");
+                                        return storeIntoFile(dir + RA.getNome() + "-diagnosi.txt", diagnosi);
+                                    }else{
+                                        break;
+                                    }
+                                }
+                            }else{
+                                break;
+                            }
                         }else{
-                            return false;
+                            break;
                         }
                     case 10:
                         A_out = new Automa();
@@ -284,7 +391,7 @@ public class main {
 
                                 System.out.println("");
                                 System.out.println("----- SALVATAGGIO RELATIVO ALLA FUSIONE DIZIONARI ------");
-                                tmp.storeIntoFile(dir + "fusione_dizionari.xml");
+                                tmp.storeIntoFile(dir + RA.getNome() + "-fusione_dizionari.xml");
 
                                 A_tmp = null;
                                 A_tmp = new Automa();
@@ -296,7 +403,7 @@ public class main {
 
                                 System.out.println("");
                                 System.out.println("----- SALVATAGGIO RELATIVO ALLA DETERMINIZZAZIONE DELLA FUSIONE DIZIONARI ------");
-                                return tmp.storeIntoFile(dir + "determinizzazione_fusione_dizionari.xml");
+                                return tmp.storeIntoFile(dir + RA.getNome() + "-determinizzazione_fusione_dizionari.xml");
                                 }
                         }else{
                             return false;
@@ -341,20 +448,46 @@ public class main {
                                 osservazione_lineare = acquisizione_osservazione_lineare();
                                 diagnosi = A_tmp.ricerca_dizionario(osservazione_lineare);
 
-                                return storeIntoFile(dir + "diagnosi.txt", diagnosi);
+                                return storeIntoFile(dir + RA.getNome() + "-diagnosi.txt", diagnosi);
                             }
                         }else{
                             return false;
                         }
                     case 12:
                         automa_scenario = new Automa();
-                        if(caricaScenario(automa_scenario)){
+                        if(caricaScenario(automa_scenario) && proseguire()){
                             A_out = new Automa();
+                            A_tmp = new Automa();
                             RA.calcolaStatoComportamentaleDecoratoVincolato(A_out, automa_scenario);
+                            tmp = new ReteAutomi();
+                            tmp.pushAutoma(A_out);
+                            System.out.println("");
+                            System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE VINCOLATO DA UNO SCENARIO ------");
+                            if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_vincolato_scenario.xml") && proseguire()){
+                                A_out.potatura();
+                                A_out.ridenominazione("");
+                                tmp = null;
+                                tmp = new ReteAutomi();
+                                tmp.pushAutoma(A_out);
+                                System.out.println("");
+                                System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE VINCOLATO DA UNO SCENARIO POTATO E RIDENOMINATO ------");
+                                if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_vincolato_scenario_potato.xml") && proseguire()){
+                                    A_out.determinizzazione(A_tmp);
+                                    tmp = null;
+                                    tmp = new ReteAutomi();
+                                    tmp.pushAutoma(A_tmp);
+                                    System.out.println("");
+                                    System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE VINCOLATO DA UNO SCENARIO DETERMINIZZATO ------");
+                                    return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_vincolato_scenario_determinizzato.xml");
+                                }else{
+                                    break;
+                                }
+                            }else{
+                                break;
+                            }
                         }else{
                             break;
                         }
-                        break;
                     case 0:
                         return false;
                     default:
@@ -475,7 +608,7 @@ public class main {
                     int scelta = Integer.parseInt(br.readLine());
 
                     if(scelta >0 && scelta <= (directoryListing.length)){
-                        if(auto.loadFromFile(tmpArray.get(scelta-1).toString())){
+                        if(auto.loadFromFile(tmpArray.get(scelta-1).toString(), "riconoscitore")){
                             return true;
                         }else{
                             // caricamento non riuscito
@@ -552,7 +685,7 @@ public class main {
                     int scelta = Integer.parseInt(br.readLine());
 
                     if(scelta >0 && scelta <= (directoryListing.length)){
-                        if(auto.loadFromFile(tmpArray.get(scelta-1).toString())){
+                        if(auto.loadFromFile(tmpArray.get(scelta-1).toString(), "scenario")){
                             return true;
                         }else{
                             // caricamento non riuscito
@@ -573,6 +706,28 @@ public class main {
             }
         }else{
             System.out.println("Non sono presenti file nella cartella input!!");
+        }
+        return false;
+    }
+    
+    private static boolean proseguire() throws IOException{
+        boolean quit = false;
+        System.out.println("Si desidera proseguire con l'elaborazione? (s/n)");
+        while(!quit){
+            try{
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                String scelta = br.readLine();
+                if(scelta.equalsIgnoreCase("s")){
+                    return true;
+                }else if(scelta.equalsIgnoreCase("n")){
+                    System.out.println("Elaborazione interrotta!");
+                    quit=true;
+                }else{
+                    System.err.println("Scelta non consentita. Inserire solo valori consentiti!");
+                }
+            }catch(NumberFormatException e){
+                System.err.println("Scelta non consentita. Inserire solo valori consentiti!");
+            }
         }
         return false;
     }

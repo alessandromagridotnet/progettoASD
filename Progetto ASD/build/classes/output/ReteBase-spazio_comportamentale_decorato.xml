@@ -4,7 +4,7 @@
     <Automi>
         <Automa>
             <Nome>null</Nome>
-            <Descrizione>Questo automa è composto da 24 stati e da 30 transizioni</Descrizione>
+            <Descrizione>Questo automa è composto da 28 stati e da 34 transizioni</Descrizione>
             <Stati>
                 <Stato>
                     <ID>a0</ID>
@@ -278,6 +278,68 @@
                     <StatoScenario/>
                 </Stato>
                 <Stato>
+                    <ID>a9</ID>
+                    <StatoIniziale>false</StatoIniziale>
+                    <StatoFinale>false</StatoFinale>
+                    <Stati>
+                        <Stato>
+                            <ID>21</ID>
+                            <StatoIniziale>true</StatoIniziale>
+                        </Stato>
+                        <Stato>
+                            <ID>30</ID>
+                            <StatoIniziale>true</StatoIniziale>
+                        </Stato>
+                    </Stati>
+                    <Coppie>
+                        <Coppia>
+                            <IdEvento>e2</IdEvento>
+                            <IdLink>L2</IdLink>
+                        </Coppia>
+                        <Coppia>
+                            <IdEvento>NULL</IdEvento>
+                            <IdLink>L3</IdLink>
+                        </Coppia>
+                    </Coppie>
+                    <Rilevanza>
+                        <Etichetta>r</Etichetta>
+                    </Rilevanza>
+                    <Diagnosi/>
+                    <StatoRiconoscitore/>
+                    <StatoScenario/>
+                </Stato>
+                <Stato>
+                    <ID>a10</ID>
+                    <StatoIniziale>false</StatoIniziale>
+                    <StatoFinale>false</StatoFinale>
+                    <Stati>
+                        <Stato>
+                            <ID>30</ID>
+                            <StatoIniziale>true</StatoIniziale>
+                        </Stato>
+                        <Stato>
+                            <ID>20</ID>
+                            <StatoIniziale>true</StatoIniziale>
+                        </Stato>
+                    </Stati>
+                    <Coppie>
+                        <Coppia>
+                            <IdEvento>e2</IdEvento>
+                            <IdLink>L2</IdLink>
+                        </Coppia>
+                        <Coppia>
+                            <IdEvento>e3</IdEvento>
+                            <IdLink>L3</IdLink>
+                        </Coppia>
+                    </Coppie>
+                    <Rilevanza>
+                        <Etichetta>r</Etichetta>
+                    </Rilevanza>
+                    <Diagnosi/>
+                    <StatoRiconoscitore/>
+                    <StatoScenario/>
+                </Stato>
+                <Stato>
                     <ID>a11</ID>
                     <StatoIniziale>false</StatoIniziale>
                     <StatoFinale>false</StatoFinale>
@@ -416,6 +478,70 @@
                         </Stato>
                         <Stato>
                             <ID>31</ID>
+                            <StatoIniziale>true</StatoIniziale>
+                        </Stato>
+                    </Stati>
+                    <Coppie>
+                        <Coppia>
+                            <IdEvento>e2</IdEvento>
+                            <IdLink>L2</IdLink>
+                        </Coppia>
+                        <Coppia>
+                            <IdEvento>e3</IdEvento>
+                            <IdLink>L3</IdLink>
+                        </Coppia>
+                    </Coppie>
+                    <Rilevanza>
+                        <Etichetta>r</Etichetta>
+                        <Etichetta>f</Etichetta>
+                    </Rilevanza>
+                    <Diagnosi/>
+                    <StatoRiconoscitore/>
+                    <StatoScenario/>
+                </Stato>
+                <Stato>
+                    <ID>a16</ID>
+                    <StatoIniziale>false</StatoIniziale>
+                    <StatoFinale>false</StatoFinale>
+                    <Stati>
+                        <Stato>
+                            <ID>21</ID>
+                            <StatoIniziale>true</StatoIniziale>
+                        </Stato>
+                        <Stato>
+                            <ID>30</ID>
+                            <StatoIniziale>true</StatoIniziale>
+                        </Stato>
+                    </Stati>
+                    <Coppie>
+                        <Coppia>
+                            <IdEvento>e2</IdEvento>
+                            <IdLink>L2</IdLink>
+                        </Coppia>
+                        <Coppia>
+                            <IdEvento>NULL</IdEvento>
+                            <IdLink>L3</IdLink>
+                        </Coppia>
+                    </Coppie>
+                    <Rilevanza>
+                        <Etichetta>r</Etichetta>
+                        <Etichetta>f</Etichetta>
+                    </Rilevanza>
+                    <Diagnosi/>
+                    <StatoRiconoscitore/>
+                    <StatoScenario/>
+                </Stato>
+                <Stato>
+                    <ID>a17</ID>
+                    <StatoIniziale>false</StatoIniziale>
+                    <StatoFinale>false</StatoFinale>
+                    <Stati>
+                        <Stato>
+                            <ID>30</ID>
+                            <StatoIniziale>true</StatoIniziale>
+                        </Stato>
+                        <Stato>
+                            <ID>20</ID>
                             <StatoIniziale>true</StatoIniziale>
                         </Stato>
                     </Stati>
@@ -804,6 +930,18 @@
                     <Osservabilita>o3</Osservabilita>
                 </Transizione>
                 <Transizione>
+                    <Nome>t3b</Nome>
+                    <IdStatoIniziale>a8</IdStatoIniziale>
+                    <IdStatoFinale>a9</IdStatoFinale>
+                    <Osservabilita>NULL</Osservabilita>
+                </Transizione>
+                <Transizione>
+                    <Nome>t2b</Nome>
+                    <IdStatoIniziale>a9</IdStatoIniziale>
+                    <IdStatoFinale>a10</IdStatoFinale>
+                    <Osservabilita>NULL</Osservabilita>
+                </Transizione>
+                <Transizione>
                     <Nome>t3c</Nome>
                     <IdStatoIniziale>a8</IdStatoIniziale>
                     <IdStatoFinale>a11</IdStatoFinale>
@@ -832,6 +970,18 @@
                     <IdStatoIniziale>a14</IdStatoIniziale>
                     <IdStatoFinale>a15</IdStatoFinale>
                     <Osservabilita>o3</Osservabilita>
+                </Transizione>
+                <Transizione>
+                    <Nome>t3b</Nome>
+                    <IdStatoIniziale>a15</IdStatoIniziale>
+                    <IdStatoFinale>a16</IdStatoFinale>
+                    <Osservabilita>NULL</Osservabilita>
+                </Transizione>
+                <Transizione>
+                    <Nome>t2b</Nome>
+                    <IdStatoIniziale>a16</IdStatoIniziale>
+                    <IdStatoFinale>a17</IdStatoFinale>
+                    <Osservabilita>NULL</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3c</Nome>

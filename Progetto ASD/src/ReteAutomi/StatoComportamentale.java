@@ -134,8 +134,8 @@ public class StatoComportamentale implements Stato, Cloneable {
         String xml = "";
         xml += "<Stato>" + System.lineSeparator();
             xml += "<ID>" + this.getId() + "</ID>" + System.lineSeparator();
-            xml += "<Iniziale>" + this.getIniziale().toString() + "</Iniziale>" + System.lineSeparator();
-            xml += "<Finale>" + this.getFinale().toString() + "</Finale>" + System.lineSeparator();
+            xml += "<StatoIniziale>" + this.getIniziale().toString() + "</StatoIniziale>" + System.lineSeparator();
+            xml += "<StatoFinale>" + this.getFinale().toString() + "</StatoFinale>" + System.lineSeparator();
             xml += "<Stati>" + System.lineSeparator();
             for(Stato s : this.getStati()){
                 xml += s.toXML();

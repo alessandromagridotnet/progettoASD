@@ -42,7 +42,7 @@ public class StatoSemplice implements Stato, Cloneable{
         String xml = "";
         xml += "<Stato>" + System.lineSeparator();
             xml += "<ID>" + this.getId() + "</ID>" + System.lineSeparator();
-            xml += "<Iniziale>" + this.getIniziale().toString() + "</Iniziale>" + System.lineSeparator();
+            xml += "<StatoIniziale>" + this.getIniziale().toString() + "</StatoIniziale>" + System.lineSeparator();
         xml += "</Stato>" + System.lineSeparator();
         
         return xml;

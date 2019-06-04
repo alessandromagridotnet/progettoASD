@@ -8,21 +8,21 @@
             <Stati>
                 <Stato>
                     <ID>b0</ID>
-                    <Iniziale>true</Iniziale>
-                    <Finale>false</Finale>
+                    <StatoIniziale>true</StatoIniziale>
+                    <StatoFinale>false</StatoFinale>
                     <Stati>
                         <Stato>
                             <ID>a0</ID>
-                            <Iniziale>true</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>true</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>30</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -38,30 +38,32 @@
                             <Rilevanza/>
                             <Diagnosi/>
                             <StatoRiconoscitore>0</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                     </Stati>
                     <Coppie/>
                     <Rilevanza/>
                     <Diagnosi/>
                     <StatoRiconoscitore/>
+                    <StatoScenario/>
                 </Stato>
                 <Stato>
                     <ID>b1</ID>
-                    <Iniziale>false</Iniziale>
-                    <Finale>false</Finale>
+                    <StatoIniziale>false</StatoIniziale>
+                    <StatoFinale>false</StatoFinale>
                     <Stati>
                         <Stato>
                             <ID>a1</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -77,30 +79,32 @@
                             <Rilevanza/>
                             <Diagnosi/>
                             <StatoRiconoscitore>1</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                     </Stati>
                     <Coppie/>
                     <Rilevanza/>
                     <Diagnosi/>
                     <StatoRiconoscitore/>
+                    <StatoScenario/>
                 </Stato>
                 <Stato>
                     <ID>b2</ID>
-                    <Iniziale>false</Iniziale>
-                    <Finale>false</Finale>
+                    <StatoIniziale>false</StatoIniziale>
+                    <StatoFinale>false</StatoFinale>
                     <Stati>
                         <Stato>
                             <ID>a2</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>21</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -116,19 +120,20 @@
                             <Rilevanza/>
                             <Diagnosi/>
                             <StatoRiconoscitore>2</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a3</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>21</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>30</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -144,19 +149,20 @@
                             <Rilevanza/>
                             <Diagnosi/>
                             <StatoRiconoscitore>2</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a4</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>30</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -174,19 +180,20 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>2</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a17</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>21</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -204,19 +211,20 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>2</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a18</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -235,19 +243,20 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>2</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a19</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>30</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -266,30 +275,32 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>2</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                     </Stati>
                     <Coppie/>
                     <Rilevanza/>
                     <Diagnosi/>
                     <StatoRiconoscitore/>
+                    <StatoScenario/>
                 </Stato>
                 <Stato>
                     <ID>b3</ID>
-                    <Iniziale>false</Iniziale>
-                    <Finale>false</Finale>
+                    <StatoIniziale>false</StatoIniziale>
+                    <StatoFinale>false</StatoFinale>
                     <Stati>
                         <Stato>
                             <ID>a5</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -307,19 +318,20 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>3</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a16</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>21</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -335,19 +347,20 @@
                             <Rilevanza/>
                             <Diagnosi/>
                             <StatoRiconoscitore>3</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a8</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -366,30 +379,32 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>3</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                     </Stati>
                     <Coppie/>
                     <Rilevanza/>
                     <Diagnosi/>
                     <StatoRiconoscitore/>
+                    <StatoScenario/>
                 </Stato>
                 <Stato>
                     <ID>b4</ID>
-                    <Iniziale>false</Iniziale>
-                    <Finale>true</Finale>
+                    <StatoIniziale>false</StatoIniziale>
+                    <StatoFinale>true</StatoFinale>
                     <Stati>
                         <Stato>
                             <ID>a9</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>21</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -408,19 +423,20 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>4</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a10</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>true</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>true</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>21</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>30</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -439,19 +455,20 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>4</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a12</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>true</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>true</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>21</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -470,19 +487,20 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>4</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a13</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>false</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>false</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -501,19 +519,20 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>4</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a14</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>true</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>true</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>30</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -532,19 +551,20 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>4</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                         <Stato>
                             <ID>a15</ID>
-                            <Iniziale>false</Iniziale>
-                            <Finale>true</Finale>
+                            <StatoIniziale>false</StatoIniziale>
+                            <StatoFinale>true</StatoFinale>
                             <Stati>
                                 <Stato>
                                     <ID>20</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                                 <Stato>
                                     <ID>31</ID>
-                                    <Iniziale>true</Iniziale>
+                                    <StatoIniziale>true</StatoIniziale>
                                 </Stato>
                             </Stati>
                             <Coppie>
@@ -563,6 +583,7 @@
                             </Rilevanza>
                             <Diagnosi/>
                             <StatoRiconoscitore>4</StatoRiconoscitore>
+                            <StatoScenario/>
                         </Stato>
                     </Stati>
                     <Coppie/>
@@ -571,6 +592,7 @@
                         <Etichetta>r,f</Etichetta>
                     </Diagnosi>
                     <StatoRiconoscitore/>
+                    <StatoScenario/>
                 </Stato>
             </Stati>
             <Transizioni>

@@ -11,9 +11,9 @@ public interface Transizione {
     public void setIniziale(Stato iniziale);
     public Stato getFinale();
     public void setFinale(Stato finale);
-    public String getOsservabilita();
-    public void setOsservabilita(String osservabilita);
-    public String getRilevanza();
-    public void setRilevanza(String rilevanza);
+//    public String getOsservabilita();
+//    public void setOsservabilita(String osservabilita);
+//    public String getRilevanza();
+//    public void setRilevanza(String rilevanza);
     public String toXML();
 }

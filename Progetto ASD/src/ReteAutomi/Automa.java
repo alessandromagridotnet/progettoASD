@@ -223,10 +223,24 @@ public class Automa {
         successiviOsservabilitaNull(a_sc).forEach((sc) -> {
             nuovo.getStati().add(sc);
         });
+        // controllo se è uno stato finale
+        for(Stato s : nuovo.getStati()){
+            StatoComportamentale s_c = (StatoComportamentale)s;
+            if(s_c.getFinale()){
+                nuovo.setFinale(true);
+            }
+            if(s_c.getIniziale()){
+                nuovo.setIniziale(true);
+            }
+        }
+        if(nuovo.getFinale()){
+            calcola_diagnosi(nuovo);
+        }
         boolean contains = false;
         for(Stato check_state : A_out.getStati()){
             StatoComportamentale sc = (StatoComportamentale) check_state;
             if(sc.equalsNotId(nuovo)){
+                System.out.println();
                 nuovo.clone(sc);
                 contains = true;
                 break;
@@ -238,19 +252,6 @@ public class Automa {
                 if(trans.getFinale()==null){
                     trans.setFinale(nuovo);
                 }
-            }
-            // controllo se è uno stato finale
-            for(Stato s : nuovo.getStati()){
-                StatoComportamentale s_c = (StatoComportamentale)s;
-                if(s_c.getFinale()){
-                    nuovo.setFinale(true);
-                }
-                if(s_c.getIniziale()){
-                    nuovo.setIniziale(true);
-                }
-            }
-            if(nuovo.getFinale()){
-                calcola_diagnosi(nuovo);
             }
             nuovo.setId("b" + incrementale);
             incrementale = incrementale + 1;
@@ -269,10 +270,11 @@ public class Automa {
         // trova tutte le possibili etichette di osservabilità in uscita dall'insieme di stati considerati
         ArrayList<String> etichette_osservabilita = new ArrayList<>();
         for(Transizione tt : this.getTransizioni()){
+            TransizioneComportamentale tc = (TransizioneComportamentale) tt;
             // controlla che l'etichetta non sia nulla e che lo stato iniziale sia uno di quelli considerati
-            if((!tt.getOsservabilita().equals("NULL")) && nuovo.getStati().contains((StatoComportamentale) tt.getIniziale())){
-                if(!etichette_osservabilita.contains(tt.getOsservabilita())){
-                    etichette_osservabilita.add(tt.getOsservabilita());
+            if((!tc.getOsservabilita().equals("NULL")) && nuovo.getStati().contains((StatoComportamentale) tc.getIniziale())){
+                if(!etichette_osservabilita.contains(tc.getOsservabilita())){
+                    etichette_osservabilita.add(tc.getOsservabilita());
                 }
             }
         }
@@ -282,10 +284,11 @@ public class Automa {
             ArrayList<StatoComportamentale> tmp_array = new ArrayList<>();
             // ciclo sulle transizioni
             for(Transizione tt : this.getTransizioni()){
+                TransizioneComportamentale tc = (TransizioneComportamentale) tt;
                 // cerco quelle che hanno una delle etichette di osservabilità possibili e che partono da uno degli stati considerati
-                if(tt.getOsservabilita().equals(e_o) && nuovo.getStati().contains((StatoComportamentale) tt.getIniziale())){
+                if(tc.getOsservabilita().equals(e_o) && nuovo.getStati().contains((StatoComportamentale) tc.getIniziale())){
                     // le aggiungo ad un array tempooraneo
-                    tmp_array.add((StatoComportamentale) tt.getFinale());
+                    tmp_array.add((StatoComportamentale) tc.getFinale());
                 }
             }
             // metto l'array temporaneo in una map list in modo da raggruppare tutti gli stati in uscita accomunati dalla stessa erichetta
@@ -568,9 +571,10 @@ public class Automa {
             osservazione = osservazione_lineare[position];
             // ciclo tutte le transizioni disponibili
             for(Transizione tt : this.getTransizioni()){
+                TransizioneComportamentale tc = (TransizioneComportamentale) tt;
                 // se la transizione ha la giusta etichetta di osservabilità e parte da uno stato tra quelli da considerare
-                if(tt.getOsservabilita().equals(osservazione) && ((StatoComportamentale)tt.getIniziale()).getConfermato()==2){
-                    ((StatoComportamentale)tt.getFinale()).setConfermato(1);
+                if(tc.getOsservabilita().equals(osservazione) && ((StatoComportamentale)tc.getIniziale()).getConfermato()==2){
+                    ((StatoComportamentale)tc.getFinale()).setConfermato(1);
                 }
             }
             for(Stato s : this.getStati()){
@@ -616,12 +620,16 @@ public class Automa {
     
     
     
-    public boolean loadFromFile(String file) {
+    public boolean loadFromFile(String file, String type) {
         try {
             SAXBuilder builder = new SAXBuilder();
             Element root = builder.build(new File(file)).getRootElement();
             
-            this.fromXMLRiconoscitore(root);
+            if(type.equals("riconoscitore")){
+                this.fromXMLRiconoscitore(root);
+            }else if(type.equals("scenario")){
+                this.fromXMLScenario(root);
+            }
 
             System.out.println("Caricamento completato");
             
@@ -633,6 +641,7 @@ public class Automa {
             return false;
         }
     }
+    
     public void fromXMLRiconoscitore(Element xml){
         this.setNome(xml.getChildText("Nome"));
         // array degli stati
@@ -652,28 +661,29 @@ public class Automa {
             this.pushTransizioni(transizione);
         }
     }
-//    public void fromXMLScenario(Element xml){
-//        this.setNome(xml.getChildText("Nome"));
-//        // array degli stati
-//        List listStati = xml.getChild("Stati").getChildren("Stato");
-//        for (int j = 0; j < listStati.size(); j++) {
-//            StatoRiconoscitore stato = new StatoRiconoscitore();
-//            Element nodoStato = (Element) listStati.get(j);
-//            stato.fromXML(nodoStato);
-//            this.pushStato(stato);
-//        }
-//        // array delle transizioni
-//        List listTransizioni = xml.getChild("Transizioni").getChildren("Transizione");
-//        for (int j = 0; j < listTransizioni.size(); j++) {
-//            TransizioneScenario transizione = new TransizioneScenario();
-//            Element nodoTransizione = (Element) listTransizioni.get(j);
-//            transizione.fromXML(nodoTransizione, this.getStati());
-//            this.pushTransizioni(transizione);
-//        }
-//    }
+    
+    public void fromXMLScenario(Element xml){
+        this.setNome(xml.getChildText("Nome"));
+        // array degli stati
+        List listStati = xml.getChild("Stati").getChildren("Stato");
+        for (int j = 0; j < listStati.size(); j++) {
+            StatoRiconoscitore stato = new StatoRiconoscitore();
+            Element nodoStato = (Element) listStati.get(j);
+            stato.fromXML(nodoStato);
+            this.pushStato(stato);
+        }
+        // array delle transizioni
+        List listTransizioni = xml.getChild("Transizioni").getChildren("Transizione");
+        for (int j = 0; j < listTransizioni.size(); j++) {
+            TransizioneScenario transizione = new TransizioneScenario();
+            Element nodoTransizione = (Element) listTransizioni.get(j);
+            transizione.fromXML(nodoTransizione, this.getStati());
+            this.pushTransizioni(transizione);
+        }
+    }
     
     public void fusione_dizionari(ArrayList<Automa> automi){
-        Transizione t;
+        TransizioneComportamentale t;
         StatoComportamentale sc = new StatoComportamentale();
         sc.setId("U0");
         sc.setIniziale(true);

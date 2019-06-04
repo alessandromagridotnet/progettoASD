@@ -1,7 +1,6 @@
 package ReteAutomi;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.jdom.Element;
 
 /**
@@ -50,22 +49,18 @@ public class TransizioneComportamentale implements Transizione{
         this.finale = finale;
     }
 
-    @Override
     public String getOsservabilita() {
         return osservabilita;
     }
 
-    @Override
     public void setOsservabilita(String osservabilita) {
         this.osservabilita = osservabilita;
     }
 
-    @Override
     public String getRilevanza() {
         return rilevanza;
     }
 
-    @Override
     public void setRilevanza(String rilevanza) {
         this.rilevanza = rilevanza;
     }

@@ -142,14 +142,18 @@ public class TransizioneStati implements Transizione{
         }
         // ingresso
         Coppia ingresso = new Coppia();
-        ingresso.fromXML((Element)xml.getChild("Coppia"));
+        if(!((Element)xml.getChild("Coppia")==null)){
+            ingresso.fromXML((Element)xml.getChild("Coppia"));
+        }
         this.setIngresso(ingresso);
         // uscite
-        List listUscite = xml.getChild("CoppieUscita").getChildren("Coppia");
-        for(int i=0; i < listUscite.size(); i++){
-            Coppia coppia = new Coppia();
-            coppia.fromXML((Element)listUscite.get(i));
-            this.pushUscita(coppia);
+        if(!((Element)xml.getChild("CoppieUscita")==null)){
+            List listUscite = xml.getChild("CoppieUscita").getChildren("Coppia");
+            for(int i=0; i < listUscite.size(); i++){
+                Coppia coppia = new Coppia();
+                coppia.fromXML((Element)listUscite.get(i));
+                this.pushUscita(coppia);
+            }
         }
         // etichette
         this.setOsservabilita(xml.getChildText("Osservabilita"));
