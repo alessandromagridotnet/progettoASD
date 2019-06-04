@@ -1,1 +1,1 @@
-La diagnosi trovata è: {{}}
+La diagnosi trovata è: {{},{f},{f,r}}

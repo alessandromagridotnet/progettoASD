@@ -652,6 +652,25 @@ public class Automa {
             this.pushTransizioni(transizione);
         }
     }
+//    public void fromXMLScenario(Element xml){
+//        this.setNome(xml.getChildText("Nome"));
+//        // array degli stati
+//        List listStati = xml.getChild("Stati").getChildren("Stato");
+//        for (int j = 0; j < listStati.size(); j++) {
+//            StatoRiconoscitore stato = new StatoRiconoscitore();
+//            Element nodoStato = (Element) listStati.get(j);
+//            stato.fromXML(nodoStato);
+//            this.pushStato(stato);
+//        }
+//        // array delle transizioni
+//        List listTransizioni = xml.getChild("Transizioni").getChildren("Transizione");
+//        for (int j = 0; j < listTransizioni.size(); j++) {
+//            TransizioneScenario transizione = new TransizioneScenario();
+//            Element nodoTransizione = (Element) listTransizioni.get(j);
+//            transizione.fromXML(nodoTransizione, this.getStati());
+//            this.pushTransizioni(transizione);
+//        }
+//    }
     
     public void fusione_dizionari(ArrayList<Automa> automi){
         Transizione t;

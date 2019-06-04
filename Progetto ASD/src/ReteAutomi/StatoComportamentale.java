@@ -21,6 +21,7 @@ public class StatoComportamentale implements Stato, Cloneable {
     private int confermato; // 0 se è da rimuovere | 1 se è stato visitato | 2 se confermato
     private ArrayList<String> diagnosi;
     private String statoRiconoscitore;
+    private String statoScenario;
 
     public StatoComportamentale() {
         this.id = "NULL";
@@ -32,6 +33,7 @@ public class StatoComportamentale implements Stato, Cloneable {
         this.rilevanza = new ArrayList<>();
         this.diagnosi = new ArrayList<>();
         this.statoRiconoscitore = "";
+        this.statoScenario = "";
     }
     
     @Override
@@ -114,6 +116,14 @@ public class StatoComportamentale implements Stato, Cloneable {
     public void setStatoRiconoscitore(String statoRiconoscitore) {
         this.statoRiconoscitore = statoRiconoscitore;
     }
+
+    public String getStatoScenario() {
+        return statoScenario;
+    }
+
+    public void setStatoScenario(String statoScenario) {
+        this.statoScenario = statoScenario;
+    }
     
     /**
      * Funzione che ritorna una stringa contenente la rappresentazione XML
@@ -147,6 +157,7 @@ public class StatoComportamentale implements Stato, Cloneable {
             }
             xml += "</Diagnosi>" + System.lineSeparator();
             xml += "<StatoRiconoscitore>" + this.getStatoRiconoscitore() + "</StatoRiconoscitore>" + System.lineSeparator();
+            xml += "<StatoScenario>" + this.getStatoScenario() + "</StatoScenario>" + System.lineSeparator();
         xml += "</Stato>" + System.lineSeparator();
         
         return xml;
@@ -180,6 +191,7 @@ public class StatoComportamentale implements Stato, Cloneable {
             this.pushDiagnosi(d);
         }
         this.setStatoRiconoscitore(sc.getStatoRiconoscitore());
+        this.setStatoScenario(sc.getStatoScenario());
     }
     
     /**
@@ -196,6 +208,7 @@ public class StatoComportamentale implements Stato, Cloneable {
                     && this.getIniziale().equals(sc.getIniziale())
                     && this.getFinale().equals(sc.getFinale())
                     && this.getStatoRiconoscitore().equals(sc.getStatoRiconoscitore())
+                    && this.getStatoScenario().equals(sc.getStatoScenario())
                     ){
                         if(this.getCoppie().size()==sc.getCoppie().size()){
                             for(Coppia cp : this.getCoppie()){
@@ -239,6 +252,7 @@ public class StatoComportamentale implements Stato, Cloneable {
                     && this.getIniziale().equals(sc.getIniziale())
                     && this.getFinale().equals(sc.getFinale())
                     && this.getStatoRiconoscitore().equals(sc.getStatoRiconoscitore())
+                    && this.getStatoScenario().equals(sc.getStatoScenario())
                     ){
                         if(this.getCoppie().size()==sc.getCoppie().size()){
                             for(Coppia cp : this.getCoppie()){
@@ -272,7 +286,9 @@ public class StatoComportamentale implements Stato, Cloneable {
                 StatoComportamentale sc = (StatoComportamentale) o;
                 if(this.getIniziale().equals(sc.getIniziale())
                     && this.getFinale().equals(sc.getFinale())
-                    && this.getStatoRiconoscitore().equals(sc.getStatoRiconoscitore())){
+                    && this.getStatoRiconoscitore().equals(sc.getStatoRiconoscitore())
+                    && this.getStatoScenario().equals(sc.getStatoScenario())
+                    ){
                         if(this.getCoppie().size()==sc.getCoppie().size()){
                             for(Coppia cp : this.getCoppie()){
                                 if(!(sc.getCoppie().contains(cp))){

@@ -1,0 +1,47 @@
+<Automa>
+    <Nome>Scenario ReteBase 1</Nome>
+    <Stati>
+        <Stato>
+            <ID>s0</ID>
+            <Iniziale>true</Iniziale>
+            <Finale>true</Finale>
+        </Stato>
+        <Stato>
+            <ID>s1</ID>
+            <Iniziale>false</Iniziale>
+            <Finale>false</Finale>
+        </Stato>
+    </Stati>
+    <Transizioni>
+        <Transizione>
+            <Nome>t2a</Nome>
+            <IdStatoIniziale>s0</IdStatoIniziale>
+            <IdStatoFinale>s0</IdStatoFinale>
+        </Transizione>
+        <Transizione>
+            <Nome>t2b</Nome>
+            <IdStatoIniziale>s0</IdStatoIniziale>
+            <IdStatoFinale>s0</IdStatoFinale>
+        </Transizione>
+        <Transizione>
+            <Nome>t2a</Nome>
+            <IdStatoIniziale>s1</IdStatoIniziale>
+            <IdStatoFinale>s1</IdStatoFinale>
+        </Transizione>
+        <Transizione>
+            <Nome>t2b</Nome>
+            <IdStatoIniziale>s1</IdStatoIniziale>
+            <IdStatoFinale>s1</IdStatoFinale>
+        </Transizione>
+        <Transizione>
+            <Nome>t3a</Nome>
+            <IdStatoIniziale>s0</IdStatoIniziale>
+            <IdStatoFinale>s1</IdStatoFinale>
+        </Transizione>
+        <Transizione>
+            <Nome>t3b</Nome>
+            <IdStatoIniziale>s1</IdStatoIniziale>
+            <IdStatoFinale>s0</IdStatoFinale>
+        </Transizione>
+    </Transizioni>
+</Automa>
