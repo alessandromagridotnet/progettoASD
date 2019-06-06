@@ -267,6 +267,8 @@ public class ReteAutomi {
                             TransizioneComportamentale t_comp = new TransizioneComportamentale();
                             t_comp.setNome(t.getNome());
                             t_comp.setIniziale(sc_pre);
+                            t_comp.setRilevanza(t.getRilevanza());
+                            t_comp.setOsservabilita(t.getOsservabilita());
                             // controllo che il nuovo stato generato non sia già presente nell'automa dello stato comportamentale
                             int chk_count = 0;
                             for(Stato s_chk : A_out.getStati()){

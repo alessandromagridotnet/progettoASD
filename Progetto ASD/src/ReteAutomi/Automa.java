@@ -726,4 +726,88 @@ public class Automa {
             }
         }
     }
+    
+    /**
+     * funzione che ciclando su un automa stato comportamentale genera un automa 
+     * StatoComportamentaleDecorato e lo restituisce nella struttura A_out
+     * @param A_out la struttura ritornata
+     */
+    public void decorazioneStatoComportamentale(Automa A_out){
+        int[] conteggio = new int[1];
+        conteggio[0] = 0;
+        // cerco lo stato iniziale
+        for(Stato s : this.getStati()){
+            if(s.getIniziale()){
+                StatoComportamentale sc = (StatoComportamentale) s;
+                sc.setId(Integer.toString(conteggio[0]));
+                A_out.pushStato(sc);
+                decorazioneStatoComportamentale_ricorsivo(A_out, sc, conteggio);
+                break;
+            }
+        }
+    }
+    
+    
+    public void decorazioneStatoComportamentale_ricorsivo(Automa A_out, StatoComportamentale stato_attuale, int[] conteggio){
+        // cerco tutte le transizioni che partono dallo stato attuale ricevuto come parametro
+        for(Transizione t : this.getTransizioni()){
+            if(((StatoComportamentale)t.getIniziale()).equalsNotEtichetteNotId(stato_attuale)){
+                TransizioneComportamentale tc = (TransizioneComportamentale) t;
+                StatoComportamentale sc = new StatoComportamentale();
+                sc.clone((StatoComportamentale)t.getFinale());
+                
+//                ########################################################################################
+//                        CRETINO NON GENERA TUTTI GLI STATI/TRANSIZIONI CHE DOVREBBE
+//                ########################################################################################
+                
+                // aggiunge le rilevanze ereditate dallo stato precedente
+                for(String s : stato_attuale.getRilevanza()){
+                    if(!sc.getRilevanza().contains(s)){
+                        sc.pushRilevanza(s);
+                    }
+                }
+                // aggiunge la rilevanza della transizione
+                if(!tc.getRilevanza().equals("NULL") && !sc.getRilevanza().contains(tc.getRilevanza())){
+                    sc.pushRilevanza(tc.getRilevanza());
+                }
+                boolean presente = false;
+                // creazione nuovo stato completata
+                for(Stato stato_check : A_out.getStati()){
+                    StatoComportamentale sc_check = (StatoComportamentale) stato_check;
+                    if(sc_check.equalsNotId(sc)){
+                        // lo stato è già presenta, va solo creata la transizione che lo punta
+                        presente = true;
+                        
+                        TransizioneComportamentale nuova_transizione = new TransizioneComportamentale();
+                        nuova_transizione.setIniziale(stato_attuale);
+                        nuova_transizione.setFinale(sc_check);
+                        nuova_transizione.setNome(tc.getNome());
+                        nuova_transizione.setOsservabilita(tc.getOsservabilita());
+                        nuova_transizione.setRilevanza(tc.getRilevanza());
+                        
+                        A_out.pushTransizioni(nuova_transizione);
+                    }
+                }
+                // se il nuovo stato generato non è presente nell'automa in uscita
+                if(!presente){
+                    conteggio[0]++;
+                    sc.setId(Integer.toString(conteggio[0]));
+                    A_out.pushStato(sc);
+                    
+                    //creiamo la transizione in uscita
+                    TransizioneComportamentale nuova_transizione = new TransizioneComportamentale();
+                    nuova_transizione.setIniziale(stato_attuale);
+                    nuova_transizione.setFinale(sc);
+                    nuova_transizione.setNome(tc.getNome());
+                    nuova_transizione.setOsservabilita(tc.getOsservabilita());
+                    nuova_transizione.setRilevanza(tc.getRilevanza());
+
+                    A_out.pushTransizioni(nuova_transizione);
+                    
+                    // chiamata ricorsiva
+                    decorazioneStatoComportamentale_ricorsivo(A_out, sc, conteggio);
+                }
+            }
+        }
+    }
 }

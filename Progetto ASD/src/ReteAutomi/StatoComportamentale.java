@@ -284,8 +284,7 @@ public class StatoComportamentale implements Stato, Cloneable {
         if(o!=null){
             if(this.getClass().isInstance(o)){
                 StatoComportamentale sc = (StatoComportamentale) o;
-                if(this.getIniziale().equals(sc.getIniziale())
-                    && this.getFinale().equals(sc.getFinale())
+                if(this.getFinale().equals(sc.getFinale())
                     && this.getStatoRiconoscitore().equals(sc.getStatoRiconoscitore())
                     && this.getStatoScenario().equals(sc.getStatoScenario())
                     ){
@@ -328,6 +327,40 @@ public class StatoComportamentale implements Stato, Cloneable {
             }
         }
         
+        return false;
+    }
+    
+    public boolean equalsNotEtichetteNotId(Object o){
+        if(o!=null){
+            if(this.getClass().isInstance(o)){
+                StatoComportamentale sc = (StatoComportamentale) o;
+                if(this.getIniziale().equals(sc.getIniziale())
+                    && this.getFinale().equals(sc.getFinale())
+                    && this.getStatoRiconoscitore().equals(sc.getStatoRiconoscitore())
+                    && this.getStatoScenario().equals(sc.getStatoScenario())
+                    ){
+                        if(this.getCoppie().size()==sc.getCoppie().size()){
+                            for(Coppia cp : this.getCoppie()){
+                                if(!(sc.getCoppie().contains(cp))){
+                                    return false;
+                                }
+                            }
+                        }else{
+                            return false;
+                        }
+                        if(this.getStati().size()==sc.getStati().size()){
+                            for(Stato s :this.getStati()){
+                                if(!(sc.getStati().contains(s))){
+                                    return false;
+                                }
+                            }
+                        }else{
+                            return false;
+                        }
+                        return true;
+                }
+            }
+        }
         return false;
     }
     

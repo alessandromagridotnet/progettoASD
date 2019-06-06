@@ -4,7 +4,7 @@
     <Automi>
         <Automa>
             <Nome>null</Nome>
-            <Descrizione>Questo automa è composto da 16 stati e da 19 transizioni</Descrizione>
+            <Descrizione>Questo automa è composto da 15 stati e da 18 transizioni</Descrizione>
             <Stati>
                 <Stato>
                     <ID>0</ID>
@@ -422,35 +422,6 @@
                             <StatoIniziale>true</StatoIniziale>
                         </Stato>
                         <Stato>
-                            <ID>30</ID>
-                            <StatoIniziale>true</StatoIniziale>
-                        </Stato>
-                    </Stati>
-                    <Coppie>
-                        <Coppia>
-                            <IdEvento>NULL</IdEvento>
-                            <IdLink>L2</IdLink>
-                        </Coppia>
-                        <Coppia>
-                            <IdEvento>NULL</IdEvento>
-                            <IdLink>L3</IdLink>
-                        </Coppia>
-                    </Coppie>
-                    <Rilevanza/>
-                    <Diagnosi/>
-                    <StatoRiconoscitore/>
-                    <StatoScenario/>
-                </Stato>
-                <Stato>
-                    <ID>15</ID>
-                    <StatoIniziale>false</StatoIniziale>
-                    <StatoFinale>true</StatoFinale>
-                    <Stati>
-                        <Stato>
-                            <ID>20</ID>
-                            <StatoIniziale>true</StatoIniziale>
-                        </Stato>
-                        <Stato>
                             <ID>31</ID>
                             <StatoIniziale>true</StatoIniziale>
                         </Stato>
@@ -476,13 +447,13 @@
                     <Nome>t3a</Nome>
                     <IdStatoIniziale>0</IdStatoIniziale>
                     <IdStatoFinale>1</IdStatoFinale>
-                    <Osservabilita>NULL</Osservabilita>
+                    <Osservabilita>o3</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t2a</Nome>
                     <IdStatoIniziale>1</IdStatoIniziale>
                     <IdStatoFinale>2</IdStatoFinale>
-                    <Osservabilita>NULL</Osservabilita>
+                    <Osservabilita>o2</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3b</Nome>
@@ -500,7 +471,7 @@
                     <Nome>t3a</Nome>
                     <IdStatoIniziale>4</IdStatoIniziale>
                     <IdStatoFinale>5</IdStatoFinale>
-                    <Osservabilita>NULL</Osservabilita>
+                    <Osservabilita>o3</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3b</Nome>
@@ -512,13 +483,13 @@
                     <Nome>t2a</Nome>
                     <IdStatoIniziale>6</IdStatoIniziale>
                     <IdStatoFinale>7</IdStatoFinale>
-                    <Osservabilita>NULL</Osservabilita>
+                    <Osservabilita>o2</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3a</Nome>
                     <IdStatoIniziale>7</IdStatoIniziale>
                     <IdStatoFinale>8</IdStatoFinale>
-                    <Osservabilita>NULL</Osservabilita>
+                    <Osservabilita>o3</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3b</Nome>
@@ -554,7 +525,7 @@
                     <Nome>t3a</Nome>
                     <IdStatoIniziale>3</IdStatoIniziale>
                     <IdStatoFinale>11</IdStatoFinale>
-                    <Osservabilita>NULL</Osservabilita>
+                    <Osservabilita>o3</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3c</Nome>
@@ -571,19 +542,13 @@
                 <Transizione>
                     <Nome>t3b</Nome>
                     <IdStatoIniziale>13</IdStatoIniziale>
-                    <IdStatoFinale>14</IdStatoFinale>
-                    <Osservabilita>NULL</Osservabilita>
-                </Transizione>
-                <Transizione>
-                    <Nome>t3a</Nome>
-                    <IdStatoIniziale>14</IdStatoIniziale>
-                    <IdStatoFinale>1</IdStatoFinale>
+                    <IdStatoFinale>0</IdStatoFinale>
                     <Osservabilita>NULL</Osservabilita>
                 </Transizione>
                 <Transizione>
                     <Nome>t3c</Nome>
                     <IdStatoIniziale>13</IdStatoIniziale>
-                    <IdStatoFinale>15</IdStatoFinale>
+                    <IdStatoFinale>14</IdStatoFinale>
                     <Osservabilita>NULL</Osservabilita>
                 </Transizione>
             </Transizioni>

@@ -1,1 +1,0 @@
-La diagnosi trovata è: {{r,f}}
