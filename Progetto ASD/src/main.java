@@ -108,6 +108,7 @@ public class main {
     }
 
     private static boolean menu_azioni(ReteAutomi RA) throws IOException{
+        int tempo_parziale=0, tempo_totale=0;
         boolean quit = false;
 
         System.out.println("");
@@ -159,20 +160,27 @@ public class main {
                         return mostraRete(RA);
 //                            return RA.storeIntoFile(dir + "output.xml");
                     case 2:
+                        tempo_totale = 0;
                         A_out = new Automa();
                         startTime = Instant.now();
                         RA.calcolaStatoComportamentale(A_out);
-                        System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                        tempo_parziale = getUsedTimeMilliSeconds();
+                        tempo_totale += tempo_parziale;
+                        System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                         tmp = new ReteAutomi();
                         tmp.pushAutoma(A_out);
                         System.out.println("");
                         System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE ------");
+                        System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                         return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale.xml");
                     case 3:
+                        tempo_totale = 0;
                         A_out = new Automa();
                         startTime = Instant.now();
                         RA.calcolaStatoComportamentale(A_out);
-                        System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                        tempo_parziale = getUsedTimeMilliSeconds();
+                        tempo_totale += tempo_parziale;
+                        System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                         tmp = new ReteAutomi();
                         tmp.pushAutoma(A_out);
                         System.out.println("");
@@ -180,21 +188,28 @@ public class main {
                         if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale.xml") && proseguire()){
                             startTime = Instant.now();
                             A_out.potatura();
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                            tempo_parziale = getUsedTimeMilliSeconds();
+                            tempo_totale += tempo_parziale;
+                            System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp=null;
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             System.out.println("");
                             System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE POTATO ------");
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                             return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_potato.xml");
                         }else{
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                             return true;
                         }
                     case 4:
+                        tempo_totale = 0;
                         A_out = new Automa();
                         startTime = Instant.now();
                         RA.calcolaStatoComportamentaleDecorato(A_out);
-                        System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                        tempo_parziale = getUsedTimeMilliSeconds();
+                        tempo_totale += tempo_parziale;
+                        System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                         tmp = new ReteAutomi();
                         tmp.pushAutoma(A_out);
                         System.out.println("");
@@ -202,21 +217,28 @@ public class main {
                         if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato.xml") && proseguire()){
                             startTime = Instant.now();
                             A_out.potatura();
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                            tempo_parziale = getUsedTimeMilliSeconds();
+                            tempo_totale += tempo_parziale;
+                            System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp = null;
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             System.out.println("");
                             System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO POTATO ------");
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                             return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato_potato.xml");
                         }else{
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                             return true;
                         }
                     case 5:
+                        tempo_totale = 0;
                         A_out = new Automa();
                         startTime = Instant.now();
                         RA.calcolaStatoComportamentale(A_out);
-                        System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                        tempo_parziale = getUsedTimeMilliSeconds();
+                        tempo_totale += tempo_parziale;
+                        System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                         tmp = new ReteAutomi();
                         tmp.pushAutoma(A_out);
                         System.out.println("");
@@ -224,7 +246,9 @@ public class main {
                         if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale.xml") && proseguire()){
                             startTime = Instant.now();
                             A_out.potatura();
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                            tempo_parziale = getUsedTimeMilliSeconds();
+                            tempo_totale += tempo_parziale;
+                            System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp=null;
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
@@ -234,15 +258,19 @@ public class main {
                                 A_tmp = new Automa();
                                 startTime = Instant.now();
                                 A_out.decorazioneStatoComportamentale(A_tmp);
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 tmp = null;
                                 tmp = new ReteAutomi();
                                 tmp.pushAutoma(A_tmp);
                                 System.out.println("");
                                 System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE DECORATO CON METODO ALTERNATIVO ------");
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato_alternativo.xml");
                             }
                         }else{
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                             return true;
                         }
 //                    case 5:
@@ -275,11 +303,14 @@ public class main {
 //                            break;
 //                        }
                     case 6:
+                        tempo_totale = 0;
                         A_tmp = new Automa();
                         A_out = new Automa();
                         startTime = Instant.now();
                         RA.calcolaStatoComportamentaleDecorato(A_tmp);
-                        System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                        tempo_parziale = getUsedTimeMilliSeconds();
+                        tempo_totale += tempo_parziale;
+                        System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                         tmp = new ReteAutomi();
                         tmp.pushAutoma(A_tmp);
                         System.out.println("");
@@ -287,7 +318,9 @@ public class main {
                         if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato.xml") && proseguire()){
                             startTime = Instant.now();
                             A_tmp.potatura();
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                        tempo_parziale = getUsedTimeMilliSeconds();
+                        tempo_totale += tempo_parziale;
+                        System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp = null;
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_tmp);
@@ -296,7 +329,9 @@ public class main {
                             if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_decorato_potato.xml") && proseguire()){
                                 startTime = Instant.now();
                                 A_tmp.determinizzazione(A_out);
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 tmp = null;
                                 tmp = new ReteAutomi();
                                 tmp.pushAutoma(A_out);
@@ -306,24 +341,35 @@ public class main {
                                     osservazione_lineare = acquisizione_osservazione_lineare();
                                     startTime = Instant.now();
                                     diagnosi = A_out.ricerca_dizionario(osservazione_lineare);
-                                    System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                    tempo_parziale = getUsedTimeMilliSeconds();
+                                    tempo_totale += tempo_parziale;
+                                    System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                     System.out.println("");
                                     System.out.println("----- SALVATAGGIO DELLA DIAGNOSI ------");
+                                    System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                     return storeIntoFile(dir + RA.getNome() + "-diagnosi.txt", diagnosi);
+                                }else{
+                                    System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
+                                    return true;
                                 }
                             }else{
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return true;
                             }
                         }else{
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                             return true;
                         }
                     case 7:
+                        tempo_totale = 0;
                         A_out = new Automa();
                         automa_osservazione = new Automa();
                         if(caricaOsservazione(automa_osservazione) && proseguire()){
                             startTime = Instant.now();
                             RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                            tempo_parziale = getUsedTimeMilliSeconds();
+                            tempo_totale += tempo_parziale;
+                            System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             System.out.println("");
@@ -331,20 +377,26 @@ public class main {
                             if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione.xml") && proseguire()){
                                 startTime = Instant.now();
                                 A_out.potatura();
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 tmp = null;
                                 tmp = new ReteAutomi();
                                 tmp.pushAutoma(A_out);
                                 System.out.println("");
                                 System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE POTATO RELATIVO AD UNA OSSERVAZIONE ------");
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione_potato.xml");
                             }else{
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return true;
                             }
                         }else{
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                             return true;
                         }
                     case 8:
+                        tempo_totale = 0;
                         A_out = new Automa();
                         A_tmp = new Automa();
 
@@ -352,7 +404,9 @@ public class main {
                         if(caricaOsservazione(automa_osservazione) && proseguire()){
                             startTime = Instant.now();
                             RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                            tempo_parziale = getUsedTimeMilliSeconds();
+                            tempo_totale += tempo_parziale;
+                            System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             System.out.println("");
@@ -360,7 +414,9 @@ public class main {
                             if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione.xml") && proseguire()){
                                 startTime = Instant.now();
                                 A_out.potatura();
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 tmp = null;
                                 tmp = new ReteAutomi();
                                 tmp.pushAutoma(A_out);
@@ -369,28 +425,39 @@ public class main {
                                 if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione_potato.xml") && proseguire()){
                                     startTime = Instant.now();
                                     A_out.determinizzazione(A_tmp);
-                                    System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                    tempo_parziale = getUsedTimeMilliSeconds();
+                                    tempo_totale += tempo_parziale;
+                                    System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                     tmp = null;
                                     tmp = new ReteAutomi();
                                     tmp.pushAutoma(A_tmp);
                                     System.out.println("");
                                     System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE POTATO RELATIVO AD UNA OSSERVAZIONE E DETERMINIZZATO ------");
+                                    System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                     return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_determinizzazione_osservazione.xml");
+                                }else{
+                                    System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
+                                    return true;
                                 }
                             }else{
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return true;
                             }
                         }else{
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                             return true;
                         }
                     case 9:
+                        tempo_totale = 0;
                         A_out = new Automa();
                         A_tmp = new Automa();
                         automa_osservazione = new Automa();
                         if(caricaOsservazione(automa_osservazione) && proseguire()){
                             startTime = Instant.now();
                             RA.calcolaStatoComportamentaleDecoratoOsservazione(A_out, automa_osservazione);
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                            tempo_parziale = getUsedTimeMilliSeconds();
+                            tempo_totale += tempo_parziale;
+                            System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             System.out.println("");
@@ -398,7 +465,9 @@ public class main {
                             if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione.xml") && proseguire()){
                                 startTime = Instant.now();
                                 A_out.potatura();
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 tmp = null;
                                 tmp = new ReteAutomi();
                                 tmp.pushAutoma(A_out);
@@ -407,7 +476,9 @@ public class main {
                                 if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_osservazione_potato.xml") && proseguire()){
                                     startTime = Instant.now();
                                     A_out.determinizzazione(A_tmp);
-                                    System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                    tempo_parziale = getUsedTimeMilliSeconds();
+                                    tempo_totale += tempo_parziale;
+                                    System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                     tmp = null;
                                     tmp = new ReteAutomi();
                                     tmp.pushAutoma(A_tmp);
@@ -417,21 +488,30 @@ public class main {
                                         osservazione_lineare = acquisizione_osservazione_lineare();
                                         startTime = Instant.now();
                                         diagnosi = A_tmp.ricerca_dizionario(osservazione_lineare);
-                                        System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                        tempo_parziale = getUsedTimeMilliSeconds();
+                                        tempo_totale += tempo_parziale;
+                                        System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                         System.out.println("");
                                         System.out.println("----- SALVATAGGIO DELLA DIAGNOSI ------");
+                                        System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                         return storeIntoFile(dir + RA.getNome() + "-diagnosi.txt", diagnosi);
                                     }else{
+                                        System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                         return true;
                                     }
+                                }else{
+                                    System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
+                                    return true;
                                 }
                             }else{
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return true;
                             }
                         }else{
                             return true;
                         }
                     case 10:
+                        tempo_totale = 0;
                         automa_osservazione_array = new ArrayList<>();
                         automi = new ArrayList<>();
                         continua = true;
@@ -460,9 +540,12 @@ public class main {
                                 A_out.determinizzazione(A_tmp);
                                 A_tmp.ridenominazione("x");
                                 automi.add(A_tmp);
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 System.out.println("Aggiunta osservazione n°: " + automi.size());
                                 if(!proseguire()){
+                                    System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                     return true;
                                 }
                             }
@@ -470,7 +553,9 @@ public class main {
                             A_out = new Automa();
                             startTime = Instant.now();
                             A_out.fusione_dizionari(automi);
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                            tempo_parziale = getUsedTimeMilliSeconds();
+                            tempo_totale += tempo_parziale;
+                            System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
 
@@ -481,18 +566,23 @@ public class main {
                                 A_tmp = new Automa();
                                 startTime = Instant.now();
                                 A_out.determinizzazione(A_tmp);
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 tmp = new ReteAutomi();
                                 tmp.pushAutoma(A_tmp);
 
                                 System.out.println("");
                                 System.out.println("----- SALVATAGGIO RELATIVO ALLA DETERMINIZZAZIONE DELLA FUSIONE DIZIONARI ------");
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return tmp.storeIntoFile(dir + RA.getNome() + "-determinizzazione_fusione_dizionari.xml");
                             }else{
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return true;
                             }
                         }
                     case 11:
+                        tempo_totale = 0;
                         automa_osservazione_array = new ArrayList<>();
                         automi = new ArrayList<>();
                         continua = true;
@@ -521,7 +611,9 @@ public class main {
                                 A_out.determinizzazione(A_tmp);
                                 A_tmp.ridenominazione("x");
                                 automi.add(A_tmp);
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 System.out.println("Aggiunta osservazione n°: " + automi.size());
                                 if(!proseguire()){
                                     return true;
@@ -531,7 +623,9 @@ public class main {
                             A_out = new Automa();
                             startTime = Instant.now();
                             A_out.fusione_dizionari(automi);
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                            tempo_parziale = getUsedTimeMilliSeconds();
+                            tempo_totale += tempo_parziale;
+                            System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
 
@@ -542,7 +636,9 @@ public class main {
                                 A_tmp = new Automa();
                                 startTime = Instant.now();
                                 A_out.determinizzazione(A_tmp);
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 tmp = new ReteAutomi();
                                 tmp.pushAutoma(A_tmp);
 
@@ -553,25 +649,33 @@ public class main {
                                     osservazione_lineare = acquisizione_osservazione_lineare();
                                     startTime = Instant.now();
                                     diagnosi = A_tmp.ricerca_dizionario(osservazione_lineare);
-                                    System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                    tempo_parziale = getUsedTimeMilliSeconds();
+                                    tempo_totale += tempo_parziale;
+                                    System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                     System.out.println("");
                                     System.out.println("----- SALVATAGGIO DELLA DIAGNOSI ------");
+                                    System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                     return storeIntoFile(dir + RA.getNome() + "-diagnosi.txt", diagnosi);
                                 }else{
+                                    System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                     return true;
                                 }
                             }else{
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return true;
                             }
                         }
                     case 12:
+                        tempo_totale = 0;
                         automa_scenario = new Automa();
                         if(caricaScenario(automa_scenario) && proseguire()){
                             A_out = new Automa();
                             A_tmp = new Automa();
                             startTime = Instant.now();
                             RA.calcolaStatoComportamentaleDecoratoVincolato(A_out, automa_scenario);
-                            System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                            tempo_parziale = getUsedTimeMilliSeconds();
+                            tempo_totale += tempo_parziale;
+                            System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                             tmp = new ReteAutomi();
                             tmp.pushAutoma(A_out);
                             System.out.println("");
@@ -580,7 +684,9 @@ public class main {
                                 startTime = Instant.now();
                                 A_out.potatura();
                                 A_out.ridenominazione("");
-                                System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                tempo_parziale = getUsedTimeMilliSeconds();
+                                tempo_totale += tempo_parziale;
+                                System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                 tmp = null;
                                 tmp = new ReteAutomi();
                                 tmp.pushAutoma(A_out);
@@ -589,20 +695,26 @@ public class main {
                                 if(tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_vincolato_scenario_potato.xml") && proseguire()){
                                     startTime = Instant.now();
                                     A_out.determinizzazione(A_tmp);
-                                    System.out.println("L'elaborazione è durata: " + Integer.toString(getUsedTimeMilliSeconds()) + " millisecondi");
+                                    tempo_parziale = getUsedTimeMilliSeconds();
+                                    tempo_totale += tempo_parziale;
+                                    System.out.println("L'elaborazione è durata: " + Integer.toString(tempo_parziale) + " millisecondi");
                                     tmp = null;
                                     tmp = new ReteAutomi();
                                     tmp.pushAutoma(A_tmp);
                                     System.out.println("");
                                     System.out.println("----- SALVATAGGIO RELATIVO ALLO SPAZIO COMPORTAMENTALE VINCOLATO DA UNO SCENARIO DETERMINIZZATO ------");
+                                    System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                     return tmp.storeIntoFile(dir + RA.getNome() + "-spazio_comportamentale_vincolato_scenario_determinizzato.xml");
                                 }else{
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                     return true;
                                 }
                             }else{
+                                System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                                 return true;
                             }
                         }else{
+                            System.out.println("Tempo totale di elaborazione: " + Integer.toString(tempo_totale) + " millisecondi");
                             return true;
                         }
                     case 0:
@@ -867,6 +979,8 @@ public class main {
     }
     
     private static int getUsedTimeMilliSeconds(){
-        return (int) ((Duration.between(startTime, Instant.now()).getNano())/1000000);
+        Duration durata = Duration.between(startTime, Instant.now());
+         return (int) ((durata.getSeconds()*1000) + (durata.getNano()/1000000));
+        
     }
 }

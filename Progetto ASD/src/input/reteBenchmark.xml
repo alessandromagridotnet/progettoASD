@@ -1,9 +1,9 @@
 <ReteAutomi>
     <Nome>ReteBenchmark</Nome>
-    <Automi>
+    <Automi xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
         <Automa>
             <Nome>C1</Nome>
-            <Stati>
+            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                 <Stato>
                     <ID>10</ID>
                     <StatoIniziale>true</StatoIniziale>
@@ -13,7 +13,7 @@
                     <StatoIniziale>false</StatoIniziale>
                 </Stato>
             </Stati>
-            <Transizioni>
+            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                 <Transizione>
                     <Nome>t1a</Nome>
                     <IdStatoIniziale>10</IdStatoIniziale>
@@ -22,7 +22,7 @@
                         <IdEvento>e1</IdEvento>
                         <IdLink>L1</IdLink>
                     </Coppia>
-                    <CoppieUscita>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>NULL</IdEvento>
                             <IdLink>NULL</IdLink>
@@ -39,7 +39,7 @@
                         <IdEvento>e2</IdEvento>
                         <IdLink>L3</IdLink>
                     </Coppia>
-                    <CoppieUscita>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>NULL</IdEvento>
                             <IdLink>NULL</IdLink>
@@ -56,7 +56,7 @@
                         <IdEvento>NULL</IdEvento>
                         <IdLink>NULL</IdLink>
                     </Coppia>
-                    <CoppieUscita>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>NULL</IdEvento>
                             <IdLink>NULL</IdLink>
@@ -69,7 +69,7 @@
         </Automa>
         <Automa>
             <Nome>C2</Nome>
-            <Stati>
+            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                 <Stato>
                     <ID>20</ID>
                     <StatoIniziale>true</StatoIniziale>
@@ -79,7 +79,7 @@
                     <StatoIniziale>false</StatoIniziale>
                 </Stato>
             </Stati>
-            <Transizioni>
+            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                 <Transizione>
                     <Nome>t2a</Nome>
                     <IdStatoIniziale>20</IdStatoIniziale>
@@ -88,7 +88,7 @@
                         <IdEvento>NULL</IdEvento>
                         <IdLink>NULL</IdLink>
                     </Coppia>
-                    <CoppieUscita>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>e1</IdEvento>
                             <IdLink>L1</IdLink>
@@ -109,7 +109,7 @@
                         <IdEvento>NULL</IdEvento>
                         <IdLink>NULL</IdLink>
                     </Coppia>
-                    <CoppieUscita>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>e1</IdEvento>
                             <IdLink>L1</IdLink>
@@ -122,7 +122,7 @@
         </Automa>
         <Automa>
             <Nome>C3</Nome>
-            <Stati>
+            <Stati xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                 <Stato>
                     <ID>30</ID>
                     <StatoIniziale>true</StatoIniziale>
@@ -132,7 +132,7 @@
                     <StatoIniziale>false</StatoIniziale>
                 </Stato>
             </Stati>
-            <Transizioni>
+            <Transizioni xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                 <Transizione>
                     <Nome>t3a</Nome>
                     <IdStatoIniziale>30</IdStatoIniziale>
@@ -141,7 +141,7 @@
                         <IdEvento>NULL</IdEvento>
                         <IdLink>NULL</IdLink>
                     </Coppia>
-                    <CoppieUscita>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>e2</IdEvento>
                             <IdLink>L3</IdLink>
@@ -158,7 +158,7 @@
                         <IdEvento>e3</IdEvento>
                         <IdLink>L2</IdLink>
                     </Coppia>
-                    <CoppieUscita>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>NULL</IdEvento>
                             <IdLink>NULL</IdLink>
@@ -175,7 +175,7 @@
                         <IdEvento>e3</IdEvento>
                         <IdLink>L2</IdLink>
                     </Coppia>
-                    <CoppieUscita>
+                    <CoppieUscita xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                         <Coppia>
                             <IdEvento>NULL</IdEvento>
                             <IdLink>NULL</IdLink>
@@ -187,7 +187,7 @@
             </Transizioni>
         </Automa>
     </Automi>
-    <Links>
+    <Links xmlns:id="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
         <Link>
             <Nome>L1</Nome>
             <IdAutomaPartenza>C2</IdAutomaPartenza>

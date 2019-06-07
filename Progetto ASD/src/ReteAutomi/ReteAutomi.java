@@ -19,7 +19,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
-import static jdk.nashorn.internal.objects.NativeArray.map;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -232,6 +231,7 @@ public class ReteAutomi {
                             }
                             // aggiungo alla lista degli stati del nuovo spazio comportamentale lo stato finale della transizione
                             Stato st =t.getFinale().clone();
+                            // nello stato semplice l'attributo iniziale identific lo stato attivo dell'automa
                             st.setIniziale(true);
                             sc.pushStato(st);
                             

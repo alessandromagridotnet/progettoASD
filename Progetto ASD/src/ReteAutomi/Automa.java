@@ -240,7 +240,6 @@ public class Automa {
         for(Stato check_state : A_out.getStati()){
             StatoComportamentale sc = (StatoComportamentale) check_state;
             if(sc.equalsNotId(nuovo)){
-                System.out.println();
                 nuovo.clone(sc);
                 contains = true;
                 break;
@@ -755,11 +754,6 @@ public class Automa {
                 TransizioneComportamentale tc = (TransizioneComportamentale) t;
                 StatoComportamentale sc = new StatoComportamentale();
                 sc.clone((StatoComportamentale)t.getFinale());
-                
-//                ########################################################################################
-//                        CRETINO NON GENERA TUTTI GLI STATI/TRANSIZIONI CHE DOVREBBE
-//                ########################################################################################
-                
                 // aggiunge le rilevanze ereditate dallo stato precedente
                 for(String s : stato_attuale.getRilevanza()){
                     if(!sc.getRilevanza().contains(s)){
@@ -786,6 +780,7 @@ public class Automa {
                         nuova_transizione.setRilevanza(tc.getRilevanza());
                         
                         A_out.pushTransizioni(nuova_transizione);
+                        break;
                     }
                 }
                 // se il nuovo stato generato non è presente nell'automa in uscita

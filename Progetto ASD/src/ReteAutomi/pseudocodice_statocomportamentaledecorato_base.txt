@@ -1,0 +1,95 @@
+decorazioneStatoComportamentaleRilevanza(automa_in, automa_out)
+   sc <- new StatoComportamentale()
+   conteggio <- 0
+   sc <- automa_in.trovaIniziale()
+   sc.setId(conteggio)
+   automa_out.pushStato(sc)
+   decorazioneStatoComportamentaleRicorsivo(automa_in, automa_out, sc, conteggio);
+
+
+decorazioneStatoComportamentaleRilevanzaRicorsivo(automa_in, automa_out, stato_attuale, conteggio)
+   foreach transizione in automa_in do
+      if transizione.getIniziale == stato_attuale then
+         sc = new StatoComportamentale()
+         sc = transizione.getFinale()
+         foreach etichetta in stato_attuale.getRilevanza() do
+            if sc.getRilevanza().notContains(s) then
+               sc.pushRilevanza(s)
+         if sc.getRilevanza().notContains(tc.getRilevanza()) then
+            sc.pushRilevanza(transizione.getRilevanza())
+         presente <- false
+         foreach stato_comp in Automa_out.getStati() do
+            if stato_comp.equals(sc) then
+               presente <- true
+
+               nuova_transizione = new TransizioneComportamentale()
+               nuova_transizione.setIniziale(stato_attuale)
+               nuova_transizione.setFinale(stato_comp)
+               nuova_transizione.setNome(transizione.getNome());
+               nuova_transizione.setRilevanza(transizione.getRilevanza())
+
+               automa_out.pushTransizione(nuova_transizione)
+               break
+
+         if presente == false then
+            conteggio <- conteggio + 1
+            sc.setId(conteggio)
+
+            automa_out.pushStato(sc)
+
+            nuova_transizione = new TransizioneComportamentale()
+            nuova_transizione.setIniziale(stato_attuale)
+            nuova_transizione.setFinale(stato_comp)
+            nuova_transizione.setNome(transizione.getNome())
+            nuova_transizione.setOsservabilita(transizione.getOsservabilita())
+            nuova_transizione.setRilevanza(transizione.getRilevanza())
+
+            automa_out.pushTransizione(nuova_transizione)
+
+            decorazioneStatoComportamentaleRicorsivo(automa_in, automa_out, sc, conteggio)
+
+
+decorazioneStatoComportamentaleOsservabilita(automa_in, automa_out)
+   sc <- new StatoComportamentale()
+   conteggio <- 0
+   sc <- automa_in.trovaIniziale()
+   sc.setId(conteggio)
+   automa_out.pushStato(sc)
+   decorazioneStatoComportamentaleRicorsivo(automa_in, automa_out, sc, conteggio);
+
+
+decorazioneStatoComportamentaleOsservabilitaRicorsivo(automa_in, automa_out, stato_attuale, conteggio)
+   foreach transizione in automa_in do
+      if transizione.getIniziale == stato_attuale then
+         sc = new StatoComportamentale()
+         sc = transizione.getFinale()
+         presente <- false
+         foreach stato_comp in Automa_out.getStati() do
+            if stato_comp.equals(sc) then
+               presente <- true
+
+               nuova_transizione = new TransizioneComportamentale()
+               nuova_transizione.setIniziale(stato_attuale)
+               nuova_transizione.setFinale(stato_comp)
+               nuova_transizione.setNome(transizione.getNome());
+               nuova_transizione.setOsservabilita(transizione.getOsservabilita())
+
+               automa_out.pushTransizione(nuova_transizione)
+               break
+
+         if presente == false then
+            conteggio <- conteggio + 1
+            sc.setId(conteggio)
+
+            automa_out.pushStato(sc)
+
+            nuova_transizione = new TransizioneComportamentale()
+            nuova_transizione.setIniziale(stato_attuale)
+            nuova_transizione.setFinale(stato_comp)
+            nuova_transizione.setNome(transizione.getNome())
+            nuova_transizione.setOsservabilita(transizione.getOsservabilita())
+            nuova_transizione.setRilevanza(transizione.getRilevanza())
+
+            automa_out.pushTransizione(nuova_transizione)
+
+            decorazioneStatoComportamentaleOsservabilitaRicorsivo(automa_in, automa_out, sc, conteggio)

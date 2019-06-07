@@ -1,0 +1,1 @@
+La diagnosi trovata è: {{ga2},{},{gs1},{gs1,ga2},{gs1,ga2,gs2},{ga2,gs2}}
