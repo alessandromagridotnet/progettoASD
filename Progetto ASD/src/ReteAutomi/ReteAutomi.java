@@ -150,11 +150,11 @@ public class ReteAutomi {
     }
     
     /**
-     * Funzione che calcola il primo Stato all'interno dell'automa chiamato StatoComportamentale
-     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
+     * Funzione che calcola il primo Stato all'interno dell'automa chiamato SpazioComportamentale
+     * @param A_out l'automa dello SpazioComportamentale che si vuole venga compilato
      * @return boolean
      */
-    public boolean calcolaStatoComportamentale(Automa A_out){
+    public boolean calcolaSpazioComportamentale(Automa A_out){
         StatoComportamentale sc = new StatoComportamentale();
         int[] conteggio = new int[1];
         conteggio[0]=0;
@@ -180,19 +180,19 @@ public class ReteAutomi {
         A_out.pushStato(sc);
         
         conteggio[0]++;
-        statoComportamentaleRicorsivo(A_out, sc, conteggio);
+        calcolaSpazioComportamentaleRicorsivo(A_out, sc, conteggio);
         
         return true;
     }
     
     /**
-     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa StatoComportamentale
-     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
+     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa SpazioComportamentale
+     * @param A_out l'automa dello SpazioComportamentale che si vuole venga compilato
      * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaStatoComportamentale()")
      * @param conteggio un intero che indica il numero di stati generati dal sistema
      * @return boolean
      */
-    private boolean statoComportamentaleRicorsivo(Automa A_out, StatoComportamentale sc_pre, int[] conteggio){
+    private boolean calcolaSpazioComportamentaleRicorsivo(Automa A_out, StatoComportamentale sc_pre, int[] conteggio){
         Evento eventoNull = new Evento();
         eventoNull.setNome("NULL");
         // cicliamo su automi e transizioni per poter scansionare tutte le possibili transizioni
@@ -288,7 +288,7 @@ public class ReteAutomi {
                                 A_out.pushTransizioni(t_comp);
                                 // chiamata ricorsiva
                                 conteggio[0]++;
-                                statoComportamentaleRicorsivo(A_out, sc, conteggio);
+                                calcolaSpazioComportamentaleRicorsivo(A_out, sc, conteggio);
                             }
                         }
                     }
@@ -299,11 +299,11 @@ public class ReteAutomi {
     }
     
     /**
-     * Funzione che calcola il primo Stato all'interno dell'automa chiamato StatoComportamentale decorato
-     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
+     * Funzione che calcola il primo Stato all'interno dell'automa chiamato SpazioComportamentale decorato
+     * @param A_out l'automa dello SpazioComportamentale che si vuole venga compilato
      * @return boolean
      */
-    public boolean calcolaStatoComportamentaleDecorato(Automa A_out){
+    public boolean calcolaSpazioComportamentaleDecorato(Automa A_out){
         StatoComportamentale sc = new StatoComportamentale();
         int[] conteggio = new int[1];
         conteggio[0]=0;
@@ -329,19 +329,19 @@ public class ReteAutomi {
         A_out.pushStato(sc);
         
         conteggio[0]++;
-        statoComportamentaleDecoratoRicorsivo(A_out, sc, conteggio);
+        CalcolaSpazioComportamentaleDecoratoRicorsivo(A_out, sc, conteggio);
         
         return true;
     }
     
     /**
-     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa StatoComportamentale decorato
-     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
-     * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaStatoComportamentale()")
+     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa SpazioComportamentale decorato
+     * @param A_out l'automa dello SpazioComportamentale che si vuole venga compilato
+     * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaSpazioComportamentale()")
      * @param conteggio un intero che indica il numero di stati generati dal sistema
      * @return boolean
      */
-    private boolean statoComportamentaleDecoratoRicorsivo(Automa A_out, StatoComportamentale sc_pre, int[] conteggio){
+    private boolean CalcolaSpazioComportamentaleDecoratoRicorsivo(Automa A_out, StatoComportamentale sc_pre, int[] conteggio){
         Evento eventoNull = new Evento();
         eventoNull.setNome("NULL");
         // cicliamo su automi e transizioni per poter scansionare tutte le possibili transizioni
@@ -440,7 +440,7 @@ public class ReteAutomi {
                                 A_out.pushTransizioni(t_comp);
                                 // chiamata ricorsiva
                                 conteggio[0]++;
-                                statoComportamentaleDecoratoRicorsivo(A_out, sc, conteggio);
+                                CalcolaSpazioComportamentaleDecoratoRicorsivo(A_out, sc, conteggio);
                             }
                         }
                     }
@@ -503,11 +503,11 @@ public class ReteAutomi {
     
     
     /**
-     * Funzione che calcola il primo Stato all'interno dell'automa chiamato StatoComportamentale decorato
-     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
+     * Funzione che calcola il primo Stato all'interno dell'automa chiamato SpazioComportamentale decorato
+     * @param A_out l'automa dello SpazioComportamentale che si vuole venga compilato
      * @return boolean
      */
-    public boolean calcolaStatoComportamentaleDecoratoOsservazione(Automa A_out, Automa osservatore){
+    public boolean calcolaSpazioComportamentaleDecoratoOsservazione(Automa A_out, Automa osservatore){
         
         StatoComportamentale sc = new StatoComportamentale();
         // devo cercare lo stato iniziale dell'automa osservatore
@@ -544,19 +544,19 @@ public class ReteAutomi {
         A_out.pushStato(sc);
         
         conteggio[0]++;
-        statoComportamentaleDecoratoRicorsivoOsservazione(A_out, sc, conteggio, osservatore);
+        calcolaSpazioComportamentaleDecoratoRicorsivoOsservazione(A_out, sc, conteggio, osservatore);
         
         return true;
     }
     
     /**
-     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa StatoComportamentale decorato
-     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
-     * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaStatoComportamentale()")
+     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa SpazioComportamentale decorato
+     * @param A_out l'automa dello SpazioComportamentale che si vuole venga compilato
+     * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaSpazioComportamentaleDecoratoOsservazione()")
      * @param conteggio un intero che indica il numero di stati generati dal sistema
      * @return boolean
      */
-    private boolean statoComportamentaleDecoratoRicorsivoOsservazione(Automa A_out, StatoComportamentale sc_pre, int[] conteggio, Automa osservatore){
+    private boolean calcolaSpazioComportamentaleDecoratoRicorsivoOsservazione(Automa A_out, StatoComportamentale sc_pre, int[] conteggio, Automa osservatore){
         Evento eventoNull = new Evento();
         eventoNull.setNome("NULL");
         boolean controllo_riconoscitore=false;
@@ -683,7 +683,7 @@ public class ReteAutomi {
                                     A_out.pushTransizioni(t_comp);
                                     // chiamata ricorsiva
                                     conteggio[0]++;
-                                    statoComportamentaleDecoratoRicorsivoOsservazione(A_out, sc, conteggio, osservatore);
+                                    calcolaSpazioComportamentaleDecoratoRicorsivoOsservazione(A_out, sc, conteggio, osservatore);
                                 }
                             }
                         }
@@ -697,11 +697,11 @@ public class ReteAutomi {
     
     
     /**
-     * Funzione che calcola il primo Stato all'interno dell'automa chiamato StatoComportamentale decorato
-     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
+     * Funzione che calcola il primo Stato all'interno dell'automa chiamato SpazioComportamentale decorato
+     * @param A_out l'automa dello SpazioComportamentale che si vuole venga compilato
      * @return boolean
      */
-    public boolean calcolaStatoComportamentaleDecoratoVincolato(Automa A_out, Automa scenario){
+    public boolean calcolaSpazioComportamentaleDecoratoVincolato(Automa A_out, Automa scenario){
         String stato_scenario = "";
         for(Stato s : scenario.getStati()){
             if(s.getIniziale()==true){
@@ -735,19 +735,19 @@ public class ReteAutomi {
         
         conteggio[0]++;
         
-        calcolaStatoComportamentaleDecoratoVincolatoRicorsivo(A_out, sc, conteggio, scenario, stato_scenario);
+        calcolaSpazioComportamentaleDecoratoVincolatoRicorsivo(A_out, sc, conteggio, scenario, stato_scenario);
         
         return true;
     }
     
     /**
-     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa StatoComportamentale decorato
-     * @param A_out l'automa dello StatoComportamentale che si vuole venga compilato
-     * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaStatoComportamentale()")
+     * Funzione ricorsiva che calcola tutti gli stati discendenti dal primo all'interno dell'automa SpazioComportamentale decorato
+     * @param A_out l'automa dello SpazioComportamentale che si vuole venga compilato
+     * @param sc_pre lo stato da cui parte la ricerca (al primo giro quello generato da "calcolaSpazioComportamentaleDecoratoVincolato()")
      * @param conteggio un intero che indica il numero di stati generati dal sistema
      * @return boolean
      */
-    private boolean calcolaStatoComportamentaleDecoratoVincolatoRicorsivo(Automa A_out, StatoComportamentale sc_pre, int[] conteggio, Automa scenario, String stato_scenario){
+    private boolean calcolaSpazioComportamentaleDecoratoVincolatoRicorsivo(Automa A_out, StatoComportamentale sc_pre, int[] conteggio, Automa scenario, String stato_scenario){
         ArrayList<TransizioneScenario> transizioni_scenario_abilitate = transizioni_abilitate_scenario(scenario, stato_scenario);
 
         Evento eventoNull = new Evento();
@@ -851,7 +851,7 @@ public class ReteAutomi {
                                     A_out.pushTransizioni(t_comp);
                                     // chiamata ricorsiva
                                     conteggio[0]++;
-                                    calcolaStatoComportamentaleDecoratoVincolatoRicorsivo(A_out, sc, conteggio, scenario, stato_finale_scenario.getId());
+                                    calcolaSpazioComportamentaleDecoratoVincolatoRicorsivo(A_out, sc, conteggio, scenario, stato_finale_scenario.getId());
                                 }
                             }
                         }

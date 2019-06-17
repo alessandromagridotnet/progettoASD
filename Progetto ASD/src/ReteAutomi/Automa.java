@@ -731,7 +731,7 @@ public class Automa {
      * StatoComportamentaleDecorato e lo restituisce nella struttura A_out
      * @param A_out la struttura ritornata
      */
-    public void decorazioneStatoComportamentale(Automa A_out){
+    public void decorazioneSpazioComportamentale(Automa A_out){
         int[] conteggio = new int[1];
         conteggio[0] = 0;
         // cerco lo stato iniziale
@@ -740,14 +740,14 @@ public class Automa {
                 StatoComportamentale sc = (StatoComportamentale) s;
                 sc.setId(Integer.toString(conteggio[0]));
                 A_out.pushStato(sc);
-                decorazioneStatoComportamentale_ricorsivo(A_out, sc, conteggio);
+                decorazioneSpazioComportamentale_ricorsivo(A_out, sc, conteggio);
                 break;
             }
         }
     }
     
     
-    public void decorazioneStatoComportamentale_ricorsivo(Automa A_out, StatoComportamentale stato_attuale, int[] conteggio){
+    public void decorazioneSpazioComportamentale_ricorsivo(Automa A_out, StatoComportamentale stato_attuale, int[] conteggio){
         // cerco tutte le transizioni che partono dallo stato attuale ricevuto come parametro
         for(Transizione t : this.getTransizioni()){
             if(((StatoComportamentale)t.getIniziale()).equalsNotEtichetteNotId(stato_attuale)){
@@ -800,7 +800,7 @@ public class Automa {
                     A_out.pushTransizioni(nuova_transizione);
                     
                     // chiamata ricorsiva
-                    decorazioneStatoComportamentale_ricorsivo(A_out, sc, conteggio);
+                    decorazioneSpazioComportamentale_ricorsivo(A_out, sc, conteggio);
                 }
             }
         }
